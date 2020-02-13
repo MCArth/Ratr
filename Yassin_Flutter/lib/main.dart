@@ -7,14 +7,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return MaterialApp (
-      title: 'First Flutter App!',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Welcome!'),
-        ),
-        body: Center(
-          child: Text('Hello Mate.'),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('App'),
+        centerTitle: true,
+        backgroundColor: Colors.red[600],
+      ),
+      body: Center(
+        child: Icon(
+          Icons.airport_shuttle,
+          color: Colors.lightBlue,
+          size: 54.0,
         ),
       ),
     );
