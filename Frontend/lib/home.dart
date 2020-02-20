@@ -27,13 +27,20 @@ class HomePage extends StatelessWidget{
               FloatingActionButton.extended(
                 icon: Icon(Icons.map),
                 label: Text('Property Map'),
-                onPressed: () {}
+                heroTag: "mapbtn",
+                onPressed: () {
+                  //Navigate to map page
+                  Navigator.pushNamed(context,'/map');
+                }
               ),
               SizedBox(height: 12.0,),
               FloatingActionButton.extended(
                 icon: Icon(Icons.list),
                 label: Text('Property List'),
-                onPressed: () {}
+                heroTag: "lstbtn",
+                onPressed: () {
+
+                }
               ),
               
             ],)
