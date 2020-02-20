@@ -142,7 +142,7 @@ class ReviewPage extends StatelessWidget {
                     child: Align(
                         alignment: Alignment.centerLeft,
                         child: Icon(
-                          Icons.home,
+                          Icons.image,
                           color: Colors.orange,
                           size: 55.0,
                         ))),
