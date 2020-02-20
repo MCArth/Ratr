@@ -13,45 +13,14 @@ class MyApp extends StatelessWidget {
   }
 }
 
-//class ReviewPage extends StatelessWidget {
-//  @override
-//  Widget build(BuildContext context) {
-//    return Scaffold(
-//      appBar: AppBar(
-//        //todo get from backend stuff
-//        title: Text(
-//          'Property Name Here',
-//          textDirection: TextDirection.ltr,
-//          style: TextStyle(
-//            fontSize: 25,
-//          ),
-//        ),
-//      ),
-//      body: SafeArea(
-//        child: Container(
-//          padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
-//          child: Text(
-//            'Please write your review below for '
-//            'the property chosen:',
-//            textDirection: TextDirection.ltr,
-//            style: TextStyle(fontSize: 18, color: Colors.black),
-//          ),
-//        ),
-//      ),
-//    );
-//  }
-//}
-
 class ReviewPage extends StatelessWidget {
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         //todo get from backend stuff
         title: Text(
-          'Property Name Here',
+          'Property Name',
           textDirection: TextDirection.ltr,
           style: TextStyle(
             fontSize: 25,
@@ -154,9 +123,7 @@ class ReviewPage extends StatelessWidget {
                       'POST',
                       style: TextStyle(color: Colors.white),
                     ),
-                    onPressed: () {
-                      print("Lol");
-                    }),
+                    onPressed: () {}),
               ),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 2.0),
@@ -169,14 +136,40 @@ class ReviewPage extends StatelessWidget {
                       textAlign: TextAlign.left,
                     )),
               ),
-              Container(
-                  padding: EdgeInsets.symmetric(vertical: 20.0),
-                  child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Icon(
-                        Icons.add_circle_outline,
-                        size: 50.0,
-                      )))
+              Row(children: <Widget>[
+                Container(
+                    padding: EdgeInsets.symmetric(vertical: 20.0),
+                    child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Icon(
+                          Icons.home,
+                          color: Colors.orange,
+                          size: 55.0,
+                        ))),
+                Container(
+                    padding: EdgeInsets.symmetric(vertical: 20.0),
+                    child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Icon(
+                          Icons.add_circle_outline,
+                          size: 55.0,
+                        ))),
+                //SizedBox(width: 70.0),
+                Spacer(),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: RaisedButton(
+                      color: Colors.orange,
+                      disabledColor: Colors.pink,
+                      disabledTextColor: Colors.black,
+                      splashColor: Colors.blue,
+                      child: Text(
+                        'POST',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onPressed: () {}),
+                )
+              ])
             ])
           ],
         ),
