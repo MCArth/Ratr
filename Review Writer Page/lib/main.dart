@@ -16,11 +16,12 @@ class MyApp extends StatelessWidget {
 class ReviewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    //todo get from backend stuff
+    String propertyName = "Property Name";
     return Scaffold(
       appBar: AppBar(
-        //todo get from backend stuff
         title: Text(
-          'Property Name',
+          propertyName,
           textDirection: TextDirection.ltr,
           style: TextStyle(
             fontSize: 25,
@@ -167,6 +168,7 @@ class ReviewPage extends StatelessWidget {
                         'POST',
                         style: TextStyle(color: Colors.white),
                       ),
+                      //todo stuff goes here
                       onPressed: () {}),
                 )
               ])
