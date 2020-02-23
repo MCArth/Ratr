@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/prop.dart';
 
 void main() => runApp(MyApp());
 
@@ -82,7 +83,12 @@ class ReviewPage extends StatelessWidget {
                     'POST',
                     style: TextStyle(color: Colors.white),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => PropertyProfile())
+                    );
+                  },
                 ),
               ),
               Container(
