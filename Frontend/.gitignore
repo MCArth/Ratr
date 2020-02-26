@@ -10,7 +10,8 @@
 .svn/
 
 # Auth/Key 
-*/auth/secrets.json
+*/android/app/src/AndroidManifest.xml
+*/ios/Flutter/AppDelegate.swift
 
 # IntelliJ related
 *.iml
