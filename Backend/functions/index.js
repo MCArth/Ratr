@@ -16,18 +16,18 @@ var messagesRef = db.ref('/messages')
 // Take the text parameter passed to this HTTP endpoint and insert it into the
 // Realtime Database under the path /messages/:pushId/original
 exports.addMessage = functions.https.onRequest(async (req, res) => {
-    // Grab the text parameter.
-    const original = req.query.text;
-    // Push the new message into the Realtime Database using the Firebase Admin SDK.
-    const snapshot = await messagesRef.push({original: original});
-    // Redirect with 303 SEE OTHER to the URL of the pushed object in the Firebase console.
-    res.redirect(303, snapshot.ref.toString());
+	// Grab the text parameter.
+	const original = req.query.text;
+	// Push the new message into the Realtime Database using the Firebase Admin SDK.
+	const snapshot = await messagesRef.push({original: original});
+	// Redirect with 303 SEE OTHER to the URL of the pushed object in the Firebase console.
+	res.redirect(303, snapshot.ref.toString());
 });
 
 // Listens for new messages added to /messages/:pushId/original and creates an
 // uppercase version of the message to /messages/:pushId/uppercase
 exports.makeUppercase = functions.database.ref('/messages/{pushId}/original')
-    .onCreate((snapshot, context) => {
+	.onCreate((snapshot, context) => {
 		// Grab the current value of what was written to the Realtime Database.
 		const original = snapshot.val();
 		console.log('Uppercasing', context.params.pushId, original);
@@ -38,12 +38,21 @@ exports.makeUppercase = functions.database.ref('/messages/{pushId}/original')
 		return snapshot.ref.parent.child('uppercase').set(uppercase);
 	});
 
-exports.readMesages = functions.https.onRequest(async (req, res) => {
-	return res.json(
-		messagesRef
-		  .once('value', 
-			snap =>  res.json(snap.val()),
-			err => res.json(err)
-		  )
-	   )
-});
+
+exports.readMesages = functions.https.onRequest((req, res) => {
+	// Grab the text parameter.
+	// const original = req.query.text;
+	// var json;
+	admin.database().ref('messages').once('value', snap =>  {
+				json = snap.val()
+				res.json(json)
+				return json
+			},
+		).then((json) => {
+			console.log(json);
+			return null;
+		}).catch((err) => {console.log(err); return null;})
+	console.log("test")
+	// res.json(json)
+	// return json
+ })
