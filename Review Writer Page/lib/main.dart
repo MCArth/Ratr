@@ -84,10 +84,6 @@ class ReviewPage extends StatelessWidget {
                     style: TextStyle(color: Colors.white),
                   ),
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => PropertyProfile())
-                    );
                   },
                 ),
               ),

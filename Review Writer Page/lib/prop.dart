@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
-//
-//import 'main.dart';
-//import 'main.dart';
-//
-//void main() => runApp(Property());
 
-//class Property extends StatelessWidget {
-//  @override
-//  Widget build(BuildContext context) {
-//    return MaterialApp(
-//      title: 'Property Profile',
-//      home: PropertyProfile(),
-//    );
-//  }
-//}
+void main() => runApp(Property());
+
+class Property extends StatelessWidget {
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Property Profile',
+      home: PropertyProfile(),
+    );
+  }
+}
 
 class PropertyProfile extends StatelessWidget {
   final String propertyName = "Property Name";
@@ -36,15 +34,17 @@ class PropertyProfile extends StatelessWidget {
               Column(
                 children: <Widget>[
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 15.0, vertical: 12.0),
+                      ),
                       Container(
-                        child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Icon(
-                              Icons.home,
-                              size: 100,
-                            )),
-                      )
+                          child: Icon(
+                        Icons.home,
+                        size: 100,
+                      ))
                     ],
                   ),
                   SizedBox(height: 300),
@@ -57,11 +57,7 @@ class PropertyProfile extends StatelessWidget {
                         'BACK',
                         style: TextStyle(color: Colors.white),
                       ),
-                      onPressed: () {
-                        Navigator.pop(
-                            context
-                        );
-                      })
+                      onPressed: () {})
                 ],
               )
             ]),
