@@ -149,22 +149,31 @@ class PropertyProfile extends StatelessWidget {
                   textAlign: TextAlign.left,
                 )),
           ),
-          Container(
-            padding: EdgeInsets.symmetric(vertical: 10),
-            child: TextField(
-                keyboardType: TextInputType.multiline,
-                minLines: 4,
-                maxLines: 4,
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(3.0),
-                        borderSide:
-                            BorderSide(width: 10.0, style: BorderStyle.solid)),
-                    filled: true,
-                    hintText: 'Stuff goes here....')
-                //labelText: 'House Review')
-                ),
-          ),
+            Container(
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
+              //todo backend stuff here
+              child: Text('No information yet.'),
+              decoration: BoxDecoration(
+                  border: Border.all(),
+                  shape: BoxShape.rectangle
+              ),
+            ),
+//          Container(
+//            padding: EdgeInsets.symmetric(vertical: 10),
+//            child: TextField(
+//                keyboardType: TextInputType.multiline,
+//                minLines: 4,
+//                maxLines: 4,
+//                decoration: InputDecoration(
+//                    border: OutlineInputBorder(
+//                        borderRadius: BorderRadius.circular(3.0),
+//                        borderSide:
+//                            BorderSide(width: 10.0, style: BorderStyle.solid)),
+//                    filled: true,
+//                    hintText: 'Stuff goes here....')
+//                //labelText: 'House Review')
+//                ),
+//          ),
           SizedBox(height: 35),
           Container(
               child: Align(
