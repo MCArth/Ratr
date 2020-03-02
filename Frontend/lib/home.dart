@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'map.dart';
 
+
+//TODO implement map and list as states of home page, with bottom navigation bar, do more encapsulation
 class HomePage extends StatelessWidget{
   @override
   Widget build(BuildContext context){
@@ -37,7 +39,7 @@ class HomePage extends StatelessWidget{
               FloatingActionButton.extended(
                 icon: Icon(Icons.list),
                 label: Text('Property List'),
-                heroTag: "lstbtn",
+                heroTag: "listbtn",
                 onPressed: () {
 
                 }

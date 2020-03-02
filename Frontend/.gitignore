@@ -10,6 +10,9 @@
 .svn/
 .env
 
+# Apikey restriction
+/android/app/src/main/AndroidManifest.xml
+/ios/Runner/AppDelegate.swift
 
 # IntelliJ related
 *.iml
