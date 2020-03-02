@@ -1,7 +1,8 @@
-<<<<<<< HEAD
 import 'package:flutter/material.dart';
 import 'map.dart';
 
+
+//TODO implement map and list as states of home page, with bottom navigation bar, do more encapsulation
 class HomePage extends StatelessWidget{
   @override
   Widget build(BuildContext context){
@@ -38,7 +39,7 @@ class HomePage extends StatelessWidget{
               FloatingActionButton.extended(
                 icon: Icon(Icons.list),
                 label: Text('Property List'),
-                heroTag: "lstbtn",
+                heroTag: "listbtn",
                 onPressed: () {
 
                 }
@@ -50,51 +51,3 @@ class HomePage extends StatelessWidget{
     ); 
   }
 }
-
-=======
-import 'package:flutter/material.dart';
-import 'map.dart';
-
-class HomePage extends StatelessWidget{
-  @override
-  Widget build(BuildContext context){
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("Home Screen"),
-        leading: IconButton(
-          icon: Icon(
-            Icons.menu,
-            semanticLabel: 'menu',
-          ),
-          onPressed: () {
-            print('Menu button');
-          }
-        ),
-      ),
-      body: SafeArea(
-        child: Center(
-          child: ListView(
-            padding: EdgeInsets.all(16),
-            children: <Widget>[
-              //TODO implement search bar here 
-              SizedBox(height: 24.0),
-              FloatingActionButton.extended(
-                icon: Icon(Icons.map),
-                label: Text('Property Map'),
-                onPressed: () {}
-              ),
-              SizedBox(height: 12.0,),
-              FloatingActionButton.extended(
-                icon: Icon(Icons.list),
-                label: Text('Property List'),
-                onPressed: () {}
-              ),
-              
-            ],)
-          ),
-        )
-    ); 
-  }
-}
-
->>>>>>> YassinIsCool
