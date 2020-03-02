@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:string_validator/string_validator.dart';
+import 'dart:developer';
 
 class RegistrationPage extends StatefulWidget {
   @override
@@ -121,11 +122,12 @@ class _RegistrationPage extends State<RegistrationPage> {
   }
 
   void _submit() {
+    log("yo bitch");
     if(formKey.currentState.validate()) {
       formKey.currentState.save();
-      print(email);
-      print(password);
-      print(firstName);
+      log(email);
+      log(password);
+      log(firstName);
       //Popup saying that account was created successfully
       //Link with RL DBS
       //Go back to home bage
