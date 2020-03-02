@@ -8,10 +8,8 @@
 .buildlog/
 .history
 .svn/
+.env
 
-# Auth/Key 
-*/android/app/src/AndroidManifest.xml
-*/ios/Flutter/AppDelegate.swift
 
 # IntelliJ related
 *.iml
