@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:string_validator/string_validator.dart';
+//import 'package:string_validator/string_validator.dart';
 import 'dart:developer';
 
 class RegistrationPage extends StatefulWidget {
