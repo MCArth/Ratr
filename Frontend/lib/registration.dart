@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:string_validator/string_validator.dart';
 
-class RegistrationPage extends StatelessWidget{
+class RegistrationPage extends StatefulWidget {
+  @override
+  _RegistrationPage createState() => _RegistrationPage();
+}
+
+class _RegistrationPage extends State<RegistrationPage> {
   final formKey = GlobalKey<FormState>();
   String firstName, lastName, email, password;
+  String testemail = "", testpassword = "";
 
   @override
   Widget build(BuildContext context){
@@ -15,64 +22,93 @@ class RegistrationPage extends StatelessWidget{
             padding: EdgeInsets.all(8.0),
             child: Form(
               key: formKey,
-              child: Column(
+                child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
 
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
+                  Expanded(
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
 
-                      TextFormField(
-                        decoration: InputDecoration(labelText: 'First name'),
-                        validator: (input) => !input.contains('A-Za-z') ? 'Not a valid First name' : null,
-                        onSaved: (input) => firstName = input,
-                      ),
+                        Expanded(
+                          child: TextFormField(
+                            decoration: InputDecoration(labelText: 'First name'),
+                            validator: (input) => !matches(input,r'^[A-Za-z]+$') ? 'Not a valid First name' : null,
+                            onSaved: (input) => firstName = input,
+                          ),
+                        ),
+                        Expanded(
+                          child: TextFormField(
+                            decoration: InputDecoration(labelText: 'Last name'),
+                            validator: (input) => !matches(input,r'^[A-Za-z]+$') ? 'Not a valid Last name' : null,
+                            onSaved: (input) => lastName = input,
+                          )
+                        )
+                      ],
+                    ),
+                  ),
 
-                      TextFormField(
-                        decoration: InputDecoration(labelText: 'Last name'),
-                        validator: (input) => !input.contains('A-Za-z') ? 'Not a valid Last name' : null,
-                        onSaved: (input) => lastName = input,
+                  Expanded(
+                    child: TextFormField(
+                      decoration: InputDecoration(labelText: "Email"),
+                      validator: (input) {
+                        if(!isEmail(input)) {
+                          return 'Not a valid email';
+                        } else{
+                          testemail = input;
+                          return null;
+                        }
+                      },
+                      onSaved: (input) => email = input,
+                    )
+                  ),
+
+                  Expanded(
+                      child: TextFormField(
+                        decoration: InputDecoration(labelText: "Re-enter email"),
+                        validator: (input) => input.compareTo(testemail) != 0 ? 'Email does not match' : null,
                       )
-
-                    ],
                   ),
 
-                  TextFormField(
-                    decoration: InputDecoration(labelText: "Email"),
-                    validator: (input) => input.contains('@') ? 'Not a valid email' : null,
-                    onSaved: (input) => email = input,
+                  Expanded(
+                    child: TextFormField(
+                      decoration: InputDecoration(labelText: "Password"),
+                      validator: (input) {
+                        if(!matches(input, r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$")){
+                          return 'Minimum 8 characters, at least 1 uppercase, 1 lowercase and 1 number';
+                        } else{
+                          testpassword = input;
+                          return null;
+                        }
+                      },
+                      onSaved: (input) => password = input,
+                      obscureText: true,
+                    )
                   ),
 
-                  TextFormField(
-                    decoration: InputDecoration(labelText: "Re-enter email"),
-                    validator: (input) => input.compareTo(email) != 0 ? 'Email does not match' : null,
+                  Expanded(
+                    child: TextFormField(
+                      decoration: InputDecoration(labelText: "Re-enter password"),
+                      validator: (input) => input.compareTo(testpassword) != 0 ? 'Password does not match' : null,
+                      obscureText: true,
+                    )
                   ),
 
-                  TextFormField(
-                    decoration: InputDecoration(labelText: "Password"),
-                    validator: (input) => input.length < 8 ? 'Must be greater than 8' : null,
-                    onSaved: (input) => password = input,
-                    obscureText: true,
-                  ),
-
-                  TextFormField(
-                    decoration: InputDecoration(labelText: "Re-enter password"),
-                    validator: (input) => input.compareTo(password) != 0 ? 'Password does not match' : null,
-                    obscureText: true,
-                  ),
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: RaisedButton(
-                            onPressed: _submit,
-                            child: Text('Sign in')),
-                      )
-                    ],
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: RaisedButton(
+                              onPressed: _submit,
+                              child: Text('Sign in')),
+                        )
+                      ],
+                    )
                   )
+
 
 
                 ],
@@ -87,6 +123,9 @@ class RegistrationPage extends StatelessWidget{
   void _submit() {
     if(formKey.currentState.validate()) {
       formKey.currentState.save();
+      print(email);
+      print(password);
+      print(firstName);
       //Popup saying that account was created successfully
       //Link with RL DBS
       //Go back to home bage
