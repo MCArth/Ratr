@@ -6,9 +6,11 @@ Future main() async {
   runApp(NexusApp());
   }
 
-class House{
+class HouseBasic{
   int lat;
   int long;
   int bedrooms;
   String address;
+
+  HouseBasic(this.lat,this.long,this.address,this.bedrooms);
 }
