@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/prop.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(ReviewWriter());
 
-class MyApp extends StatelessWidget {
+class ReviewWriter extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -82,7 +83,8 @@ class ReviewPage extends StatelessWidget {
                     'POST',
                     style: TextStyle(color: Colors.white),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                  },
                 ),
               ),
               Container(
