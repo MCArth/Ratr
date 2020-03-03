@@ -53,4 +53,4 @@ exports.readMesages = functions.https.onRequest((req, res) => {
 			return null;
 		}).catch((err) => {console.log(err); return null;})
 	console.log("test")
- })
+ });
