@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'login.dart';
 import 'home.dart';
 import 'map.dart';
+import 'registration.dart';
+
 class NexusApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
@@ -13,7 +15,9 @@ class NexusApp extends StatelessWidget {
       initialRoute: '/login',
       onGenerateRoute: _getRoute,
       routes: <String, WidgetBuilder>{
-				'/map': (BuildContext context) { return MapPage();}
+				'/map': (BuildContext context) { return MapPage();},
+        '/registration': (BuildContext context) {return RegistrationPage();}
+      
 			}
     );
   }

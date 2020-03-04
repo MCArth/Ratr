@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-//import 'package:string_validator/string_validator.dart';
+import 'package:string_validator/string_validator.dart';
 import 'dart:developer';
 
 class RegistrationPage extends StatefulWidget {
@@ -18,8 +18,9 @@ class _RegistrationPage extends State<RegistrationPage> {
       appBar: AppBar(
         title: const Text('Register'),
       ),
-      body: Card(
-        child: Padding(
+      body: SafeArea(
+        child: Card(
+          child: Padding(
             padding: EdgeInsets.all(8.0),
             child: Form(
               key: formKey,
@@ -98,13 +99,17 @@ class _RegistrationPage extends State<RegistrationPage> {
 
                   Expanded(
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: RaisedButton(
+                          child: SizedBox(
+                            width: 350,
+                            height: 50,
+                            child: RaisedButton(
                               onPressed: _submit,
-                              child: Text('Sign in')),
+                              child: Text('Create Account')),
+                          )
                         )
                       ],
                     )
@@ -118,6 +123,7 @@ class _RegistrationPage extends State<RegistrationPage> {
         )
       )
 
+    )
     );
   }
 

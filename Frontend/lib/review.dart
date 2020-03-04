@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/prop.dart';
+import 'prop.dart';
 
 void main() => runApp(ReviewWriter());
 
