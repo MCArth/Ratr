@@ -81,11 +81,7 @@ class _LoginPageState extends State<LoginPage> {
               child: new InkWell( 
                 child: Text("Not registered yet? Click here!"),
                 onTap:() {
-                  Navigator.push(
-                    context,
-                    new MaterialPageRoute(
-                    builder: (ctxt) => new RegistrationPage()),
-                  );
+                  Navigator.pushNamed(context,'/registration');
                   } //Go to registration page
                 )
             )
