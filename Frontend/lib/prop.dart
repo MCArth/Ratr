@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/review.dart';
+import 'review.dart';
 
 void main() => runApp(Property());
 

@@ -15,16 +15,11 @@ dependencies:
   cupertino_icons: ^0.1.2
   ## Adds package for securing keys, getting environment variables 
   flutter_dotenv: ^2.1.0
-<<<<<<< HEAD
   string_validator: ^0.1.3
 
   google_maps_flutter: ^0.5.11
-
-=======
-
-  google_maps_flutter: ^0.5.11
   
->>>>>>> 0015065e0e4f7a94d835a41425d4d6320e21bb6e
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -50,12 +45,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  assets:
-<<<<<<< HEAD
-    - auth.env
-=======
-  - auth.env
->>>>>>> 0015065e0e4f7a94d835a41425d4d6320e21bb6e
+  # assets:
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
