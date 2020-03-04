@@ -54,3 +54,64 @@ exports.readMesages = functions.https.onRequest((req, res) => {
 		}).catch((err) => {console.log(err); return null;})
 	console.log("test")
  });
+
+ exports.getHouses = functions.https.onRequest((req, res) => {
+	// Grab the text parameter.
+	// const original = req.query.text;
+	// var json;
+	admin.database().ref('houses').once('value', snap =>  {
+				json = snap.val()
+				res.json(json)
+				return json
+			},
+		).then((json) => {
+			console.log(json);
+			return null;
+		}).catch((err) => {console.log(err); return null;})
+ });
+
+ exports.login = functions.https.onRequest(async (req, res) => {
+	// Grab the text parameter.
+	const username = req.query.username;
+	const password = req.query.password;
+
+	admin.database().ref('users').once('value', snap =>  {
+				json = snap.val();
+				res.status(loginCheck(json, username, password));
+				res.json(json);
+				return null;
+			},
+		).then((json) => {
+			return null;
+	}).catch((err) => {console.log(err); return null;})
+});
+
+function loginCheck (usersList, username, password){
+	console.log(usersList);
+	for (let i = 1; i < usersList.length; i++){
+		if (usersList[i].username === username){
+			if (usersList[i].password.toString() === password){
+				return 200;
+			} else {
+				return 401;
+			}
+		}
+	}
+	console.log("User not found"); 
+	return 401;
+}
+
+exports.getUser = functions.https.onRequest((req, res) => {
+	// Grab the text parameter.
+	// const original = req.query.text;
+	// var json;
+	admin.database().ref('users').once('value', snap =>  {
+				data = snap.val()
+				res.json(data)
+				return data
+			},
+		).then((data) => {
+			console.log(data);
+			return null;
+		}).catch((err) => {console.log(err); return null;})
+ });
