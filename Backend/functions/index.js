@@ -1,4 +1,5 @@
 const functions = require('firebase-functions');
+var crypto = require('crypto');
 
 const admin = require('firebase-admin');
 admin.initializeApp();
@@ -122,10 +123,11 @@ exports.updateHouse = functions.https.onRequest(async (req, res) => {
 	// Grab the text parameter.
 	const username = req.query.username;
 	const password = req.query.password;
+	const hashed_pw = crypto.createHash('md5').update(password).digest('hex');
 
 	admin.database().ref('users').once('value', snap =>  {
 				json = snap.val();
-				res.status(loginCheck(json, username, password));
+				res.status(loginCheck(json, username, hashed_pw));
 				res.json(json);
 				return null;
 			},
