@@ -1,14 +1,8 @@
-<<<<<<< HEAD
-import 'package:flutter/material.dart';
-import 'app.dart';
-
-void main() => runApp(NexusApp());
-=======
 import 'package:flutter/material.dart';
 import 'app.dart';
 
 
-Future main() async {
+main(){
   runApp(NexusApp());
   }
 
@@ -20,4 +14,3 @@ class HouseBasic{
 
   HouseBasic(this.lat,this.long,this.address,this.bedrooms);
 }
->>>>>>> samsbranch
