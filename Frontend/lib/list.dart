@@ -12,7 +12,9 @@ class ListPage extends StatelessWidget{
         title: Text("List View")),
         body: Padding(
           padding: EdgeInsets.fromLTRB(0,10.0,0,10.0),
-          child: getListViewBody(context)
+          child: ListView(
+            children: _getListViewBody(context)
+          )
         )
 
       );
@@ -21,6 +23,9 @@ class ListPage extends StatelessWidget{
 
 }
 
-getListViewBody(BuildContext context){
-
+//Function that gets all houses from database
+List<Card> _getListViewBody(BuildContext context){
+  List<Card> cards;
+  ListView();
+  return cards;
 }
