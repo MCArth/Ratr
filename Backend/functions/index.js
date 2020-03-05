@@ -54,3 +54,52 @@ exports.readMesages = functions.https.onRequest((req, res) => {
 		}).catch((err) => {console.log(err); return null;})
 	console.log("test")
  });
+
+ exports.addHouse = functions.https.onRequest(async (req, res) => {
+	// Grab the text parameter.
+	// Push the new message into the Realtime Database using the Firebase Admin SDK.
+	// Redirect with 303 SEE OTHER to the URL of the pushed object in the Firebase console.
+	const housesMetaData = db.ref('/housesMetaData');
+	const housesRef = db.ref('/houses');
+
+	const houseInfo = req.query.text;
+	const snapshot = await housesRef.push({original: houseInfo});
+	console.log(snapshot);
+	res.json("{'status': 200}");
+});
+
+exports.updateHouse = functions.https.onRequest(async (req, res) => {
+	const housesRef = db.ref('/houses');
+
+	const newHouseInfo = req.query.text;
+	console.log(newHouseInfo);
+	// const newHouseJson = JSON.parse(newHouseInfo);
+	const newHouseJson = newHouseInfo;
+	housesRef.once('value', snap =>  {
+			json = snap.val();
+
+			console.log(json);
+			let allHouses = json;
+			allHouses.array.forEach(databaseId => {
+				houseInfo = allHouses[databaseId];
+				if (houseInfo['lat'] === newHouseJson['lat'] && houseInfo['long'] === newHouseJson['long']) {
+					housesRef.child(databaseId).update(newHouseInfo);
+				}
+			});
+			res.json("{'status': 200}");
+
+			return json;
+		},
+		).then((json) => {
+			// console.log(json);
+			// let allHouses = json;
+			// allHouses.array.forEach(databaseId => {
+			// 	houseInfo = allHouses[databaseId];
+			// 	if (houseInfo['lat'] === newHouseJson['lat'] && houseInfo['long'] === newHouseJson['long']) {
+			// 		housesRef.child(databaseId).update(newHouseInfo);
+			// 	}
+			// });
+			// res.json("{'status': 200}");
+			return null;
+		}).catch((err) => {console.log(err); return null;})
+});
