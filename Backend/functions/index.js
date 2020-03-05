@@ -55,6 +55,7 @@ exports.readMesages = functions.https.onRequest((req, res) => {
 	console.log("test")
  });
 
+ exports.addHouse = functions.https.onRequest(async (req, res) => {
 	// Grab the text parameter.
 	// Push the new message into the Realtime Database using the Firebase Admin SDK.
 	// Redirect with 303 SEE OTHER to the URL of the pushed object in the Firebase console.
@@ -103,6 +104,7 @@ exports.updateHouse = functions.https.onRequest(async (req, res) => {
 		}).catch((err) => {console.log(err); return null;})
 });
  exports.getHouses = functions.https.onRequest((req, res) => {
+	// Grab the text parameter.
 	// const original = req.query.text;
 	// var json;
 	admin.database().ref('houses').once('value', snap =>  {
