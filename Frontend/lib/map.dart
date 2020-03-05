@@ -1,8 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:async';
+import 'testData.dart';
 
 final Set<Marker> _markers = {};
+
+final Set<Marker> _testMarkers = {
+  //Near Uni 1
+  Marker(
+    markerId: MarkerId("NearUni1"),
+    position: LatLng(51.377360, -2.333635),
+    onTap: null,
+     ),
+  //Near Uni 2
+  Marker(
+    markerId: MarkerId("NearUni2"),
+    position: LatLng(51.376007, -2.342781),
+    onTap: null,
+  ),
+  //Oldfield Park 1
+  Marker(
+    markerId: MarkerId("OldfieldPark1") ,
+    position: LatLng(51.377226, -2.384187),
+    onTap: null,
+  ),
+  //Oldfield Park 2
+  Marker(
+    markerId: MarkerId("OldfieldPark2"),
+    position: LatLng(51.377253, -2.383962),
+    onTap: null,
+  ),
+  //Oldfield Park 3
+  Marker(
+    markerId: MarkerId("OldfieldPark3"),
+    position: LatLng(51.376704, -2.381291),
+    onTap: null,
+  )
+  };
 
 class MapPage extends StatefulWidget{ 
   @override
@@ -17,8 +51,33 @@ class _MapState extends State<MapPage>{
     _controller.complete(controller);
   }
 
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+          title: Text('Bath Properties'),
+        ),
+        body: GoogleMap(
+          markers: _testMarkers,
+          onMapCreated: _onMapCreated,
+          initialCameraPosition: CameraPosition(
+            target: _center,
+            zoom: 12.0,
+          ),
+    ),
+    floatingActionButton: FloatingActionButton(
+      onPressed: () {
+        getMarker();
+      },
+      child: Icon(Icons.navigation),
+      backgroundColor: Colors.blue,
+    ),
+    );
+  }
+
 // TODO Create class that, on map creation, iterates through database and places markers at properties location. Markers should 
 // link to property page
+
 
 //This function creates a marker from a single entry
 void getMarker(){
@@ -42,27 +101,4 @@ void getMarker(){
 
 
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-          title: Text('Bath Properties'),
-        ),
-        body: GoogleMap(
-          markers: _markers,
-          onMapCreated: _onMapCreated,
-          initialCameraPosition: CameraPosition(
-            target: _center,
-            zoom: 12.0,
-          ),
-    ),
-    floatingActionButton: FloatingActionButton(
-      onPressed: () {
-        getMarker();
-      },
-      child: Icon(Icons.navigation),
-      backgroundColor: Colors.blue,
-    ),
-    );
-  }
 }

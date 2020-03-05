@@ -3,6 +3,7 @@ import 'login.dart';
 import 'home.dart';
 import 'map.dart';
 import 'registration.dart';
+import 'theme/colours.dart';
 
 class NexusApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -10,6 +11,15 @@ class NexusApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Rental Nexus',
+      //Build theme that will be inherited by rest of application
+      theme: ThemeData(
+        brightness: Brightness.dark,
+        primaryColor: Colors.blueGrey[700],
+        accentColor: Colors.blueGrey,
+        fontFamily: 'Rubik',
+        
+      ),
+
       //If logged in go to home, else go to login page. Currently j goes to login for testing purposes
       home: HomePage(),
       initialRoute: '/login',
