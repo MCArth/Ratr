@@ -78,15 +78,15 @@ exports.updateHouse = functions.https.onRequest(async (req, res) => {
 	const newHouseJson = newHouseInfo;
 	housesRef.once('value', snap =>  {
 			json = snap.val();
-
 			console.log(json);
 			let allHouses = json;
-			allHouses.array.forEach(databaseId => {
-				houseInfo = allHouses[databaseId];
+			for(var databaseId in json) {
+				houseInfo = allHouses[databaseId]["original"];
+				console.log(houseInfo);
 				if (houseInfo['lat'] === newHouseJson['lat'] && houseInfo['long'] === newHouseJson['long']) {
-					housesRef.child(databaseId).update(newHouseInfo);
+					db.ref("/houses/" + databaseId).set({"original": newHouseInfo});
 				}
-			});
+			}
 			res.json("{'status': 200}");
 
 			return json;
