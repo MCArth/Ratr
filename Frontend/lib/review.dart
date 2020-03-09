@@ -1,5 +1,8 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
-import 'prop.dart';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart'; // For Image Picker
+import 'package:path/path.dart' as Path;
 
 void main() => runApp(ReviewWriter());
 
@@ -83,8 +86,7 @@ class ReviewPage extends StatelessWidget {
                     'POST',
                     style: TextStyle(color: Colors.white),
                   ),
-                  onPressed: () {
-                  },
+                  onPressed: () {},
                 ),
               ),
               Container(
@@ -139,45 +141,119 @@ class ReviewPage extends StatelessWidget {
                       textAlign: TextAlign.left,
                     )),
               ),
-              Row(children: <Widget>[
-                Container(
-                    padding: EdgeInsets.symmetric(vertical: 20.0),
-                    child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Icon(
-                          Icons.image,
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                        padding: EdgeInsets.symmetric(vertical: 20.0),
+                        child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Icon(
+                              Icons.image,
+                              color: Colors.orange,
+                              size: 55.0,
+                            ))),
+                    Center(
+                        child: Container(
+                            height: 80,
+                            padding: EdgeInsets.symmetric(vertical: 20.0),
+                            alignment: Alignment.centerRight,
+                            child: FloatingActionButton(
+                              child: Icon(Icons.add, size: 40),
+                              backgroundColor: Colors.black,
+                              onPressed: chooseImage,
+                              materialTapTargetSize:
+                                  MaterialTapTargetSize.shrinkWrap,
+                            ))),
+                    //SizedBox(width: 70.0),
+                    Spacer(),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: RaisedButton(
                           color: Colors.orange,
-                          size: 55.0,
-                        ))),
-                Container(
-                    padding: EdgeInsets.symmetric(vertical: 20.0),
-                    child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Icon(
-                          Icons.add_circle_outline,
-                          size: 55.0,
-                        ))),
-                //SizedBox(width: 70.0),
-                Spacer(),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: RaisedButton(
-                      color: Colors.orange,
-                      disabledColor: Colors.pink,
-                      disabledTextColor: Colors.black,
-                      splashColor: Colors.blue,
-                      child: Text(
-                        'POST',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      //todo stuff goes here
-                      onPressed: () {}),
-                )
-              ])
+                          disabledColor: Colors.pink,
+                          disabledTextColor: Colors.black,
+                          splashColor: Colors.blue,
+                          child: Text(
+                            'POST',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          //todo stuff goes here
+                          onPressed: () {}),
+                    )
+                  ])
             ])
           ],
         ),
       ),
     );
   }
+}
+
+class _ImageUpload extends State<Image> {
+  File _image;
+
+  Future<void> _cropImage() async {
+    File cropped = await ImageCropper.cropImage(
+        sourcePath: _image.path,
+        // ratioX: 1.0,
+        // ratioY: 1.0,
+        // maxWidth: 512,
+        // maxHeight: 512,
+        toolbarColor: Colors.purple,
+        toolbarWidgetColor: Colors.white,
+        toolbarTitle: 'Crop It'
+    );
+
+    setState(() {
+      _image = cropped ?? _image;
+    });
+  }
+
+  Future chooseFile() async {
+    await ImagePicker.pickImage(source: ImageSource.gallery).then((image) {
+      setState(() {
+        _image = image;
+      });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      // Select an image from the camera or gallery
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          children: <Widget>[
+            IconButton(
+              icon: Icon(Icons.photo_library),
+              onPressed: () => chooseImage(),
+            ),
+          ],
+        ),
+      ),
+      body: ListView(
+        children: <Widget>[
+          if (_image != null) ...[
+            Image.file(_image),
+            Row(
+              children: <Widget>[
+                FlatButton(
+                  child: Icon(Icons.crop),
+                  onPressed: _cropImage,
+                )
+              ],
+            ),
+          ]
+        ],
+      ),
+    );
+  }
+}
+
+File chooseImage() {
+  var load = new _ImageUpload();
+  load.chooseFile();
+
+  return load._image;
 }
