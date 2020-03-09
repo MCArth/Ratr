@@ -10,30 +10,58 @@ class ListPage extends StatelessWidget{
     return Scaffold(
       appBar: new AppBar(
         title: Text("List View")),
-        body: Padding(
-          padding: EdgeInsets.fromLTRB(0,10.0,0,10.0),
-          child: ListView(
-            children: _getListViewBody(context)
-          )
-        )
-
-      );
+        body: makeHouseCard,
+        );
   }
-
-
 }
 
+final makeHouseCard = Card(
+  elevation: 8.0,
+  margin: new EdgeInsets.symmetric(
+    horizontal: 10.0,
+    vertical: 6.0,
+  ),
+  child: Container(
+    decoration: BoxDecoration(),
+    child: makeCardStructure,
+    ),
+);
 
-//Defines house card structure for display purposes. To be generated as part of a list.
-class HouseCard{
+final makeCardStructure = ListTile(
+        contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+        leading: Container(
+          padding: EdgeInsets.only(right: 12.0),
+          decoration: new BoxDecoration(
+              border: new Border(
+                  right: new BorderSide(width: 1.0, color: Colors.white24))),
+          child: Icon(Icons.autorenew, color: Colors.white),
+        ),
+        title: Text(
+          "House",
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
 
-}
+        subtitle: Row(
+          children: <Widget>[
+            Icon(Icons.linear_scale, color: Colors.yellowAccent),
+            Text(" Intermediate", style: TextStyle(color: Colors.white))
+          ],
+        ),
+        trailing:
+            Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0)
+);
+
 //Function that gets all houses from database, creates card for each one
-List<Card> _getListViewBody(BuildContext context){
-  List<Card> cards = List.generate(
-    
-  );  
-  ListView();
-  return cards;
-}
+final getListViewBody = Container(
+  child: ListView.builder(
+    scrollDirection: Axis.vertical,
+    shrinkWrap: true,
+    //TODO make this dynamically size house directory 
+    itemCount: 10,
+    itemBuilder: (BuildContext context, int index){
+      return makeHouseCard;
+    },
+  )
+);
 

@@ -4,9 +4,9 @@ import 'dart:async';
 import 'houseThings.dart';
 
 List<HouseBasic> testHouse = [
-  const HouseBasic(),
+  HouseBasic(),
 
-]
+];
 
 
 
