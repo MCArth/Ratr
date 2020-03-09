@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:async';
+import 'houseThings.dart';
+
+List<HouseBasic> testHouse = [
+  const HouseBasic(),
+
+]
+
+
 
 
 //Hard coded marker locations/informaton for testing map functionality and navigation

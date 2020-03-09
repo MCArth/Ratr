@@ -23,9 +23,17 @@ class ListPage extends StatelessWidget{
 
 }
 
-//Function that gets all houses from database
+
+//Defines house card structure for display purposes. To be generated as part of a list.
+class HouseCard{
+
+}
+//Function that gets all houses from database, creates card for each one
 List<Card> _getListViewBody(BuildContext context){
-  List<Card> cards;
+  List<Card> cards = List.generate(
+    
+  );  
   ListView();
   return cards;
 }
+
