@@ -69,6 +69,16 @@ exports.readMesages = functions.https.onRequest((req, res) => {
 	res.json("{'status': 200}");
 });
 
+exports.addUser = functions.https.onRequest(async (req, res) => {
+	const userRef = db.ref('/users');
+	const username = req.query.username;
+	const password = req.query.password;
+	const snapshot = await userRef.push({username: username, password: password});
+	console.log(snapshot);
+	res.status(200)
+	res.json("{}");
+});
+
 exports.updateHouse = functions.https.onRequest(async (req, res) => {
 	const housesRef = db.ref('/houses');
 
@@ -137,16 +147,28 @@ exports.updateHouse = functions.https.onRequest(async (req, res) => {
 });
 
 function loginCheck (usersList, username, password){
-	console.log(usersList);
-	for (let i = 1; i < usersList.length; i++){
-		if (usersList[i].username === username){
-			if (usersList[i].password.toString() === password){
+	for(var user in usersList){
+		userInfo = usersList[user];
+		console.log(user);
+		if(userInfo.username === username){
+			if (userInfo.password === password){
 				return 200;
 			} else {
+				console.log("Wrong password");
 				return 401;
 			}
 		}
 	}
+
+	// for (let i = 1; i < usersList.length; i++){
+	// 	if (usersList[i].username === username){
+	// 		if (usersList[i].password.toString() === password){
+	// 			return 200;
+	// 		} else {
+	// 			return 401;
+	// 		}
+	// 	}
+	// }
 	console.log("User not found"); 
 	return 401;
 }
