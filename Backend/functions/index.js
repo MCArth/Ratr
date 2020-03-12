@@ -73,11 +73,28 @@ exports.addUser = functions.https.onRequest(async (req, res) => {
 	const userRef = db.ref('/users');
 	const username = req.query.username;
 	const password = req.query.password;
-	const snapshot = await userRef.push({username: username, password: password});
-	console.log(snapshot);
-	res.status(200)
-	res.json("{}");
+	const hashed_pw = crypto.createHash('md5').update(password).digest('hex');
+	const usersList = getUser();
+	console.log(usersList);
+	if(!checkExistingUsername(usersList, username)){
+		const snapshot = await userRef.push({username: username, password: hashed_pw});
+		res.status(200)
+		res.json("User added");
+	} else {
+		res.status(403)
+		res.json("User already exists");
+	}
 });
+
+function checkExistingUsername (usersList, username){
+for(var user in usersList){
+	userInfo = usersList[user];
+	if(userInfo.username === username){
+		return true
+		}
+	}
+	return false
+}
 
 exports.updateHouse = functions.https.onRequest(async (req, res) => {
 	const housesRef = db.ref('/houses');
@@ -138,7 +155,7 @@ exports.updateHouse = functions.https.onRequest(async (req, res) => {
 	admin.database().ref('users').once('value', snap =>  {
 				json = snap.val();
 				res.status(loginCheck(json, username, hashed_pw));
-				res.json(json);
+				res.json(null);
 				return null;
 			},
 		).then((json) => {
@@ -149,7 +166,6 @@ exports.updateHouse = functions.https.onRequest(async (req, res) => {
 function loginCheck (usersList, username, password){
 	for(var user in usersList){
 		userInfo = usersList[user];
-		console.log(user);
 		if(userInfo.username === username){
 			if (userInfo.password === password){
 				return 200;
@@ -173,17 +189,28 @@ function loginCheck (usersList, username, password){
 	return 401;
 }
 
-exports.getUser = functions.https.onRequest((req, res) => {
+function getUser() {
 	// Grab the text parameter.
 	// const original = req.query.text;
 	// var json;
-	admin.database().ref('users').once('value', snap =>  {
+	return 	admin.database().ref('users').once('value', snap =>  {
 				data = snap.val()
-				res.json(data)
+				list = data;
 				return data
 			},
 		).then((data) => {
-			console.log(data);
-			return null;
+			return data;
 		}).catch((err) => {console.log(err); return null;})
- });
+
+ }
+
+exports.checkUser2 = functions.https.onRequest(async (req, res) => {
+	const userRef = db.ref('/users');
+	const username = req.query.username;
+	const password = req.query.password;
+	var ref = admin.database().ref("users");
+	ref.orderByChild("username").equalTo(username).on("child_added", function(snapshot) {
+  console.log(snapshot.key);
+	});
+	
+});
