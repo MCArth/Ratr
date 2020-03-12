@@ -74,16 +74,23 @@ exports.addUser = functions.https.onRequest(async (req, res) => {
 	const username = req.query.username;
 	const password = req.query.password;
 	const hashed_pw = crypto.createHash('md5').update(password).digest('hex');
-	const usersList = getUser();
-	console.log(usersList);
-	if(!checkExistingUsername(usersList, username)){
-		const snapshot = await userRef.push({username: username, password: hashed_pw});
-		res.status(200)
-		res.json("User added");
-	} else {
-		res.status(403)
-		res.json("User already exists");
-	}
+	admin.database().ref('users').once('value', snap =>  {
+		data = snap.val()
+		console.log(data);
+		if(!checkExistingUsername(data, username)) {
+			const mySNappp = admin.database().ref('/users').push({username: username, password: hashed_pw});
+			console.log(mySNappp);
+			res.status(200)
+			res.json({status: 200});
+		} else {
+			res.status(403)
+			res.json({status: 403});
+		}
+		return data
+	},
+	).then((data) => {
+		return data;
+	}).catch((err) => {console.log(err); return null;})
 });
 
 function checkExistingUsername (usersList, username){
@@ -193,7 +200,7 @@ function getUser() {
 	// Grab the text parameter.
 	// const original = req.query.text;
 	// var json;
-	return 	admin.database().ref('users').once('value', snap =>  {
+	admin.database().ref('users').once('value', snap =>  {
 				data = snap.val()
 				list = data;
 				return data
