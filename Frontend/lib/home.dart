@@ -41,7 +41,7 @@ class HomePage extends StatelessWidget{
                 label: Text('Property List'),
                 heroTag: "listbtn",
                 onPressed: () {
-
+                  Navigator.pushNamed(context,'/list');
                 }
               ),
               
