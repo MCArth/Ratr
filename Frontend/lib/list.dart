@@ -10,17 +10,63 @@ class ListPage extends StatelessWidget{
     return Scaffold(
       appBar: new AppBar(
         title: Text("List View")),
-        body: Padding(
-          padding: EdgeInsets.fromLTRB(0,10.0,0,10.0),
-          child: getListViewBody(context)
-        )
-
-      );
+        body: getListViewBody
+        );
   }
-
-
 }
 
-getListViewBody(BuildContext context){
 
-}
+
+//Creates a card for a house
+Widget makeCardStructure = ListTile(
+        contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+        leading: Container(
+          padding: EdgeInsets.only(right: 12.0),
+          decoration: new BoxDecoration(
+              border: new Border(
+                  right: new BorderSide(width: 1.0, color: Colors.white24))),
+          child: Icon(Icons.home, color: Colors.white),
+        ),
+        title: Text(
+          "32 Road Avenue",
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
+
+        subtitle: Row(
+          children: <Widget>[
+            Text("5 Bedroom House")
+          ],
+        ),
+        trailing:
+            Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0),
+        onTap: () {
+                  //TODO sort out navigation issues
+                }
+);
+
+final makeHouseCard = Card(
+  elevation: 8.0,
+  margin: new EdgeInsets.symmetric(
+    horizontal: 10.0,
+    vertical: 6.0,
+  ),
+  child: Container(
+    decoration: BoxDecoration(),
+    child: makeCardStructure,
+    ),
+);
+
+//Function that gets all houses from database, creates card for each one
+final getListViewBody = Container(
+  child: ListView.builder(
+    scrollDirection: Axis.vertical,
+    shrinkWrap: true,
+    //TODO make this dynamically size house directory 
+    itemCount: 10,
+    itemBuilder: (BuildContext context, int index){
+      return makeHouseCard;
+    },
+  )
+);
+

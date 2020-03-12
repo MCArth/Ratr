@@ -3,7 +3,8 @@ import 'login.dart';
 import 'home.dart';
 import 'map.dart';
 import 'registration.dart';
-import 'theme/colours.dart';
+import 'prop.dart';
+import 'list.dart';
 
 class NexusApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -26,8 +27,9 @@ class NexusApp extends StatelessWidget {
       onGenerateRoute: _getRoute,
       routes: <String, WidgetBuilder>{
 				'/map': (BuildContext context) { return MapPage();},
-        '/registration': (BuildContext context) {return RegistrationPage();}
-      
+        '/registration': (BuildContext context) {return RegistrationPage();},
+        '/list': (BuildContext context) {return ListPage();},
+        '/property': (BuildContext context) {return Property();}
 			}
     );
   }
