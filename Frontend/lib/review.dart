@@ -9,6 +9,7 @@ import 'dart:developer';
 //void main() => runApp(ReviewPage());
 //No need for main here, can be accessed from app
 
+//Global variables to do db stuff
 int revLat;
 int revLong;
 
