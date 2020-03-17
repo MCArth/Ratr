@@ -274,3 +274,46 @@ exports.getLandlords = functions.https.onRequest((req, res) => {
 			return null;
 		}).catch((err) => {console.log(err); return null;})
  });
+
+
+exports.getPropertyStats = functions.https.onRequest((req, res) => {
+	admin.database().ref('landlords').once('value', snap =>  {
+			json = snap.val()
+			result = {};
+			houses = [];
+
+			let allHouses = json;
+			for(var databaseId in json) {
+				houseInfo = JSON.parse(allHouses[databaseId]["original"]);
+				houses.push(houseInfo);
+			}
+			if(house.length === 0) {
+				res.json({})
+				return {}
+			}
+			let totalppa = totalRating = 0;
+			houses.sort(function(a, b){return a["pricePerAnnum"]-b["pricePerAnnum"]});
+			for(var house in houses) {
+				totalppa += house["pricePerAnnum"];
+				totalRating += house[avgRating];
+			}
+			result["priceInfo"] = {}
+			result["priceInfo"]["meanPrice"] = totalppa/houses.length
+			result["priceInfo"]["medianPrice"] = houses[Math.floor(houses.length/2)]["pricePerAnnum"];
+			let percentile25 = houses[Math.floor(houses.length/4)]["pricePerAnnum"];
+			let percentile75 = houses[Math.floor(3*houses.length/4)]["pricePerAnnum"];
+			let percentile90 = houses[Math.floor(9*houses.length/10)]["pricePerAnnum"];
+			result["priceInfo"]["25thPercentilePrice"] = percentile25;
+			result["priceInfo"]["75thPercentilePrice"] = percentile75;
+			result["priceInfo"]["90thPercentilePrice"] = percentile90;
+
+			result["meanHouseRating"] = totalRating/houses.length;
+
+			res.json(result)
+			return result
+		},
+		).then((json) => {
+			console.log(json);
+			return null;
+		}).catch((err) => {console.log(err); return null;})
+});
