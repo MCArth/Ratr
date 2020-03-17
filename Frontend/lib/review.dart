@@ -2,26 +2,39 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart'; // For Image Picker
+import 'package:string_validator/string_validator.dart';
 import 'package:path/path.dart' as Path;
+import 'dart:developer';
 
-void main() => runApp(ReviewWriter());
+//void main() => runApp(ReviewPage());
+//No need for main here, can be accessed from app
 
-class ReviewWriter extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Review Page',
-      home: ReviewPage(),
-    );
+int revLat;
+int revLong;
+
+class ReviewPage extends StatefulWidget {
+
+  ReviewPage(int lat, int long) {
+    revLat = lat;
+    revLong = long;
+    print(revLat);
   }
+
+  @override
+  _ReviewPage createState() => _ReviewPage();
 }
 
-class ReviewPage extends StatelessWidget {
+class _ReviewPage extends State<ReviewPage> {
+  //todo change this to do backend stuff
+  String propertyName = "Latitude: "+revLat.toString();
+  String propertyReview = "";
+  String landlordReview = "";
+  final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     //todo get from backend stuff
-    String propertyName = "Property Name";
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -31,163 +44,209 @@ class ReviewPage extends StatelessWidget {
             fontSize: 25,
           ),
         ),
-        backgroundColor: Colors.orange,
+        //backgroundColor: Colors.orange,
       ),
       body: SafeArea(
-        child: ListView(
-          padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 12.0),
-          children: <Widget>[
-            Column(children: <Widget>[
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 15.0),
-                child: Text(
-                  'Please write your review below for '
-                  'the property chosen:',
-                  textDirection: TextDirection.ltr,
-                  style: TextStyle(fontSize: 18, color: Colors.black),
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 2.0, vertical: 5),
-                child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Property Review:',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.left,
-                    )),
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 10),
-                child: TextField(
-                    keyboardType: TextInputType.multiline,
-                    minLines: 4,
-                    maxLines: 4,
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(3.0),
-                            borderSide: BorderSide(
-                                width: 10.0, style: BorderStyle.solid)),
-                        filled: true,
-                        hintText: 'Write your review here...')
-                    //labelText: 'House Review')
-                    ),
-              ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: RaisedButton(
-                  padding: EdgeInsets.all(5.0),
-                  color: Colors.orange,
-                  disabledColor: Colors.pink,
-                  disabledTextColor: Colors.black,
-                  splashColor: Colors.blue,
-                  child: Text(
-                    'POST',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  onPressed: () {},
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 2.0),
-                child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Landlord Review:',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.left,
-                    )),
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 10),
-                child: TextField(
-                    keyboardType: TextInputType.multiline,
-                    minLines: 4,
-                    maxLines: 4,
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(3.0),
-                            borderSide: BorderSide(
-                                width: 10.0, style: BorderStyle.solid)),
-                        filled: true,
-                        hintText: 'Write your review here...')
-                    //labelText: 'House Review')
-                    ),
-              ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: RaisedButton(
-                    padding: EdgeInsets.all(5.0),
-                    color: Colors.orange,
-                    disabledColor: Colors.pink,
-                    disabledTextColor: Colors.black,
-                    splashColor: Colors.blue,
-                    child: Text(
-                      'POST',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    onPressed: () {}),
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 2.0),
-                child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Upload Images:',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.left,
-                    )),
-              ),
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Container(
-                        padding: EdgeInsets.symmetric(vertical: 20.0),
-                        child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Icon(
-                              Icons.image,
-                              color: Colors.orange,
-                              size: 55.0,
-                            ))),
-                    Center(
-                        child: Container(
-                            height: 80,
-                            padding: EdgeInsets.symmetric(vertical: 20.0),
-                            alignment: Alignment.centerRight,
-                            child: FloatingActionButton(
-                              child: Icon(Icons.add, size: 40),
-                              backgroundColor: Colors.black,
-                              onPressed: chooseImage,
-                              materialTapTargetSize:
-                                  MaterialTapTargetSize.shrinkWrap,
-                            ))),
-                    //SizedBox(width: 70.0),
-                    Spacer(),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: RaisedButton(
-                          color: Colors.orange,
-                          disabledColor: Colors.pink,
-                          disabledTextColor: Colors.black,
-                          splashColor: Colors.blue,
-                          child: Text(
-                            'POST',
-                            style: TextStyle(color: Colors.white),
+        child: Card(
+            child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Form(
+                    key: formKey,
+                    child: ListView(
+                      children: <Widget>[
+                        Column(children: <Widget>[
+                          Container(
+                            padding: EdgeInsets.symmetric(vertical: 15.0),
+                            child: Text(
+                              'Please write your review below for '
+                                  'the property chosen:',
+                              textDirection: TextDirection.ltr,
+                              style:
+                              TextStyle(fontSize: 18, color: Colors.black),
+                            ),
                           ),
-                          //todo stuff goes here
-                          onPressed: () {}),
-                    )
-                  ])
-            ])
-          ],
-        ),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 2.0, vertical: 5),
+                            child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Property Review:',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                  textAlign: TextAlign.left,
+                                )),
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(vertical: 10),
+                            child: TextFormField(
+                              keyboardType: TextInputType.multiline,
+                              minLines: 4,
+                              maxLines: 4,
+                              decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(3.0),
+                                      borderSide: BorderSide(
+                                          width: 10.0,
+                                          style: BorderStyle.solid)),
+                                  filled: true,
+                                  hintText: 'Write your review here...'),
+                              validator: (input) => !matches(
+                                  input, r'^[A-Za-z\n]+$')
+                                  ? 'Invalid description, needs to consist of letters'
+                                  : null,
+                              onSaved: (input) => propertyReview = input,
+                              //labelText: 'House Review')
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: RaisedButton(
+                              color: Colors.blue,
+                              //disabledColor: Colors.pink,
+                                disabledTextColor: Colors.black,
+                                splashColor: Colors.blue,
+                                child: Text(
+                                  'POST',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                //todo stuff goes here
+                                onPressed: _submitPropertyReview),
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 2.0),
+                            child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Landlord Review:',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                  textAlign: TextAlign.left,
+                                )),
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(vertical: 10),
+                            child: TextFormField(
+                              keyboardType: TextInputType.multiline,
+                              minLines: 4,
+                              maxLines: 4,
+                              decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(3.0),
+                                      borderSide: BorderSide(
+                                          width: 10.0,
+                                          style: BorderStyle.solid)),
+                                  filled: true,
+                                  hintText: 'Write your review here...'),
+                              validator: (input) => !matches(
+                                  input, r'^[A-Za-z\n]+$')
+                                  ? 'Invalid description, needs to consist of letters'
+                                  : null,
+                              onSaved: (input) => landlordReview = input,
+                              //labelText: 'House Review')
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: RaisedButton(
+                              //color: Colors.orange,
+                                color: Colors.blue,
+                                disabledColor: Colors.pink,
+                                disabledTextColor: Colors.black,
+                                splashColor: Colors.blue,
+                                child: Text(
+                                  'POST',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                //todo stuff goes here
+                                onPressed: _submitLandlordReview),
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 2.0),
+                            child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Upload Images:',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                  textAlign: TextAlign.left,
+                                )),
+                          ),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Container(
+                                    padding:
+                                    EdgeInsets.symmetric(vertical: 20.0),
+                                    child: Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Icon(
+                                          Icons.image,
+                                          //color: Colors.orange,
+                                          size: 55.0,
+                                        ))),
+                                Center(
+                                    child: Container(
+                                        height: 80,
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 20.0),
+                                        alignment: Alignment.centerRight,
+                                        child: FloatingActionButton(
+                                          child: Icon(Icons.add, size: 40),
+                                          backgroundColor: Colors.black,
+                                          onPressed: chooseImage,
+                                          materialTapTargetSize:
+                                          MaterialTapTargetSize.shrinkWrap,
+                                        ))),
+                                //SizedBox(width: 70.0),
+                                Spacer(),
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: RaisedButton(
+                                    //color: Colors.orange,
+                                      color: Colors.blue,
+                                      disabledColor: Colors.pink,
+                                      disabledTextColor: Colors.black,
+                                      splashColor: Colors.blue,
+                                      child: Text(
+                                        'POST',
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      //todo stuff goes here
+                                      onPressed: _submitImage),
+                                )
+                              ])
+                        ])
+                      ],
+                    )))),
       ),
     );
   }
+
+  void _submitPropertyReview() {
+    if (formKey.currentState.validate()) {
+      formKey.currentState.save();
+      log(propertyReview);
+      //Popup saying that account was created successfully
+      //todo Link with RL DBS
+      //Go back to home bage
+    }
+  }
+
+  void _submitLandlordReview() {
+    if (formKey.currentState.validate()) {
+      formKey.currentState.save();
+      log(landlordReview);
+      //Popup saying that account was created successfully
+      //Link with RL DBS
+      //Go back to home bage
+    }
+  }
+
+  void _submitImage() {}
 }
 
 class _ImageUpload extends State<Image> {
@@ -202,8 +261,7 @@ class _ImageUpload extends State<Image> {
         // maxHeight: 512,
         toolbarColor: Colors.purple,
         toolbarWidgetColor: Colors.white,
-        toolbarTitle: 'Crop It'
-    );
+        toolbarTitle: 'Crop It');
 
     setState(() {
       _image = cropped ?? _image;

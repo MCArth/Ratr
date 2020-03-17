@@ -1,9 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:nexus_app/review.dart';
+import 'review.dart';
 
-void main() => runApp(Property());
+//void main() => runApp(Property());
+
+//Global variables to be passed in from list of houses
+int propLat;
+int propLong;
 
 class Property extends StatelessWidget {
+
+  Property(int lat, int long) {
+    propLat = lat;
+    propLat = long;
+  }
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -15,16 +26,17 @@ class Property extends StatelessWidget {
 }
 
 class PropertyProfile extends StatelessWidget {
-  //todo change this, not propName anymore
+  //todo do database stuff with lat and long
   final String propertyName = "Property Profile";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.orange,
+        //backgroundColor: Colors.orange,
         title: Text(
-          propertyName,
+          "Latitude: " +propLat.toString(),
+          //propertyName+propLat.toString(),
           textDirection: TextDirection.ltr,
           style: TextStyle(fontSize: 25),
         ),
@@ -120,10 +132,8 @@ class PropertyProfile extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
             //todo backend stuff here
             child: Text('No information yet.'),
-            decoration: BoxDecoration(
-              border: Border.all(),
-              shape: BoxShape.rectangle
-            ),
+            decoration:
+                BoxDecoration(border: Border.all(), shape: BoxShape.rectangle),
 //            child: TextField(
 //                keyboardType: TextInputType.multiline,
 //                minLines: 4,
@@ -149,15 +159,13 @@ class PropertyProfile extends StatelessWidget {
                   textAlign: TextAlign.left,
                 )),
           ),
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
-              //todo backend stuff here
-              child: Text('No information yet.'),
-              decoration: BoxDecoration(
-                  border: Border.all(),
-                  shape: BoxShape.rectangle
-              ),
-            ),
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
+            //todo backend stuff here
+            child: Text('No information yet.'),
+            decoration:
+                BoxDecoration(border: Border.all(), shape: BoxShape.rectangle),
+          ),
 //          Container(
 //            padding: EdgeInsets.symmetric(vertical: 10),
 //            child: TextField(
@@ -181,11 +189,12 @@ class PropertyProfile extends StatelessWidget {
                   child: FloatingActionButton(
                     elevation: 0.0,
                     child: Icon(Icons.add),
-                    backgroundColor: Colors.orange,
+                    //backgroundColor: Colors.orange,
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => ReviewPage()),
+                        //goes to review; passes lat and long into the class
+                        MaterialPageRoute(builder: (context) => ReviewPage(propLat, propLong)),
                       );
                     },
                   )))
