@@ -2,7 +2,8 @@ addHouse endpoint
 https://us-central1-ridr-cc2ec.cloudfunctions.net/addHouse
 Intended use:
 https://us-central1-ridr-cc2ec.cloudfunctions.net/addHouse?text=yourHouseJson
-where yourHouseJson is a string like {"lat": 1.52, "ffe": ......} (intended format as specified by deliverable 2)
+where yourHouseJson is a string like {"lat": 1.52, "long": 2.55, "ffe": ......} (intended format as specified by deliverable 2)
+"ffe" and onward can be whatever you want if you want to change but the "lat" and "long" must stay at the base level of the json
 
 getHouses endpoint
 https://us-central1-ridr-cc2ec.cloudfunctions.net/getHouses
@@ -20,10 +21,23 @@ intended:
 https://us-central1-ridr-cc2ec.cloudfunctions.net/updateHouse?text=yourNewHouseJson
 where yourNewHouseJson is a json for a house with updated values.
 Intended for you to find a house to update with getHouses and then modify the json given to you for that house.
-However, you must leave lat and lng untouched as these are used to identify the house to update.
+However, you must leave lat and long untouched as these are used to identify the house to update.
 
 addUser endpoint
 https://us-central1-ridr-cc2ec.cloudfunctions.net/login?username=myname&password=mypassword
 where myname and mypassword are name and passwords
 returns 403 if username already exists
 else 200
+
+addLandlord
+https://us-central1-ridr-cc2ec.cloudfunctions.net/addLandlord?text=yourLandlordJson
+{"name": james, "other keys": eoimsfe, fokfewopk}
+"name" must exist, is used as primary identifier (yes, lazy, but good enough for our need)
+
+updateLandlord
+https://us-central1-ridr-cc2ec.cloudfunctions.net/updateLandlord?text=yourNewLandlordJSON
+where yourNewLandlordJSON is a json for a landlord with updated values.
+
+getLandlords
+https://us-central1-ridr-cc2ec.cloudfunctions.net/getLandlords
+returns a json with all landlords
