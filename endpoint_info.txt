@@ -21,3 +21,9 @@ https://us-central1-ridr-cc2ec.cloudfunctions.net/updateHouse?text=yourNewHouseJ
 where yourNewHouseJson is a json for a house with updated values.
 Intended for you to find a house to update with getHouses and then modify the json given to you for that house.
 However, you must leave lat and lng untouched as these are used to identify the house to update.
+
+addUser endpoint
+https://us-central1-ridr-cc2ec.cloudfunctions.net/login?username=myname&password=mypassword
+where myname and mypassword are name and passwords
+returns 403 if username already exists
+else 200
