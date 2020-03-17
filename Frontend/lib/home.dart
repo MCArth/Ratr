@@ -9,15 +9,6 @@ class HomePage extends StatelessWidget{
     return new Scaffold(
       appBar: new AppBar(
         title: new Text("Home Screen"),
-        leading: IconButton(
-          icon: Icon(
-            Icons.menu,
-            semanticLabel: 'menu',
-          ),
-          onPressed: () {
-            print('Menu button');
-          }
-        ),
       ),
       body: SafeArea(
         child: Center(
