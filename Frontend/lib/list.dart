@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nexus_app/prop.dart';
 
 
 //page displaying all available properties in a relational database
@@ -49,7 +50,12 @@ makeHouseCard(BuildContext context){
                 trailing:
                     Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0),
                 onTap: () {
-                        Navigator.pushNamed(context, '/property');
+                        //Navigator.pushNamed(context, '/property');
+                  Navigator.push(
+                    context,
+                    //todo get actual lat and long; not 69,96 lol
+                    MaterialPageRoute(builder: (context) => Property(69,96)),
+                  );
                         }
         ),
       ),
