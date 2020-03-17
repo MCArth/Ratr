@@ -17,7 +17,6 @@ class ReviewPage extends StatefulWidget {
   ReviewPage(int lat, int long) {
     revLat = lat;
     revLong = long;
-    print(revLat);
   }
 
   @override
@@ -106,7 +105,7 @@ class _ReviewPage extends State<ReviewPage> {
                               color: Colors.blue,
                               //disabledColor: Colors.pink,
                                 disabledTextColor: Colors.black,
-                                splashColor: Colors.blue,
+                                splashColor: Colors.lightGreen,
                                 child: Text(
                                   'POST',
                                   style: TextStyle(color: Colors.white),
@@ -155,7 +154,7 @@ class _ReviewPage extends State<ReviewPage> {
                                 color: Colors.blue,
                                 disabledColor: Colors.pink,
                                 disabledTextColor: Colors.black,
-                                splashColor: Colors.blue,
+                                splashColor: Colors.lightGreen,
                                 child: Text(
                                   'POST',
                                   style: TextStyle(color: Colors.white),
@@ -210,7 +209,7 @@ class _ReviewPage extends State<ReviewPage> {
                                       color: Colors.blue,
                                       disabledColor: Colors.pink,
                                       disabledTextColor: Colors.black,
-                                      splashColor: Colors.blue,
+                                      splashColor: Colors.lightGreen,
                                       child: Text(
                                         'POST',
                                         style: TextStyle(color: Colors.white),

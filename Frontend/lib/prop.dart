@@ -197,6 +197,7 @@ class PropertyProfile extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => ReviewPage(propLat, propLong)),
                       );
                     },
+                    splashColor: Colors.lightGreen,
                   )))
         ],
       )),
