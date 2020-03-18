@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nexus_app/review.dart';
 import 'login.dart';
 import 'home.dart';
 import 'map.dart';
@@ -29,7 +30,7 @@ class NexusApp extends StatelessWidget {
 				'/map': (BuildContext context) { return MapPage();},
         '/registration': (BuildContext context) {return RegistrationPage();},
         '/list': (BuildContext context) {return ListPage();},
-        '/property': (BuildContext context) {return Property();}
+        //'/property': (BuildContext context) {return Property();},
 			}
     );
   }

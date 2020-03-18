@@ -5,6 +5,8 @@ import 'testData.dart';
 
 final Set<Marker> _markers = {};
 
+
+//TODO marker todos must link to properties 
 final Set<Marker> _testMarkers = {
   //Near Uni 1
   Marker(

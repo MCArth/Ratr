@@ -74,16 +74,23 @@ exports.addUser = functions.https.onRequest(async (req, res) => {
 	const username = req.query.username;
 	const password = req.query.password;
 	const hashed_pw = crypto.createHash('md5').update(password).digest('hex');
-	const usersList = getUser();
-	console.log(usersList);
-	if(!checkExistingUsername(usersList, username)){
-		const snapshot = await userRef.push({username: username, password: hashed_pw});
-		res.status(200)
-		res.json("User added");
-	} else {
-		res.status(403)
-		res.json("User already exists");
-	}
+	admin.database().ref('users').once('value', snap =>  {
+		data = snap.val()
+		console.log(data);
+		if(!checkExistingUsername(data, username)) {
+			const mySNappp = admin.database().ref('/users').push({username: username, password: hashed_pw});
+			console.log(mySNappp);
+			res.status(200)
+			res.json({status: 200});
+		} else {
+			res.status(403)
+			res.json({status: 403});
+		}
+		return data
+	},
+	).then((data) => {
+		return data;
+	}).catch((err) => {console.log(err); return null;})
 });
 
 function checkExistingUsername (usersList, username){
@@ -102,18 +109,18 @@ exports.updateHouse = functions.https.onRequest(async (req, res) => {
 	const newHouseInfo = req.query.text;
 	console.log(newHouseInfo);
 	// const newHouseJson = JSON.parse(newHouseInfo);
-	const newHouseJson = newHouseInfo;
+	const newHouseJson = JSON.parse(newHouseInfo);
 	housesRef.once('value', snap =>  {
 			json = snap.val();
-
 			console.log(json);
 			let allHouses = json;
-			allHouses.array.forEach(databaseId => {
-				houseInfo = allHouses[databaseId];
+			for(var databaseId in json) {
+				houseInfo = JSON.parse(allHouses[databaseId]["original"]);
+				console.log(houseInfo);
 				if (houseInfo['lat'] === newHouseJson['lat'] && houseInfo['long'] === newHouseJson['long']) {
-					housesRef.child(databaseId).update(newHouseInfo);
+					db.ref("/houses/" + databaseId).set({"original": newHouseInfo});
 				}
-			});
+			}
 			res.json("{'status': 200}");
 
 			return json;
@@ -193,7 +200,7 @@ function getUser() {
 	// Grab the text parameter.
 	// const original = req.query.text;
 	// var json;
-	return 	admin.database().ref('users').once('value', snap =>  {
+	admin.database().ref('users').once('value', snap =>  {
 				data = snap.val()
 				list = data;
 				return data
@@ -213,4 +220,100 @@ exports.checkUser2 = functions.https.onRequest(async (req, res) => {
   console.log(snapshot.key);
 	});
 	
+});
+
+
+
+
+exports.updateLandlord = functions.https.onRequest(async (req, res) => {
+	const landlordRef = db.ref('/landlords');
+	const newLLInfo = req.query.text;
+	const newLLJson = JSON.parse(newLLInfo);
+	landlordRef.once('value', snap =>  {
+			json = snap.val();
+			console.log(json);
+			let allLL = json;
+			for(var databaseId in json) {
+				landlordInfo = JSON.parse(allLL[databaseId]["original"]);
+				console.log(databaseId + " " + landlordInfo['name'] + " " + newLLJson['name'])
+				if (landlordInfo['name'] === newLLJson['name']) {
+					db.ref("/landlords/" + databaseId).set({"original": newLLInfo});
+				}
+			}
+			res.json("{'status': 200}");
+
+			return json;
+		},
+		).then((json) => {
+			return null;
+		}).catch((err) => {console.log(err); return null;})
+});
+
+exports.addLandlord = functions.https.onRequest(async (req, res) => {
+	// Grab the text parameter.
+	// Push the new message into the Realtime Database using the Firebase Admin SDK.
+	// Redirect with 303 SEE OTHER to the URL of the pushed object in the Firebase console.
+	const landlordRef = db.ref('/landlords');
+
+	const landlordInfo = req.query.text;
+	const snapshot = await landlordRef.push({original: landlordInfo});
+	res.json("{'status': 200}");
+});
+
+exports.getLandlords = functions.https.onRequest((req, res) => {
+	// Grab the text parameter.
+	// const original = req.query.text;
+	// var json;
+	admin.database().ref('landlords').once('value', snap =>  {
+				json = snap.val()
+				res.json(json)
+				return json
+			},
+		).then((json) => {
+			console.log(json);
+			return null;
+		}).catch((err) => {console.log(err); return null;})
+ });
+
+
+exports.getPropertyStats = functions.https.onRequest((req, res) => {
+	admin.database().ref('landlords').once('value', snap =>  {
+			json = snap.val()
+			result = {};
+			houses = [];
+
+			let allHouses = json;
+			for(var databaseId in json) {
+				houseInfo = JSON.parse(allHouses[databaseId]["original"]);
+				houses.push(houseInfo);
+			}
+			if(house.length === 0) {
+				res.json({})
+				return {}
+			}
+			let totalppa = totalRating = 0;
+			houses.sort(function(a, b){return a["pricePerAnnum"]-b["pricePerAnnum"]});
+			for(var house in houses) {
+				totalppa += house["pricePerAnnum"];
+				totalRating += house[avgRating];
+			}
+			result["priceInfo"] = {}
+			result["priceInfo"]["meanPrice"] = totalppa/houses.length
+			result["priceInfo"]["medianPrice"] = houses[Math.floor(houses.length/2)]["pricePerAnnum"];
+			let percentile25 = houses[Math.floor(houses.length/4)]["pricePerAnnum"];
+			let percentile75 = houses[Math.floor(3*houses.length/4)]["pricePerAnnum"];
+			let percentile90 = houses[Math.floor(9*houses.length/10)]["pricePerAnnum"];
+			result["priceInfo"]["25thPercentilePrice"] = percentile25;
+			result["priceInfo"]["75thPercentilePrice"] = percentile75;
+			result["priceInfo"]["90thPercentilePrice"] = percentile90;
+
+			result["meanHouseRating"] = totalRating/houses.length;
+
+			res.json(result)
+			return result
+		},
+		).then((json) => {
+			console.log(json);
+			return null;
+		}).catch((err) => {console.log(err); return null;})
 });
