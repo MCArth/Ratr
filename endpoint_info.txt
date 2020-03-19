@@ -41,3 +41,6 @@ where yourNewLandlordJSON is a json for a landlord with updated values.
 getLandlords
 https://us-central1-ridr-cc2ec.cloudfunctions.net/getLandlords
 returns a json with all landlords
+
+https://us-central1-ridr-cc2ec.cloudfunctions.net/getPropertyStats
+returns property stats (we need to populate db with valid data before this works)
