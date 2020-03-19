@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'map.dart';
 
 
@@ -40,32 +41,50 @@ class HomePage extends StatelessWidget{
                         }
                       ),
                   
-              ],)
+              ],),
+  
             ),
               ),
-          Expanded(
-            child: Container(
-              alignment: Alignment(0.0,1.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  RaisedButton(
-                    onPressed: (){},
-                    child: Text('Add New Property')
-                  ),
-                  const SizedBox(width: 20,),
-                  RaisedButton(
-                    onPressed: (){},
-                    child: Text('Add New Landlord')
-                  ),
-                ]
-              ),
-            )
-          ),
+          // Expanded(
+          //   child: Container(
+          //     alignment: Alignment(0.0,1.0),
+          //     child: Row(
+          //       mainAxisAlignment: MainAxisAlignment.center,
+          //       children: <Widget>[
+          //         RaisedButton(
+          //           onPressed: (){},
+          //           child: Text('Add New Property')
+          //         ),
+          //         const SizedBox(width: 20,),
+          //         RaisedButton(
+          //           onPressed: (){},
+          //           child: Text('Add New Landlord')
+          //         ),
+          //       ]
+          //     ),
+          //   )
+          // ),
           ]
         )
       )
-    ) 
+    ),
+    floatingActionButton: SpeedDial(
+      child: Icon(Icons.add), 
+      children: [
+        SpeedDialChild(
+          child: Icon(Icons.home),
+          label: 'New Property',
+          labelStyle: TextStyle(color: Colors.blueGrey[800]),
+          onTap: () => print("Go to property creation")
+        ),
+        SpeedDialChild(
+          child: Icon(Icons.person_add),
+          label: 'New Landlord',  
+          labelStyle: TextStyle(color: Colors.blueGrey[800]),
+          onTap: () => print("Go to landlord creation")
+        )
+      ]
+    ), 
     );
   }
 }

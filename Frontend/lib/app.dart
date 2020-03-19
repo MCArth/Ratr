@@ -16,8 +16,9 @@ class NexusApp extends StatelessWidget {
       //Build theme that will be inherited by rest of application
       theme: ThemeData(
         brightness: Brightness.dark,
-        primaryColor: Colors.blueGrey[700],
-        accentColor: Colors.blueGrey,
+        primaryColor: Colors.blueGrey[600],
+        
+        accentColor: Colors.deepOrangeAccent,
         fontFamily: 'Rubik',
         
       ),
