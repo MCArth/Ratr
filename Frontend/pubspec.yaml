@@ -13,6 +13,10 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
+
+  ## Speed dial
+  flutter_speed_dial: ^1.2.1
+  
   ## Adds package for securing keys, getting environment variables 
   flutter_dotenv: ^2.1.0
   string_validator: ^0.1.3
