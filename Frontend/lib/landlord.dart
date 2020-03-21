@@ -3,6 +3,9 @@ import 'package:nexus_app/list.dart';
 import 'package:nexus_app/review.dart';
 import 'package:nexus_app/revland.dart';
 
+//todo change this
+double rating = 8;
+
 //void main() => runApp(Landlord());
 //todo make this inherit the theme of the app!!!!!!!
 class Landlord extends StatelessWidget {
@@ -19,6 +22,12 @@ class Landlord extends StatelessWidget {
 class LandlordProfile extends StatelessWidget {
   //todo change this
   final String name = "Landlord Profile";
+
+  Color getColour(double num) {
+    if (num >= 7.5) return Colors.green;
+    if (num > 5) return Colors.orange;
+    else return Colors.red;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,9 +88,9 @@ class LandlordProfile extends StatelessWidget {
                             splashColor: Colors.blueAccent,
                             onPressed: () {},
                             child: Text(
-                              "8.5",
+                              rating.toString(),
                               style: TextStyle(
-                                  fontSize: 20.0, color: Colors.green),
+                                  fontSize: 20.0, color: getColour(rating)),
                             ),
                           )),
                       SizedBox(
