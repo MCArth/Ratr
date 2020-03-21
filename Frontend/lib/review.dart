@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart'; // For Image Picker
 import 'package:string_validator/string_validator.dart';
-import 'package:path/path.dart' as Path;
 import 'dart:developer';
 
 //void main() => runApp(ReviewPage());
@@ -26,7 +25,8 @@ class ReviewPage extends StatefulWidget {
 
 class _ReviewPage extends State<ReviewPage> {
   //todo change this to do backend stuff
-  String propertyName = "Latitude: "+revLat.toString();
+  //String propertyName = "Latitude: "+revLat.toString();
+  String propertyName = "Property Review";
   String propertyReview = "";
   String landlordReview = "";
   final formKey = GlobalKey<FormState>();
@@ -82,8 +82,8 @@ class _ReviewPage extends State<ReviewPage> {
                             padding: EdgeInsets.symmetric(vertical: 10),
                             child: TextFormField(
                               keyboardType: TextInputType.multiline,
-                              minLines: 4,
-                              maxLines: 4,
+                              minLines: 7,
+                              maxLines: 7,
                               decoration: InputDecoration(
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(3.0),
@@ -114,55 +114,55 @@ class _ReviewPage extends State<ReviewPage> {
                                 //todo stuff goes here
                                 onPressed: _submitPropertyReview),
                           ),
-                          Container(
-                            padding: EdgeInsets.symmetric(horizontal: 2.0),
-                            child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  'Landlord Review:',
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
-                                  textAlign: TextAlign.left,
-                                )),
-                          ),
-                          Container(
-                            padding: EdgeInsets.symmetric(vertical: 10),
-                            child: TextFormField(
-                              keyboardType: TextInputType.multiline,
-                              minLines: 4,
-                              maxLines: 4,
-                              decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(3.0),
-                                      borderSide: BorderSide(
-                                          width: 10.0,
-                                          style: BorderStyle.solid)),
-                                  filled: true,
-                                  hintText: 'Write your review here...'),
-                              validator: (input) => !matches(
-                                  input, r'^[A-Za-z\n]+$')
-                                  ? 'Invalid description, needs to consist of letters'
-                                  : null,
-                              onSaved: (input) => landlordReview = input,
-                              //labelText: 'House Review')
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: RaisedButton(
-                              //color: Colors.orange,
-                                color: Colors.blue,
-                                disabledColor: Colors.pink,
-                                disabledTextColor: Colors.black,
-                                splashColor: Colors.lightGreen,
-                                child: Text(
-                                  'POST',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                //todo stuff goes here
-                                onPressed: _submitLandlordReview),
-                          ),
+//                          Container(
+//                            padding: EdgeInsets.symmetric(horizontal: 2.0),
+//                            child: Align(
+//                                alignment: Alignment.centerLeft,
+//                                child: Text(
+//                                  'Landlord Review:',
+//                                  style: TextStyle(
+//                                      fontSize: 18,
+//                                      fontWeight: FontWeight.bold),
+//                                  textAlign: TextAlign.left,
+//                                )),
+//                          ),
+//                          Container(
+//                            padding: EdgeInsets.symmetric(vertical: 10),
+//                            child: TextFormField(
+//                              keyboardType: TextInputType.multiline,
+//                              minLines: 4,
+//                              maxLines: 4,
+//                              decoration: InputDecoration(
+//                                  border: OutlineInputBorder(
+//                                      borderRadius: BorderRadius.circular(3.0),
+//                                      borderSide: BorderSide(
+//                                          width: 10.0,
+//                                          style: BorderStyle.solid)),
+//                                  filled: true,
+//                                  hintText: 'Write your review here...'),
+//                              validator: (input) => !matches(
+//                                  input, r'^[A-Za-z\n]+$')
+//                                  ? 'Invalid description, needs to consist of letters'
+//                                  : null,
+//                              onSaved: (input) => landlordReview = input,
+//                              //labelText: 'House Review')
+//                            ),
+//                          ),
+//                          Align(
+//                            alignment: Alignment.centerRight,
+//                            child: RaisedButton(
+//                              //color: Colors.orange,
+//                                color: Colors.blue,
+//                                disabledColor: Colors.pink,
+//                                disabledTextColor: Colors.black,
+//                                splashColor: Colors.lightGreen,
+//                                child: Text(
+//                                  'POST',
+//                                  style: TextStyle(color: Colors.white),
+//                                ),
+//                                //todo stuff goes here
+//                                onPressed: _submitLandlordReview),
+//                          ),
                           Container(
                             padding: EdgeInsets.symmetric(horizontal: 2.0),
                             child: Align(
@@ -232,7 +232,7 @@ class _ReviewPage extends State<ReviewPage> {
       log(propertyReview);
       //Popup saying that account was created successfully
       //todo Link with RL DBS
-      //Go back to home bage
+      //Go back to home page
     }
   }
 

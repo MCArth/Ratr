@@ -9,7 +9,6 @@ int propLat;
 int propLong;
 
 class Property extends StatelessWidget {
-
   Property(int lat, int long) {
     propLat = lat;
     propLat = long;
@@ -35,7 +34,7 @@ class PropertyProfile extends StatelessWidget {
       appBar: AppBar(
         //backgroundColor: Colors.orange,
         title: Text(
-          "Latitude: " +propLat.toString(),
+          "Latitude: " + propLat.toString(),
           //propertyName+propLat.toString(),
           textDirection: TextDirection.ltr,
           style: TextStyle(fontSize: 25),
@@ -47,7 +46,12 @@ class PropertyProfile extends StatelessWidget {
         children: <Widget>[
           Column(
             children: <Widget>[
-              Row(
+              Container(
+                  padding: EdgeInsets.symmetric(vertical: 23.0),
+                  decoration: BoxDecoration(border: Border.all(width: 2),borderRadius: BorderRadius.all(
+                      Radius.circular(7.0)
+                  ), color: Colors.grey[350]),
+                  child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Padding(
@@ -114,7 +118,7 @@ class PropertyProfile extends StatelessWidget {
                         )
                       ])
                 ],
-              )
+              ))
             ],
           ),
           SizedBox(height: 35),
@@ -194,7 +198,9 @@ class PropertyProfile extends StatelessWidget {
                       Navigator.push(
                         context,
                         //goes to review; passes lat and long into the class
-                        MaterialPageRoute(builder: (context) => ReviewPage(propLat, propLong)),
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                ReviewPage(propLat, propLong)),
                       );
                     },
                     splashColor: Colors.lightGreen,
