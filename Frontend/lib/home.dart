@@ -40,7 +40,15 @@ class HomePage extends StatelessWidget{
                                   Navigator.pushNamed(context,'/list');
                                 }
                             ),
-
+                            SizedBox(height: 12.0,),
+                            FloatingActionButton.extended(
+                                icon: Icon(Icons.person),
+                                label: Text('Landlord Profile (test)'),
+                                heroTag: "donkey",
+                                onPressed: () {
+                                  Navigator.pushNamed(context,'/land');
+                                }
+                            ),
                           ],),
 
                       ),
