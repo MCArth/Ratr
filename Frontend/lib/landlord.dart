@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nexus_app/list.dart';
 import 'package:nexus_app/review.dart';
 import 'package:nexus_app/revland.dart';
 
@@ -125,6 +126,12 @@ class LandlordProfile extends StatelessWidget {
                               decoration: TextDecoration.underline),
                         ),
                         onTap: () {//todo stuff goes here, should go to a list view of houses?
+                          Navigator.push(
+                            context,
+                            //goes to review; passes lat and long into the class
+                            //todo change this theme is fucked!!!!
+                            MaterialPageRoute(builder: (context) => ListPage()),
+                          );
                            }
                       ),
                     ]),

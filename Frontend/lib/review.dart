@@ -25,7 +25,8 @@ class ReviewPage extends StatefulWidget {
 
 class _ReviewPage extends State<ReviewPage> {
   //todo change this to do backend stuff
-  String propertyName = "Latitude: "+revLat.toString();
+  //String propertyName = "Latitude: "+revLat.toString();
+  String propertyName = "Property Review";
   String propertyReview = "";
   String landlordReview = "";
   final formKey = GlobalKey<FormState>();
