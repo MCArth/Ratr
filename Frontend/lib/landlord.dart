@@ -40,8 +40,8 @@ class LandlordProfile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Container(
-                padding: EdgeInsets.symmetric(vertical: 15.0),
-                decoration: BoxDecoration(border: Border.all(width: 3),borderRadius: BorderRadius.all(
+                padding: EdgeInsets.symmetric(vertical: 23.0),
+                decoration: BoxDecoration(border: Border.all(width: 2),borderRadius: BorderRadius.all(
                   Radius.circular(7.0)
                 ), color: Colors.grey[350]),
                 //color: Colors.grey,
