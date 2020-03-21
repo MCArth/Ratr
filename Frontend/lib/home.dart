@@ -40,6 +40,12 @@ class HomePage extends StatelessWidget{
                           Navigator.pushNamed(context,'/list');
                         }
                       ),
+                      SizedBox(height: 12.0,),
+                      FloatingActionButton.extended(
+                        icon: Icon(Icons.person),
+                        label: Text('Property Owners'),
+                        heroTag: "landlordlst",
+                        onPressed: () {})
                   
               ],),
   

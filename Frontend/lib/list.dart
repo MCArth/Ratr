@@ -40,8 +40,6 @@ makeHouseCard(BuildContext context){
                   "32 Road Avenue",
                   style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                 ),
-                // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
-
                 subtitle: Row(
                   children: <Widget>[
                     Text("5 Bedroom House")
