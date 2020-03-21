@@ -22,6 +22,7 @@ Future<HouseBasic> fetchHouseBasic() async {
 
   if(response.statusCode == 200){
     //REturn house from json
+    
   } else {
     throw Exception('Failed to load houses!');
   }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:nexus_app/landlord.dart';
 import 'package:nexus_app/review.dart';
+import 'package:nexus_app/revland.dart';
 import 'login.dart';
 import 'home.dart';
 import 'map.dart';
@@ -22,16 +24,18 @@ class NexusApp extends StatelessWidget {
         
       ),
 
-      //If logged in go to home, else go to login page. Currently j goes to login for testing purposes
-      home: HomePage(),
-      initialRoute: '/login',
-      onGenerateRoute: _getRoute,
-      routes: <String, WidgetBuilder>{
-				'/map': (BuildContext context) { return MapPage();},
-        '/registration': (BuildContext context) {return RegistrationPage();},
-        '/list': (BuildContext context) {return ListPage();},
-        //'/property': (BuildContext context) {return Property();},
-			}
+        //If logged in go to home, else go to login page. Currently j goes to login for testing purposes
+        home: HomePage(),
+        initialRoute: '/login',
+        onGenerateRoute: _getRoute,
+        routes: <String, WidgetBuilder>{
+          '/map': (BuildContext context) { return MapPage();},
+          '/registration': (BuildContext context) {return RegistrationPage();},
+          '/list': (BuildContext context) {return ListPage();},
+          '/land': (BuildContext context) {return Landlord();},
+          '/landrev': (BuildContext context) {return LandlordReview();},
+          //'/property': (BuildContext context) {return Property();},
+        }
     );
   }
 

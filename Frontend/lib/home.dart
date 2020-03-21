@@ -45,31 +45,14 @@ class HomePage extends StatelessWidget{
                         icon: Icon(Icons.person),
                         label: Text('Property Owners'),
                         heroTag: "landlordlst",
-                        onPressed: () {})
+                        onPressed: () {
+                          Navigator.pushNamed(context,'/land');
+                        })
                   
               ],),
   
             ),
               ),
-          // Expanded(
-          //   child: Container(
-          //     alignment: Alignment(0.0,1.0),
-          //     child: Row(
-          //       mainAxisAlignment: MainAxisAlignment.center,
-          //       children: <Widget>[
-          //         RaisedButton(
-          //           onPressed: (){},
-          //           child: Text('Add New Property')
-          //         ),
-          //         const SizedBox(width: 20,),
-          //         RaisedButton(
-          //           onPressed: (){},
-          //           child: Text('Add New Landlord')
-          //         ),
-          //       ]
-          //     ),
-          //   )
-          // ),
           ]
         )
       )
