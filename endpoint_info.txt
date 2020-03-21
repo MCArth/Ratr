@@ -4,6 +4,8 @@ Intended use:
 https://us-central1-ridr-cc2ec.cloudfunctions.net/addHouse?text=yourHouseJson
 where yourHouseJson is a string like {"lat": 1.52, "long": 2.55, "ffe": ......} (intended format as specified by deliverable 2)
 "ffe" and onward can be whatever you want if you want to change but the "lat" and "long" must stay at the base level of the json
+example query:
+https://us-central1-ridr-cc2ec.cloudfunctions.net/addHouse?text={"lat": 1.52, "long": 2.55, "otherHouseInfo": "heyhey"}
 
 getHouses endpoint
 https://us-central1-ridr-cc2ec.cloudfunctions.net/getHouses
