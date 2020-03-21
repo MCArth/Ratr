@@ -11,7 +11,6 @@ int landLat;
 int landLong;
 
 class LandlordReview extends StatefulWidget {
-
   @override
   _LandlordReview createState() => _LandlordReview();
 }
@@ -21,6 +20,11 @@ class _LandlordReview extends State<LandlordReview> {
   String name = "Landlord Review";
   String landlordReview = "";
   final formKey = GlobalKey<FormState>();
+  double value = 5.0;
+  var ratingIcon = Icons.account_circle;
+  var iconColour = Colors.white;
+
+  //RangeValues values = RangeValues(0, 10);
 
   @override
   Widget build(BuildContext context) {
@@ -50,10 +54,10 @@ class _LandlordReview extends State<LandlordReview> {
                             padding: EdgeInsets.symmetric(vertical: 15.0),
                             child: Text(
                               'Please write your review below for '
-                                  'the landlord chosen:',
+                              'the landlord chosen:',
                               textDirection: TextDirection.ltr,
                               style:
-                              TextStyle(fontSize: 18, color: Colors.black),
+                                  TextStyle(fontSize: 18, color: Colors.black),
                             ),
                           ),
                           Container(
@@ -120,7 +124,7 @@ class _LandlordReview extends State<LandlordReview> {
                                   filled: true,
                                   hintText: 'Write your review here...'),
                               validator: (input) => !matches(
-                                  input, r'^[A-Za-z\n]+$')
+                                      input, r'^[A-Za-z\n]+$')
                                   ? 'Invalid description, needs to consist of letters'
                                   : null,
                               onSaved: (input) => landlordReview = input,
@@ -130,7 +134,7 @@ class _LandlordReview extends State<LandlordReview> {
                           Align(
                             alignment: Alignment.centerRight,
                             child: RaisedButton(
-                              //color: Colors.orange,
+                                //color: Colors.orange,
                                 color: Colors.blue,
                                 disabledColor: Colors.pink,
                                 disabledTextColor: Colors.black,
@@ -142,6 +146,72 @@ class _LandlordReview extends State<LandlordReview> {
                                 //todo stuff goes here
                                 onPressed: _submitLandlordReview),
                           ),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 2.0, vertical: 5),
+                            child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Landlord Rating:',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                  textAlign: TextAlign.left,
+                                )),
+                          ),
+                          Row(children: <Widget>[
+                            Expanded(
+                                child: SliderTheme(
+                                    data: SliderTheme.of(context).copyWith(
+//                                        activeTrackColor: Colors.red[700],
+//                                        inactiveTrackColor: Colors.red[100],
+                                        trackShape: RoundedRectSliderTrackShape(),
+                                        trackHeight: 4.0,
+                                        thumbShape: RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                                        overlayShape: RoundSliderOverlayShape(overlayRadius: 28.0),
+                                        tickMarkShape: RoundSliderTickMarkShape(),
+                                        valueIndicatorShape: PaddleSliderValueIndicatorShape(),
+                                        valueIndicatorTextStyle: TextStyle(
+                                          color: Colors.white,
+                                        ),),
+                                    child: Slider(
+                                      inactiveColor: Colors.blueGrey,
+                                      value: value,
+                                      min: 0.0,
+                                      label: '$value',
+                                      max: 10.0,
+                                      divisions: 20,
+                                      onChanged: (newValue) {
+                                        setState(() {
+                                          value = newValue;
+                                          if (value >= 7.0) {
+                                            iconColour = Colors.green;
+                                            return;
+                                          }
+                                          if (value >= 4.0) {
+                                            iconColour = Colors.yellow;
+                                          } else
+                                            iconColour = Colors.red;
+                                        });
+                                      },
+                                    ))),
+//                            Expanded(
+//                              child: Text('10'),
+//                            ),
+                          ]),
+                          SizedBox(
+                            height: 12,
+                          ),
+                          Container(
+                            //child: Icon(ratingIcon, size: 50, color: iconColour,),
+                            child: Text(
+                              value.toString(),
+                              style: TextStyle(
+                                color: iconColour,
+                                fontSize: 28,
+                              ),
+                            ),
+                          )
                         ])
                       ],
                     )))),

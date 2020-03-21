@@ -21,8 +21,8 @@ class LandlordProfile extends StatelessWidget {
   final String name = "Landlord Profile";
 
   Color getColour(double num) {
-    if (num >= 7.5) return Colors.green;
-    if (num > 5) return Colors.orange;
+    if (num >= 7.0) return Colors.green;
+    if (num > 4.0) return Colors.orange;
     else return Colors.red;
   }
 
