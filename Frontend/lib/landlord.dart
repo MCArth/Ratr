@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nexus_app/review.dart';
+import 'package:nexus_app/revland.dart';
 
 //void main() => runApp(Landlord());
 //todo make this inherit the theme of the app!!!!!!!
@@ -181,7 +182,7 @@ class LandlordProfile extends StatelessWidget {
                       Navigator.push(
                         context,
                         //goes to review; passes lat and long into the class
-                        MaterialPageRoute(builder: (context) => ReviewPage(2, 2)),
+                        MaterialPageRoute(builder: (context) => LandlordReview()),
                       );
                     },
                   )))

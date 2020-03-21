@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nexus_app/landlord.dart';
 import 'package:nexus_app/review.dart';
+import 'package:nexus_app/revland.dart';
 import 'login.dart';
 import 'home.dart';
 import 'map.dart';
@@ -33,6 +34,7 @@ class NexusApp extends StatelessWidget {
           '/registration': (BuildContext context) {return RegistrationPage();},
           '/list': (BuildContext context) {return ListPage();},
           '/land': (BuildContext context) {return Landlord();},
+          '/landrev': (BuildContext context) {return LandlordReview();},
           //'/property': (BuildContext context) {return Property();},
         }
     );
