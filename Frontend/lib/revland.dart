@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:string_validator/string_validator.dart';
 import 'dart:developer';
@@ -131,21 +132,24 @@ class _LandlordReview extends State<LandlordReview> {
                               //labelText: 'House Review')
                             ),
                           ),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: RaisedButton(
-                                //color: Colors.orange,
-                                color: Colors.blue,
-                                disabledColor: Colors.pink,
-                                disabledTextColor: Colors.black,
-                                splashColor: Colors.lightGreen,
-                                child: Text(
-                                  'POST',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                //todo stuff goes here
-                                onPressed: _submitLandlordReview),
+                          SizedBox(
+                            height: 12,
                           ),
+//                          Align(
+//                            alignment: Alignment.centerRight,
+//                            child: RaisedButton(
+//                                //color: Colors.orange,
+//                                color: Colors.blue,
+//                                disabledColor: Colors.pink,
+//                                disabledTextColor: Colors.black,
+//                                splashColor: Colors.lightGreen,
+//                                child: Text(
+//                                  'POST',
+//                                  style: TextStyle(color: Colors.white),
+//                                ),
+//                                //todo stuff goes here
+//                                onPressed: _submitLandlordReview),
+//                          ),
                           Container(
                             padding: EdgeInsets.symmetric(
                                 horizontal: 2.0, vertical: 5),
@@ -159,26 +163,29 @@ class _LandlordReview extends State<LandlordReview> {
                                   textAlign: TextAlign.left,
                                 )),
                           ),
+                          SizedBox(height: 16),
                           Row(children: <Widget>[
                             Expanded(
                                 child: SliderTheme(
                                     data: SliderTheme.of(context).copyWith(
-//                                        activeTrackColor: Colors.red[700],
-//                                        inactiveTrackColor: Colors.red[100],
-                                        trackShape: RoundedRectSliderTrackShape(),
-                                        trackHeight: 4.0,
-                                        thumbShape: RoundSliderThumbShape(enabledThumbRadius: 12.0),
-                                        overlayShape: RoundSliderOverlayShape(overlayRadius: 28.0),
-                                        tickMarkShape: RoundSliderTickMarkShape(),
-                                        valueIndicatorShape: PaddleSliderValueIndicatorShape(),
-                                        valueIndicatorTextStyle: TextStyle(
-                                          color: Colors.white,
-                                        ),),
+                                      trackShape: RoundedRectSliderTrackShape(),
+                                      trackHeight: 3.0,
+                                      thumbShape: RoundSliderThumbShape(
+                                          enabledThumbRadius: 15.0),
+                                      //overlayShape: RoundSliderOverlayShape(overlayRadius: 28.0),
+                                      tickMarkShape: RoundSliderTickMarkShape(),
+                                      valueIndicatorShape:
+                                          PaddleSliderValueIndicatorShape(),
+                                      valueIndicatorTextStyle: TextStyle(
+                                        color: iconColour,
+                                      ),
+                                    ),
                                     child: Slider(
-                                      inactiveColor: Colors.blueGrey,
+//                                      inactiveColor: Colors.white,
+                                      activeColor: Colors.black,
+                                      label: '$value',
                                       value: value,
                                       min: 0.0,
-                                      label: '$value',
                                       max: 10.0,
                                       divisions: 20,
                                       onChanged: (newValue) {
@@ -200,18 +207,34 @@ class _LandlordReview extends State<LandlordReview> {
 //                            ),
                           ]),
                           SizedBox(
-                            height: 12,
+                            height: 22,
                           ),
-                          Container(
-                            //child: Icon(ratingIcon, size: 50, color: iconColour,),
-                            child: Text(
-                              value.toString(),
-                              style: TextStyle(
-                                color: iconColour,
-                                fontSize: 28,
-                              ),
-                            ),
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: RaisedButton(
+                                //color: Colors.orange,
+                                color: Colors.blue,
+                                disabledColor: Colors.pink,
+                                disabledTextColor: Colors.black,
+                                splashColor: Colors.lightGreen,
+                                child: Text(
+                                  'POST',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                //todo stuff goes here
+                                onPressed: () {}),
                           )
+                          //text to show slider value + colour
+//                          Container(
+//                            //child: Icon(ratingIcon, size: 50, color: iconColour,),
+//                            child: Text(
+//                              value.toString(),
+//                              style: TextStyle(
+//                                color: iconColour,
+//                                fontSize: 28,
+//                              ),
+//                            ),
+//                          )
                         ])
                       ],
                     )))),
