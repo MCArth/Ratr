@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nexus_app/prop.dart';
-
+import 'houseFunctions.dart';
 
 //page displaying all available properties in a relational database
 //required to display only a small amount of information that nevertheless expresses the general sense for a property at a glance
@@ -17,8 +17,10 @@ class ListPage extends StatelessWidget{
 }
 
 //Generates an instance of a card for a house
-makeHouseCard(BuildContext context){
+makeHouseCard(BuildContext context, int index){
+  print(index);
   return Card(
+
     elevation: 8.0,
     margin: new EdgeInsets.symmetric(
       horizontal: 10.0,
@@ -37,13 +39,13 @@ makeHouseCard(BuildContext context){
                   child: Icon(Icons.home, color: Colors.white),
                 ),
                 title: Text(
-                  "32 Road Avenue",
+                  (houseList[index].houseNum.toString() + " " + houseList[index].street),
                   style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                 ),
 
                 subtitle: Row(
                   children: <Widget>[
-                    Text("5 Bedroom House")
+                    Text(houseList[index].bedrooms.toString() + " Bedroom House")
                   ],
                 ),
                 trailing:
@@ -63,14 +65,16 @@ makeHouseCard(BuildContext context){
 
 //Function that gets all houses from database, creates card for each one
 Widget getListViewBody(BuildContext context){
+  print("current house list length");
   return Container(
     child: ListView.builder(
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
       //TODO make this dynamically size house directory 
-      itemCount: 10,
+
+      itemCount: houseList.length,
       itemBuilder: (BuildContext context, int index){
-        return makeHouseCard(context);
+        return makeHouseCard(context,index);
       },
     )
   );
