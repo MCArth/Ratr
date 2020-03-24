@@ -23,7 +23,6 @@ class NexusApp extends StatelessWidget {
         fontFamily: 'Rubik',
         
       ),
-
         //If logged in go to home, else go to login page. Currently j goes to login for testing purposes
         home: HomePage(),
         initialRoute: '/login',

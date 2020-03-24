@@ -8,6 +8,9 @@ import 'dart:convert';
 //This is a basic house classfor display purposes, generally to be substantiated by json
 
 List<House> houseList = [];
+List<Landlord> landlordList = [];
+
+
 
 class House{
   int id;
@@ -34,8 +37,12 @@ class House{
   }
 }
 
+class Landlord{
+
+}
 // Retreives a list of houses from database
 Future fetchHouses() async {
+  //clears previous version of houseList
   houseList = [];
   final response = await http.get('https://us-central1-ridr-cc2ec.cloudfunctions.net/getHouses');
 
@@ -43,15 +50,23 @@ Future fetchHouses() async {
     //REturn house from json
     //final out = HouseBasic.fromJson(json.decode(response.body));
     var data = json.decode(response.body);
-    print(data);
     for(Map i in data){
       houseList.add(House.fromJson(i));
     }
-    print("length is");
-    print(houseList.length);
-    print(houseList[0].bedrooms);
-    return(houseList);
   } else {
-    throw Exception('Failed to load houses!');
+    throw Exception('Failed to load houses! (Probably the server is down)');
+  }
+}
+
+Future fetchLandlords() async {
+  
+  landlordList = [];
+  final response = await http.get('https://us-central1-ridr-cc2ec.cloudfunctions.net/getLandlords');
+  if(response.statusCode == 200){
+    var data = json.decode(response.body);
+    print(data);
+  }
+  else{
+    throw Exception('Failed to load landlords! (Probably the server is down');
   }
 }
