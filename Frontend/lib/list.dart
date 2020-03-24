@@ -54,8 +54,7 @@ makeHouseCard(BuildContext context, int index){
                         //Navigator.pushNamed(context, '/property');
                   Navigator.push(
                     context,
-                    //todo get actual lat and long; not 69,96 lol
-                    MaterialPageRoute(builder: (context) => Property(69,96)),
+                    MaterialPageRoute(builder: (context) => Property(index)),
                   );
                         }
         ),

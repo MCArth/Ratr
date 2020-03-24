@@ -5,7 +5,7 @@ import 'dart:convert';
 
 //TODO modify basic house class and factory as per criteria established in deliverable 2 
 
-//This is a basic house classfor display purposes, generally to be substantiated by json
+//This is a basic house class for display purposes, generally to be substantiated by json
 
 List<House> houseList = [];
 

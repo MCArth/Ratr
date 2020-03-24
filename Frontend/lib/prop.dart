@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:nexus_app/review.dart';
 import 'review.dart';
+import 'package:nexus_app/houseFunctions.dart';
 
 //void main() => runApp(Property());
 
 //Global variables to be passed in from list of houses
-int propLat;
-int propLong;
+int propIndex;
 
 class Property extends StatelessWidget {
-  Property(int lat, int long) {
-    propLat = lat;
-    propLat = long;
+
+  Property(int index) {
+    propIndex = index;
   }
 
   // This widget is the root of your application.
@@ -22,8 +22,8 @@ class Property extends StatelessWidget {
 }
 
 class PropertyProfile extends StatelessWidget {
-  //todo do database stuff with lat and long
-  final String propertyName = "Property Profile";
+  final String propertyName = houseList[propIndex].houseNum.toString() +" "+
+      houseList[propIndex].street.toString();
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class PropertyProfile extends StatelessWidget {
       appBar: AppBar(
         //backgroundColor: Colors.orange,
         title: Text(
-          "Latitude: " + propLat.toString(),
+          propertyName,
           //propertyName+propLat.toString(),
           textDirection: TextDirection.ltr,
           style: TextStyle(fontSize: 25),
@@ -47,7 +47,7 @@ class PropertyProfile extends StatelessWidget {
                   padding: EdgeInsets.symmetric(vertical: 23.0),
                   decoration: BoxDecoration(border: Border.all(width: 2),borderRadius: BorderRadius.all(
                       Radius.circular(7.0)
-                  ), color: Colors.grey[350]),
+                  ), color: Colors.black),
                   child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -68,7 +68,7 @@ class PropertyProfile extends StatelessWidget {
                         Container(
                           child: Text(
                               //todo this is just a place holder
-                              '5 Green Street',
+                              propertyName,
                               style: TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.bold),
                               textAlign: TextAlign.left),
@@ -76,7 +76,7 @@ class PropertyProfile extends StatelessWidget {
                         Container(
                             child: Text(
                                 //todo this is just a place holder
-                                'BA2 6FP',
+                                houseList[propIndex].postCode.toString(),
                                 style: TextStyle(
                                     fontSize: 16, fontStyle: FontStyle.italic),
                                 textAlign: TextAlign.left)),
@@ -89,6 +89,7 @@ class PropertyProfile extends StatelessWidget {
                               textAlign: TextAlign.left),
                         ),
                         Container(
+                          //todo change or delete this if no backend change
                           child: Text('Roger Mexico',
                               style: TextStyle(
                                   color: Colors.red,
@@ -105,7 +106,7 @@ class PropertyProfile extends StatelessWidget {
                               textAlign: TextAlign.left),
                         ),
                         Container(
-                          //todo get rid of hardcoding
+                          //todo change or delete this if no backend change
                           child: Text('Trustease',
                               style: TextStyle(
                                   color: Colors.red,
@@ -197,7 +198,7 @@ class PropertyProfile extends StatelessWidget {
                         //goes to review; passes lat and long into the class
                         MaterialPageRoute(
                             builder: (context) =>
-                                ReviewPage(propLat, propLong)),
+                                ReviewPage(propIndex)),
                       );
                     },
                     splashColor: Colors.lightGreen,
