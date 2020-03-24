@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nexus_app/review.dart';
 import 'review.dart';
-import 'package:nexus_app/houseFunctions.dart';
+import 'package:nexus_app/functionsAndData.dart';
 
 //void main() => runApp(Property());
 
