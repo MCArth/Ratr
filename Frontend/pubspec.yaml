@@ -31,7 +31,6 @@ dependencies:
   json_serializable: ^3.2.5
 
 
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
