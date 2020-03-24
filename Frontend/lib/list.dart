@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nexus_app/prop.dart';
-import 'houseFunctions.dart';
+import 'functionsAndData.dart';
 
 //page displaying all available properties in a relational database
 //required to display only a small amount of information that nevertheless expresses the general sense for a property at a glance
