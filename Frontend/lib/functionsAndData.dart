@@ -21,8 +21,9 @@ class House{
   double long;
   String postCode;
   String street;
+  int price;
 
-  House({this.lat,this.long,this.avgRating,this.bedrooms,this.houseNum,this.street,this.postCode});
+  House({this.lat,this.long,this.avgRating,this.bedrooms,this.houseNum,this.street,this.postCode,this.price});
 
   factory House.fromJson(Map<String,dynamic> json){
     return House(
@@ -33,6 +34,7 @@ class House{
       street: json["houseStreet"],
       bedrooms: json["roomInfo"]["numBedrooms"],
       postCode: json["postCode"],
+      price: json["pricePerAnnum"],
     );
   }
 }
