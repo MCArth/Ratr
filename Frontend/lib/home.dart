@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'map.dart';
+import 'houseFunctions.dart';
 
 
 //TODO implement map and list as states of home page, with bottom navigation bar, do more encapsulation
 class HomePage extends StatelessWidget{
+
+  
   @override
   Widget build(BuildContext context){
+
+    fetchHouses();
     return new Scaffold(
       appBar: new AppBar(
         title: new Text("Home Screen"),

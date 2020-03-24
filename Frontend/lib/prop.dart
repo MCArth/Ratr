@@ -17,11 +17,6 @@ class Property extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    // return Scaffold(
-    //   appBar: new AppBar(
-    //   title: 'Property Profile',
-    //   home: PropertyProfile(),
-    // );
     return PropertyProfile();
   }
 }
