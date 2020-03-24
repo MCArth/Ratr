@@ -64,13 +64,13 @@ class HomePage extends StatelessWidget{
           child: Icon(Icons.home),
           label: 'New Property',
           labelStyle: TextStyle(color: Colors.blueGrey[800]),
-          onTap: () => print("Go to property creation")
+          onTap: () => Navigator.pushNamed(context, '/addProp')
         ),
         SpeedDialChild(
           child: Icon(Icons.person_add),
           label: 'New Landlord',  
           labelStyle: TextStyle(color: Colors.blueGrey[800]),
-          onTap: () => print("Go to landlord creation")
+          onTap: () => Navigator.pushNamed(context, '/addLand')
         )
       ]
     ), 
