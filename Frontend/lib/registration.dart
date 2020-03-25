@@ -10,7 +10,7 @@ class RegistrationPage extends StatefulWidget {
 class _RegistrationPage extends State<RegistrationPage> {
   final formKey = GlobalKey<FormState>();
   String firstName, lastName, email, password;
-  String testemail = "", testpassword = "";
+  String testEmail = "", testPassword = "";
 
   @override
   Widget build(BuildContext context){
@@ -19,7 +19,6 @@ class _RegistrationPage extends State<RegistrationPage> {
         title: const Text('Register'),
       ),
       body: SafeArea(
-        child: Card(
           child: Padding(
             padding: EdgeInsets.all(8.0),
             child: Form(
@@ -27,7 +26,6 @@ class _RegistrationPage extends State<RegistrationPage> {
                 child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-
                   Expanded(
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
@@ -58,7 +56,7 @@ class _RegistrationPage extends State<RegistrationPage> {
                         if(!isEmail(input)) {
                           return 'Not a valid email';
                         } else{
-                          testemail = input;
+                          testEmail = input;
                           return null;
                         }
                       },
@@ -69,7 +67,7 @@ class _RegistrationPage extends State<RegistrationPage> {
                   Expanded(
                       child: TextFormField(
                         decoration: InputDecoration(labelText: "Re-enter email"),
-                        validator: (input) => input.compareTo(testemail) != 0 ? 'Email does not match' : null,
+                        validator: (input) => input.compareTo(testEmail) != 0 ? 'Email does not match' : null,
                       )
                   ),
 
@@ -80,7 +78,7 @@ class _RegistrationPage extends State<RegistrationPage> {
                         if(!matches(input, r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$")){
                           return 'Minimum 8 characters, at least 1 uppercase, 1 lowercase and 1 number';
                         } else{
-                          testpassword = input;
+                          testPassword = input;
                           return null;
                         }
                       },
@@ -92,7 +90,7 @@ class _RegistrationPage extends State<RegistrationPage> {
                   Expanded(
                     child: TextFormField(
                       decoration: InputDecoration(labelText: "Re-enter password"),
-                      validator: (input) => input.compareTo(testpassword) != 0 ? 'Password does not match' : null,
+                      validator: (input) => input.compareTo(testPassword) != 0 ? 'Password does not match' : null,
                       obscureText: true,
                     )
                   ),
@@ -122,13 +120,10 @@ class _RegistrationPage extends State<RegistrationPage> {
             )
         )
       )
-
-    )
     );
   }
 
   void _submit() {
-    log("yo bitch");
     if(formKey.currentState.validate()) {
       formKey.currentState.save();
       log(email);
@@ -139,5 +134,5 @@ class _RegistrationPage extends State<RegistrationPage> {
       //Go back to home bage
     }
   }
-  
+
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:string_validator/string_validator.dart';
 
 class addProperty extends StatefulWidget {
   @override
@@ -6,9 +7,8 @@ class addProperty extends StatefulWidget {
 }
 
 class _addProperty extends State<addProperty> {
-  RangeValues _values = RangeValues(500.0, 750.0);
-  int min = 500;
-  int max = 750;
+  double value = 500.0;
+  int printValue = 500;
 
   @override
   Widget build(BuildContext context) {
@@ -22,51 +22,48 @@ class _addProperty extends State<addProperty> {
             child: Form(
                 child: ListView(
                   children: <Widget>[
-                    Header("Price per month:"),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Align(
-                          alignment: Alignment.bottomLeft,
-                          child: Container(
-                            child: Text(
-                              "Minimum: $min £",
-                            ),
-                            padding: EdgeInsets.all(17.0),
-                          ),
+                    Container(
+                        child: Header("Price per month:")
+                    ),
+                    Container(
+                      child: Text("Selected: $printValue £"),
+                    ),
+                    Container(
+                      child: Slider(
+                        min: 500.0,
+                        max: 3500.0,
+                        value: value,
+                        divisions: 300,
+                        onChanged: (double newValue) {
+                          setState(() {
+                            value = newValue;
+                            printValue = value.toInt();
+                          });
+                        },
+                      ),
+                    ),
+                    Container(child: Header("Address:")),
+                    Container(child: TextFormField()),
+                    Container(child: Header("Description:")),
+                    Container(
+                      child: TextFormField(
+                        keyboardType: TextInputType.multiline,
+                        minLines: 4,
+                        maxLines: 8,
+                      ),
+                    ),
+                    Container(child: Header("Phone number of Landlord:")),
+                    Container(child: TextFormField()),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 2.0, vertical: 10.0),
+                        child: SizedBox(
+                          width: 350,
+                          height: 50,
+                          child: RaisedButton(
+                              onPressed: () => print("hellooo"),
+                              child: Text('Create Account')),
                         ),
-                        Align(
-                          alignment: Alignment.bottomRight,
-                          child: Container(
-                            child: Text("Maximum: $max £"),
-                            padding: EdgeInsets.all(17.0),
-                          ),
-                        ),
-                      ],
-                    ),
-                    RangeSlider(
-                      min: 500.0,
-                      max: 3500.0,
-                      values: _values,
-                      divisions: 300,
-                      onChanged: (RangeValues newValues) {
-                        setState(() {
-                          _values = newValues;
-                          min = _values.start.toInt();
-                          max = _values.end.toInt();
-                        });
-                      },
-                    ),
-                    Header("Address:"),
-                    TextFormField(),
-                    Header("Description:"),
-                    TextFormField(
-                      keyboardType: TextInputType.multiline,
-                      minLines: 4,
-                      maxLines: 8,
-                    ),
-                    Header("Phone number of Landlord:"),
-                    TextFormField()
+                      ),
                   ],
                 )),
           ),
@@ -80,7 +77,7 @@ class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 2.0, vertical: 5),
+      padding: EdgeInsets.symmetric(horizontal: 2.0, vertical: 10),
       child: Align(
           alignment: Alignment.centerLeft,
           child: Text(
