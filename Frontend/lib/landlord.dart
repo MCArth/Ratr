@@ -1,24 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:nexus_app/list.dart';
-import 'package:nexus_app/review.dart';
+import 'package:nexus_app/landlordPropList.dart';
+import 'package:nexus_app/functionsAndData.dart';
 import 'package:nexus_app/revland.dart';
+import 'package:string_validator/string_validator.dart';
 
-//todo change this
-double rating = 8;
+int landIndex;
 
-//void main() => runApp(Landlord());
-//todo make this inherit the theme of the app!!!!!!!
-class Landlord extends StatelessWidget {
-  // This widget is the root of your application.
+class LandlordProfile extends StatelessWidget {
+
+  LandlordProfile(int index) {
+    landIndex = index;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return LandlordProfile();
+    return _LandlordProfile();
   }
 }
 
-class LandlordProfile extends StatelessWidget {
+class _LandlordProfile extends StatelessWidget {
   //todo change this
-  final String name = "Landlord Profile";
+  final String name = landlordList[landIndex].name.toString();
+  final String rating = landlordList[landIndex].avgRating.toString();
+  final int number = landlordList[landIndex].houses.length;
 
   Color getColour(double num) {
     if (num >= 7.5) return Colors.green;
@@ -49,15 +53,14 @@ class LandlordProfile extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 23.0),
                 decoration: BoxDecoration(border: Border.all(width: 2),borderRadius: BorderRadius.all(
                   Radius.circular(7.0)
-                ), color: Colors.grey[350]),
+                ), color: Colors.black),
                 //color: Colors.grey,
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Container(
                         child: Text(
-                          //todo this is just a place holder
-                          'Lewis Andlord',
+                          name,
                           style: TextStyle(
                               fontSize: 24, fontWeight: FontWeight.bold),
                         ),
@@ -65,18 +68,6 @@ class LandlordProfile extends StatelessWidget {
                       SizedBox(
                         height: 12,
                       ),
-                      //Row(children: <Widget>[
-//                  Container(
-//                    child: SizedBox(
-//                      width: 110,
-//                    ),
-//                  ),
-//                  Container(
-//                      child: Text(
-//                    //todo this is just a place holder
-//                    'Rating: ',
-//                    style: TextStyle(fontSize: 18, fontStyle: FontStyle.normal),
-//                  )),
                       Container(
                           height: 55,
                           width: 55,
@@ -85,9 +76,9 @@ class LandlordProfile extends StatelessWidget {
                             splashColor: Colors.blueAccent,
                             onPressed: () {},
                             child: Text(
-                              rating.toString(),
+                              rating,
                               style: TextStyle(
-                                  fontSize: 20.0, color: getColour(rating)),
+                                  fontSize: 20.0, color: getColour(toDouble(rating))),
                             ),
                           )),
                       SizedBox(
@@ -104,7 +95,7 @@ class LandlordProfile extends StatelessWidget {
                               child: Text(
                                 'Number of Properties: ',
                                 style: TextStyle(
-                                    color: Colors.black,
+                                    color: Colors.white,
                                     fontSize: 16,
                                     fontStyle: FontStyle.normal),
                               ),
@@ -112,9 +103,9 @@ class LandlordProfile extends StatelessWidget {
                             Container(
                               child: Text(
                                 //var number
-                                '5',
+                                number.toString(),
                                 style: TextStyle(
-                                    color: Colors.red,
+                                    color: Colors.blue,
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -135,8 +126,7 @@ class LandlordProfile extends StatelessWidget {
                           Navigator.push(
                             context,
                             //goes to review; passes lat and long into the class
-                            //todo change this theme is fucked!!!!
-                            MaterialPageRoute(builder: (context) => ListPage()),
+                            MaterialPageRoute(builder: (context) => LandProp(landIndex)),
                           );
                            }
                       ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nexus_app/prop.dart';
+import 'package:nexus_app/landlord.dart';
 import 'functionsAndData.dart';
+import 'package:nexus_app/app.dart';
 
 //page displaying all available properties in a relational database
 //required to display only a small amount of information that nevertheless expresses the general sense for a property at a glance
@@ -53,8 +54,7 @@ makeLandlordCard(BuildContext context, int index){
                 onTap: () {
                   Navigator.push(
                     context,
-                   
-                    MaterialPageRoute(builder: null),
+                    MaterialPageRoute(builder: (context) => LandlordProfile(index)),
                   );
                         }
         ),
