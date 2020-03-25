@@ -4,6 +4,7 @@ import 'package:nexus_app/addProperty.dart';
 import 'package:nexus_app/landlord.dart';
 import 'package:nexus_app/review.dart';
 import 'package:nexus_app/revland.dart';
+import 'package:nexus_app/home.dart';
 import 'login.dart';
 import 'home.dart';
 import 'map.dart';
@@ -37,7 +38,9 @@ class NexusApp extends StatelessWidget {
           '/landrev': (BuildContext context) {return LandlordReview();},
           '/addProp': (BuildContext context) {return addProperty();},
           '/addLand': (BuildContext context) {return addLandlord();},
-          '/rentierList': (BuildContext context) {return RentierListPage();}
+          '/rentierList': (BuildContext context) {return RentierListPage();},
+          '/homePage': (BuildContext context) {return HomePage();},
+
           //'/property': (BuildContext context) {return Property();},
         }
     );

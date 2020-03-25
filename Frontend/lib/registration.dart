@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:string_validator/string_validator.dart';
-import 'dart:developer';
 
 class RegistrationPage extends StatefulWidget {
   @override
@@ -114,9 +113,9 @@ class _RegistrationPage extends State<RegistrationPage> {
                                             if (formKey.currentState.validate()) {
                                               formKey.currentState.save();
 
-                                              log(email);
-                                              log(password);
-                                              log(firstName);
+                                              print(email);
+                                              print(password);
+                                              print(firstName);
                                               //TODO: Link with RL DBS], if everything goes well show the bellow code (STARTS HERE to ENDS HERE) else dont
 
                                               //STARTS HERE

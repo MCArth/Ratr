@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nexus_app/home.dart';
 import 'package:string_validator/string_validator.dart';
 
 class addProperty extends StatefulWidget {
@@ -12,7 +13,7 @@ class _addProperty extends State<addProperty> {
   String address, description, phoneNumber;
 
   //Tracks the value of price and puts it into a int variable for printing
-  int printPrice= 500;
+  int printPrice = 500;
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +25,10 @@ class _addProperty extends State<addProperty> {
           child: Padding(
             padding: EdgeInsets.all(8.0),
             child: Form(
-              key: formKey,
+                key: formKey,
                 child: ListView(
                   children: <Widget>[
-                    Container(
-                        child: Header("Price per month:")
-                    ),
+                    Container(child: Header("Price per month:")),
                     Container(
                       child: Text("Selected: $printPrice £"),
                     ),
@@ -48,62 +47,105 @@ class _addProperty extends State<addProperty> {
                       ),
                     ),
                     Container(child: Header("Address:")),
-                    Container(child: TextFormField(
-                      validator: (input) => !matches(input,r'^[#.0-9a-zA-Z\s,-]+$') ? 'Not a valid Address' : null,
-                      onSaved: (input) => address = input,
-                    )),
+                    Container(
+                        child: TextFormField(
+                          validator: (input) =>
+                          !matches(input, r'^[#.0-9a-zA-Z\s,-]+$')
+                              ? 'Not a valid Address'
+                              : null,
+                          onSaved: (input) => address = input,
+                        )),
                     Container(child: Header("Description:")),
                     Container(
                       child: TextFormField(
                         keyboardType: TextInputType.multiline,
                         minLines: 4,
                         maxLines: 8,
-                        validator: (input) => !matches(input,r'^[#.0-9a-zA-Z\s,-]+$') ? 'Not a valid Description' : null,
+                        validator: (input) =>
+                        !matches(input, r'^[#.0-9a-zA-Z\s,-]+$')
+                            ? 'Not a valid Description'
+                            : null,
                         onSaved: (input) => description = input,
                       ),
                     ),
                     Container(child: Header("Phone number of Landlord:")),
-                    Container(child: TextFormField(
-                      //Accepts:
-                      //
-                      //+(01) 123 (456) 789 ext555
-                      //123456
-                      //*44 123-456-789 [321]
-                      //123456
-                      //123456789012345678901234567890123456789012345
-                      //*****++[](][((( 123456tteexxttppww
-                      //Rejects:
-                      //
-                      //mob 07777 777777
-                      //1234 567 890 after 5pm
-                      //john smith
-                      //(empty)
-                      //1234567890123456789012345678901234567890123456
-                      //911
-                      validator: (input) => !matches(input,r'^[+#*\(\)\[\]]*([0-9][ ext+-pw#*\(\)\[\]]*){6,45}$') ? 'Not a valid Phone Number' : null,
-                      onSaved: (input) => phoneNumber = input,
-                    )),
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: 2.0, vertical: 10.0),
-                        child: SizedBox(
-                          width: 350,
-                          height: 50,
-                          child: RaisedButton(
-                              onPressed: () {
-                                if(formKey.currentState.validate()) {
-                                  formKey.currentState.save();
-                                  print(address);
-                                  print(description);
-                                  print(phoneNumber);
-                                  print(price);
-                                  //Popup saying that account was created successfully
-                                  //Link with RL DBS
-                                  //Go back to home bage
-                                }
-                              },
-                              child: Text('Add Property')),
-                        ),
+                        child: TextFormField(
+                          //Accepts:
+                          //
+                          //+(01) 123 (456) 789 ext555
+                          //123456
+                          //*44 123-456-789 [321]
+                          //123456
+                          //123456789012345678901234567890123456789012345
+                          //*****++[](][((( 123456tteexxttppww
+                          //Rejects:
+                          //
+                          //mob 07777 777777
+                          //1234 567 890 after 5pm
+                          //john smith
+                          //(empty)
+                          //1234567890123456789012345678901234567890123456
+                          //911
+                          validator: (input) => !matches(input,
+                              r'^[+#*\(\)\[\]]*([0-9][ ext+-pw#*\(\)\[\]]*){6,45}$')
+                              ? 'Not a valid Phone Number'
+                              : null,
+                          onSaved: (input) => phoneNumber = input,
+                        )),
+                    Container(
+                      padding:
+                      EdgeInsets.symmetric(horizontal: 2.0, vertical: 10.0),
+                      child: SizedBox(
+                        width: 350,
+                        height: 50,
+                        child: RaisedButton(
+                            onPressed: () {
+                              if (formKey.currentState.validate()) {
+                                formKey.currentState.save();
+
+                                print(address);
+                                print(description);
+                                print(phoneNumber);
+                                print(price);
+                                //TODO: Link with RL DBS], if everything goes well show the bellow code (STARTS HERE to ENDS HERE) else dont
+
+                                //STARTS HERE
+                                showDialog(
+                                    context: context,
+                                    barrierDismissible: false,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: Text("Well Done!"),
+                                        content: SingleChildScrollView(
+                                          child: ListBody(
+                                            children: <Widget>[
+                                              Text(
+                                                  "You successfully created an property profile")
+                                            ],
+                                          ),
+                                        ),
+                                        actions: <Widget>[
+                                          FlatButton(
+                                            onPressed: () {
+                                              /***
+                                               * ERROR HERREEEEE
+                                               * error:: Failed assertion: line 2330 pos 12: '!_debugLocked': is not true.
+                                               * It works fine with registration.dart where i am popping until i reach the login screen but not here
+                                               */
+                                              Navigator.popUntil(context,ModalRoute.withName('/homePage'));
+                                            },
+                                            child: Text("Ok"),
+                                          )
+                                        ],
+                                      );
+                                    });
+                                //ENDS HERE
+                              }
+                            },
+                            child: Text('Add Property')),
                       ),
+                    ),
                   ],
                 )),
           ),
