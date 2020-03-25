@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'map.dart';
 import 'functionsAndData.dart';
 
 
@@ -53,7 +52,7 @@ class HomePage extends StatelessWidget{
                         label: Text('Property Owners'),
                         heroTag: "landlordlst",
                         onPressed: () {
-                          Navigator.pushNamed(context,'/land');
+                          Navigator.pushNamed(context,'/rentierList');
                         })
                   
               ],),

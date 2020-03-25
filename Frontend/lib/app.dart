@@ -10,6 +10,7 @@ import 'map.dart';
 import 'registration.dart';
 import 'prop.dart';
 import 'list.dart';
+import 'rentierList.dart';
 
 class NexusApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -37,6 +38,7 @@ class NexusApp extends StatelessWidget {
           '/landrev': (BuildContext context) {return LandlordReview();},
           '/addProp': (BuildContext context) {return addProperty();},
           '/addLand': (BuildContext context) {return addLandlord();},
+          '/rentierList': (BuildContext context) {return RentierListPage();}
           //'/property': (BuildContext context) {return Property();},
         }
     );
