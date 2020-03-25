@@ -101,7 +101,7 @@ class _addProperty extends State<addProperty> {
                                   //Go back to home bage
                                 }
                               },
-                              child: Text('Create Account')),
+                              child: Text('Add Property')),
                         ),
                       ),
                   ],
