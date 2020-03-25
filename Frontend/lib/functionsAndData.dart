@@ -8,7 +8,7 @@ import 'dart:convert';
 
 //TODO modify basic house class and factory as per criteria established in deliverable 2 
 
-//This is a basic house classfor display purposes, generally to be substantiated by json
+//This is a basic house class for display purposes, generally to be substantiated by json
 
 List<House> houseList = [];
 List<Landlord> landlordList = [];
@@ -43,8 +43,9 @@ class House{
   double long;
   String postCode;
   String street;
+  int price;
 
-  House({this.lat,this.long,this.avgRating,this.bedrooms,this.houseNum,this.street,this.postCode});
+  House({this.lat,this.long,this.avgRating,this.bedrooms,this.houseNum,this.street,this.postCode,this.price});
 
   factory House.fromJson(Map<String,dynamic> json){
     return House(
@@ -55,6 +56,7 @@ class House{
       street: json["houseStreet"],
       bedrooms: json["roomInfo"]["numBedrooms"],
       postCode: json["postCode"],
+      price: json["pricePerAnnum"],
     );
   }
 }

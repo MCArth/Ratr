@@ -9,14 +9,12 @@ import 'dart:developer';
 //No need for main here, can be accessed from app
 
 //Global variables to do db stuff
-int revLat;
-int revLong;
+int revIndex;
 
 class ReviewPage extends StatefulWidget {
 
-  ReviewPage(int lat, int long) {
-    revLat = lat;
-    revLong = long;
+  ReviewPage(int index) {
+    revIndex = index;
   }
 
   @override
