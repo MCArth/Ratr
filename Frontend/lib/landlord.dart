@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nexus_app/list.dart';
+import 'package:nexus_app/landlordPropList.dart';
 import 'package:nexus_app/functionsAndData.dart';
 import 'package:nexus_app/revland.dart';
 import 'package:string_validator/string_validator.dart';
@@ -22,8 +22,7 @@ class _LandlordProfile extends StatelessWidget {
   //todo change this
   final String name = landlordList[landIndex].name.toString();
   final String rating = landlordList[landIndex].avgRating.toString();
-  //todo finish this
-  //final String number = landlordList[landIndex]
+  final int number = landlordList[landIndex].houses.length;
 
   Color getColour(double num) {
     if (num >= 7.5) return Colors.green;
@@ -54,14 +53,13 @@ class _LandlordProfile extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 23.0),
                 decoration: BoxDecoration(border: Border.all(width: 2),borderRadius: BorderRadius.all(
                   Radius.circular(7.0)
-                ), color: Colors.grey[350]),
+                ), color: Colors.black),
                 //color: Colors.grey,
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Container(
                         child: Text(
-                          //todo this is just a place holder
                           name,
                           style: TextStyle(
                               fontSize: 24, fontWeight: FontWeight.bold),
@@ -95,10 +93,9 @@ class _LandlordProfile extends StatelessWidget {
                             ),
                             Container(
                               child: Text(
-                                //todo continue
                                 'Number of Properties: ',
                                 style: TextStyle(
-                                    color: Colors.black,
+                                    color: Colors.white,
                                     fontSize: 16,
                                     fontStyle: FontStyle.normal),
                               ),
@@ -106,9 +103,9 @@ class _LandlordProfile extends StatelessWidget {
                             Container(
                               child: Text(
                                 //var number
-                                '5',
+                                number.toString(),
                                 style: TextStyle(
-                                    color: Colors.red,
+                                    color: Colors.blue,
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -129,8 +126,7 @@ class _LandlordProfile extends StatelessWidget {
                           Navigator.push(
                             context,
                             //goes to review; passes lat and long into the class
-                            //todo change this theme is fucked!!!!
-                            MaterialPageRoute(builder: (context) => ListPage()),
+                            MaterialPageRoute(builder: (context) => LandProp(landIndex)),
                           );
                            }
                       ),

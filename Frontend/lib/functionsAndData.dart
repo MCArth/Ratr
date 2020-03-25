@@ -16,10 +16,11 @@ List<Landlord> landlordList = [];
 class Landlord{
   String name;
   int avgRating;
+  String lat;
   List<dynamic> houses;
   List<dynamic> reviews;
 
-  Landlord({this.name,this.avgRating,this.houses,this.reviews});
+  Landlord({this.name,this.avgRating,this.houses,this.reviews,this.lat});
 
   factory Landlord.fromJson(Map<String,dynamic> json){
     return Landlord(
@@ -27,11 +28,9 @@ class Landlord{
       reviews: json["reviews"],
       houses: json["houses"],
       avgRating: json["avgRating"],
-      
+      lat: json["houses"]["lat"],
     );
-    
   }
-
 }
 
 class House{
