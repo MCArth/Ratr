@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -16,11 +14,10 @@ List<Landlord> landlordList = [];
 class Landlord{
   String name;
   int avgRating;
-  String lat;
   List<dynamic> houses;
   List<dynamic> reviews;
 
-  Landlord({this.name,this.avgRating,this.houses,this.reviews,this.lat});
+  Landlord({this.name,this.avgRating,this.houses,this.reviews});
 
   factory Landlord.fromJson(Map<String,dynamic> json){
     return Landlord(
@@ -28,7 +25,6 @@ class Landlord{
       reviews: json["reviews"],
       houses: json["houses"],
       avgRating: json["avgRating"],
-      lat: json["houses"]["lat"],
     );
   }
 }
@@ -58,6 +54,12 @@ class House{
       price: json["pricePerAnnum"],
     );
   }
+
+  //Returns houses lat,long in LatLng format for compatability with googlemaps
+  LatLng get latlng{
+    LatLng out = new LatLng(this.lat,this.long);
+    return out;
+  }
 }
 
 class Review{
@@ -74,14 +76,6 @@ class Review{
     
   }
 }
-
-//Helper function that, when given a landlords reviews json return a list of reviews in review data structure (ideally)
-Review FixReviews(Map<String,dynamic> json){
-  Review thisRev = Review.fromJson(json);
-  return thisRev;
-  
-}
-
 
 // Retreives a list of houses from database
 Future fetchHouses() async {
@@ -116,10 +110,19 @@ Future fetchLandlords() async {
       for(var j = 0; j < landlord.reviews.length; j++){
         landlord.reviews[j] = Review.fromJson(landlord.reviews[j]);
       }
+      for(var k = 0; k < landlord.houses.length; k++){
+        landlord.houses[k] = new LatLng(landlord.houses[k]["lat"],landlord.houses[k]["long"]);
+      }
     }
     print(landlordList[0].houses);
   }
   else{
     throw Exception('Failed to load landlords! (Probably the server is down');
   }
+}
+
+
+//TODO function for getting a LatLng from an address
+LatLng getFromAddress(String address){
+
 }
