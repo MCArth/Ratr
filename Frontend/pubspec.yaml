@@ -30,6 +30,9 @@ dependencies:
   http: ^0.12.0+4
   json_serializable: ^3.2.5
 
+  # Number Spinner
+  numberpicker: ^1.2.0
+
 
 dev_dependencies:
   flutter_test:

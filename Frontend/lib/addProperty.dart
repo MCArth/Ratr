@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nexus_app/home.dart';
 import 'package:string_validator/string_validator.dart';
+import 'package:numberpicker/numberpicker.dart';
 
 class addProperty extends StatefulWidget {
   @override
@@ -10,7 +10,9 @@ class addProperty extends StatefulWidget {
 class _addProperty extends State<addProperty> {
   final formKey = GlobalKey<FormState>();
   double price = 500.0;
-  String address, description, phoneNumber;
+  String address, description, landlord, phoneNumber;
+  int nBedrooms = 1;
+  int nBathrooms = 1;
 
   //Tracks the value of price and puts it into a int variable for printing
   int printPrice = 500;
@@ -49,6 +51,12 @@ class _addProperty extends State<addProperty> {
                     Container(child: Header("Address:")),
                     Container(
                         child: TextFormField(
+                          keyboardType: TextInputType.multiline,
+                          minLines: 2,
+                          maxLines: 4,
+                          decoration: InputDecoration(
+                            hintText: "2 Beckhampton road, Bath \nSomerset, England, BA2 3LL"
+                          ),
                           validator: (input) =>
                           !matches(input, r'^[#.0-9a-zA-Z\s,-]+$')
                               ? 'Not a valid Address'
@@ -59,8 +67,12 @@ class _addProperty extends State<addProperty> {
                     Container(
                       child: TextFormField(
                         keyboardType: TextInputType.multiline,
-                        minLines: 4,
+
+                        minLines: 3,
                         maxLines: 8,
+                        decoration: InputDecoration(
+                          hintText: "Insert description of property"
+                        ),
                         validator: (input) =>
                         !matches(input, r'^[#.0-9a-zA-Z\s,-]+$')
                             ? 'Not a valid Description'
@@ -68,7 +80,41 @@ class _addProperty extends State<addProperty> {
                         onSaved: (input) => description = input,
                       ),
                     ),
-                    Container(child: Header("Phone number of Landlord:")),
+                    Row(
+                      children: <Widget>[
+                        Column(
+                          children: <Widget>[
+                            Header("Number of Bedrooms:"),
+                            SizedBox(
+                              height: 90,
+                              child: NumberPicker.integer(infiniteLoop: true, initialValue: nBedrooms, minValue: 1, maxValue: 15, onChanged: (newValue) =>
+                                  setState(() => nBedrooms = newValue)),
+                            )
+                          ],
+                        ),
+                        Spacer(),
+                        Column(
+                          children: <Widget>[
+                            Header("Number of Bathrooms:"),
+                            SizedBox(
+                              height: 90,
+                              child: NumberPicker.integer(infiniteLoop: true, initialValue: nBathrooms, minValue: 1, maxValue: 15, onChanged: (newValue) =>
+                                  setState(() => nBathrooms = newValue)),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                    Container(child: Header("Landlord:")),
+                    Container(
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                            hintText: "Yassin Ouzzane"
+                          ),
+                          validator: (input) => !matches(input, r'^[A-Z][a-z]+\s[A-Z][a-z]+$') ? 'Not a valid Full Name' : null,
+                          onSaved: (input) => landlord = input,
+                        )),
+                    Container(child: Header("Contact number of Landlord:")),
                     Container(
                         child: TextFormField(
                           //Accepts:
@@ -87,6 +133,9 @@ class _addProperty extends State<addProperty> {
                           //(empty)
                           //1234567890123456789012345678901234567890123456
                           //911
+                          decoration: InputDecoration(
+                            hintText: "+44(0) 815-389-5634"
+                          ),
                           validator: (input) => !matches(input,
                               r'^[+#*\(\)\[\]]*([0-9][ ext+-pw#*\(\)\[\]]*){6,45}$')
                               ? 'Not a valid Phone Number'
@@ -106,8 +155,11 @@ class _addProperty extends State<addProperty> {
 
                                 print(address);
                                 print(description);
+                                print(landlord);
                                 print(phoneNumber);
                                 print(price);
+                                print(nBathrooms);
+                                print(nBedrooms);
                                 //TODO: Link with RL DBS], if everything goes well show the bellow code (STARTS HERE to ENDS HERE) else dont
 
                                 //STARTS HERE
@@ -121,7 +173,7 @@ class _addProperty extends State<addProperty> {
                                           child: ListBody(
                                             children: <Widget>[
                                               Text(
-                                                  "You successfully created an property profile")
+                                                  "You successfully created an property profile 🎉🎉")
                                             ],
                                           ),
                                         ),
@@ -133,7 +185,10 @@ class _addProperty extends State<addProperty> {
                                                * error:: Failed assertion: line 2330 pos 12: '!_debugLocked': is not true.
                                                * It works fine with registration.dart where i am popping until i reach the login screen but not here
                                                */
-                                              Navigator.popUntil(context,ModalRoute.withName('/homePage'));
+                                              Navigator.popUntil(
+                                                  context,
+                                                  ModalRoute.withName(
+                                                      '/homePage'));
                                             },
                                             child: Text("Ok"),
                                           )

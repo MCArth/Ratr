@@ -130,7 +130,7 @@ class _RegistrationPage extends State<RegistrationPage> {
                                                         child: ListBody(
                                                           children: <Widget>[
                                                             Text(
-                                                                "You successfully created an account")
+                                                                "You successfully created an account 🎉🎉")
                                                           ],
                                                         ),
                                                       ),
