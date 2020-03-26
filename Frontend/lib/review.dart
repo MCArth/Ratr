@@ -22,7 +22,6 @@ class ReviewPage extends StatefulWidget {
 }
 
 class _ReviewPage extends State<ReviewPage> {
-  //todo change this to do backend stuff
   //String propertyName = "Latitude: "+revLat.toString();
   String propertyName = "Property Review";
   String propertyReview = "";
@@ -31,7 +30,6 @@ class _ReviewPage extends State<ReviewPage> {
 
   @override
   Widget build(BuildContext context) {
-    //todo get from backend stuff
 
     return Scaffold(
       appBar: AppBar(
@@ -99,6 +97,7 @@ class _ReviewPage extends State<ReviewPage> {
                             ),
                           ),
                           Align(
+                            //todo GET ALL POST BUTTONS TO WORK
                             alignment: Alignment.centerRight,
                             child: RaisedButton(
                               color: Colors.blue,
@@ -109,58 +108,8 @@ class _ReviewPage extends State<ReviewPage> {
                                   'POST',
                                   style: TextStyle(color: Colors.white),
                                 ),
-                                //todo stuff goes here
                                 onPressed: _submitPropertyReview),
                           ),
-//                          Container(
-//                            padding: EdgeInsets.symmetric(horizontal: 2.0),
-//                            child: Align(
-//                                alignment: Alignment.centerLeft,
-//                                child: Text(
-//                                  'Landlord Review:',
-//                                  style: TextStyle(
-//                                      fontSize: 18,
-//                                      fontWeight: FontWeight.bold),
-//                                  textAlign: TextAlign.left,
-//                                )),
-//                          ),
-//                          Container(
-//                            padding: EdgeInsets.symmetric(vertical: 10),
-//                            child: TextFormField(
-//                              keyboardType: TextInputType.multiline,
-//                              minLines: 4,
-//                              maxLines: 4,
-//                              decoration: InputDecoration(
-//                                  border: OutlineInputBorder(
-//                                      borderRadius: BorderRadius.circular(3.0),
-//                                      borderSide: BorderSide(
-//                                          width: 10.0,
-//                                          style: BorderStyle.solid)),
-//                                  filled: true,
-//                                  hintText: 'Write your review here...'),
-//                              validator: (input) => !matches(
-//                                  input, r'^[A-Za-z\n]+$')
-//                                  ? 'Invalid description, needs to consist of letters'
-//                                  : null,
-//                              onSaved: (input) => landlordReview = input,
-//                              //labelText: 'House Review')
-//                            ),
-//                          ),
-//                          Align(
-//                            alignment: Alignment.centerRight,
-//                            child: RaisedButton(
-//                              //color: Colors.orange,
-//                                color: Colors.blue,
-//                                disabledColor: Colors.pink,
-//                                disabledTextColor: Colors.black,
-//                                splashColor: Colors.lightGreen,
-//                                child: Text(
-//                                  'POST',
-//                                  style: TextStyle(color: Colors.white),
-//                                ),
-//                                //todo stuff goes here
-//                                onPressed: _submitLandlordReview),
-//                          ),
                           Container(
                             padding: EdgeInsets.symmetric(horizontal: 2.0),
                             child: Align(
@@ -195,7 +144,8 @@ class _ReviewPage extends State<ReviewPage> {
                                         child: FloatingActionButton(
                                           child: Icon(Icons.add, size: 40),
                                           backgroundColor: Colors.black,
-                                          onPressed: chooseImage,
+                                          //todo IMAGE SELECTION GOES HERE
+                                          onPressed: () {},
                                           materialTapTargetSize:
                                           MaterialTapTargetSize.shrinkWrap,
                                         ))),
@@ -213,7 +163,7 @@ class _ReviewPage extends State<ReviewPage> {
                                         'POST',
                                         style: TextStyle(color: Colors.white),
                                       ),
-                                      //todo stuff goes here
+                                      //todo UPLOAD IMAGE TO DB
                                       onPressed: _submitImage),
                                 )
                               ])
@@ -229,7 +179,6 @@ class _ReviewPage extends State<ReviewPage> {
       formKey.currentState.save();
       log(propertyReview);
       //Popup saying that account was created successfully
-      //todo Link with RL DBS
       //Go back to home page
     }
   }
@@ -247,69 +196,71 @@ class _ReviewPage extends State<ReviewPage> {
   void _submitImage() {}
 }
 
-class _ImageUpload extends State<Image> {
-  File _image;
+//The code below doesn't really work, will leave here for - plz fix lol
 
-  Future<void> _cropImage() async {
-    File cropped = await ImageCropper.cropImage(
-        sourcePath: _image.path,
-        // ratioX: 1.0,
-        // ratioY: 1.0,
-        // maxWidth: 512,
-        // maxHeight: 512,
-        toolbarColor: Colors.purple,
-        toolbarWidgetColor: Colors.white,
-        toolbarTitle: 'Crop It');
-
-    setState(() {
-      _image = cropped ?? _image;
-    });
-  }
-
-  Future chooseFile() async {
-    await ImagePicker.pickImage(source: ImageSource.gallery).then((image) {
-      setState(() {
-        _image = image;
-      });
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      // Select an image from the camera or gallery
-      bottomNavigationBar: BottomAppBar(
-        child: Row(
-          children: <Widget>[
-            IconButton(
-              icon: Icon(Icons.photo_library),
-              onPressed: () => chooseImage(),
-            ),
-          ],
-        ),
-      ),
-      body: ListView(
-        children: <Widget>[
-          if (_image != null) ...[
-            Image.file(_image),
-            Row(
-              children: <Widget>[
-                FlatButton(
-                  child: Icon(Icons.crop),
-                  onPressed: _cropImage,
-                )
-              ],
-            ),
-          ]
-        ],
-      ),
-    );
-  }
-}
-
-File chooseImage() {
-  var load = new _ImageUpload();
-  load.chooseFile();
-
-  return load._image;
-}
+//class _ImageUpload extends State<Image> {
+//  File _image;
+//
+//  Future<void> _cropImage() async {
+//    File cropped = await ImageCropper.cropImage(
+//        sourcePath: _image.path,
+//        // ratioX: 1.0,
+//        // ratioY: 1.0,
+//        // maxWidth: 512,
+//        // maxHeight: 512,
+//        toolbarColor: Colors.purple,
+//        toolbarWidgetColor: Colors.white,
+//        toolbarTitle: 'Crop It');
+//
+//    setState(() {
+//      _image = cropped ?? _image;
+//    });
+//  }
+//
+//  Future chooseFile() async {
+//    await ImagePicker.pickImage(source: ImageSource.gallery).then((image) {
+//      setState(() {
+//        _image = image;
+//      });
+//    });
+//  }
+//
+//  @override
+//  Widget build(BuildContext context) {
+//    return Scaffold(
+//      // Select an image from the camera or gallery
+//      bottomNavigationBar: BottomAppBar(
+//        child: Row(
+//          children: <Widget>[
+//            IconButton(
+//              icon: Icon(Icons.photo_library),
+//              onPressed: () => chooseImage(),
+//            ),
+//          ],
+//        ),
+//      ),
+//      body: ListView(
+//        children: <Widget>[
+//          if (_image != null) ...[
+//            Image.file(_image),
+//            Row(
+//              children: <Widget>[
+//                FlatButton(
+//                  child: Icon(Icons.crop),
+//                  onPressed: _cropImage,
+//                )
+//              ],
+//            ),
+//          ]
+//        ],
+//      ),
+//    );
+//  }
+//}
+//
+//File chooseImage() {
+//  var load = new _ImageUpload();
+//  load.chooseFile();
+//
+//  return load._image;
+//}
