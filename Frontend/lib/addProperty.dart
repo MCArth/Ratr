@@ -73,9 +73,9 @@ class _addProperty extends State<addProperty> {
                         keyboardType: TextInputType.multiline,
                         minLines: 2,
                         maxLines: 4,
-                        decoration: InputDecoration(
-                            hintText: "Insert description of property"
-                        ),
+//                        decoration: InputDecoration(
+//                            hintText: "Insert description of property"
+//                        ),
                         validator: (input) =>
                         !matches(input, r'^[#.0-9a-zA-Z\s,-]+$')
                             ? 'Not a valid Description'
@@ -163,14 +163,6 @@ class _addProperty extends State<addProperty> {
                                           actions: <Widget>[
                                             FlatButton(
                                               onPressed: () {
-                                                /***
-                                                 * ERROR HERREEEEE
-                                                 * error:: Failed assertion: line 2330 pos 12: '!_debugLocked': is not true.
-                                                 * The error happens when you complete the form correctly
-                                                 * It works fine with registration.dart where i am popping until i reach the login screen but not here
-                                                 *
-                                                 * All i want to do is go back to the home page after they successfully added a property
-                                                 */
                                                 Navigator.of(context).popUntil(ModalRoute.withName(Navigator.defaultRouteName));},
                                               child: Text("Ok"),
                                             )
