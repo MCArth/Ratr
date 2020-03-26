@@ -10,7 +10,7 @@ class ListPage extends StatelessWidget{
   Widget build(BuildContext context){
     return Scaffold(
       appBar: new AppBar(
-        title: Text("List View")),
+        title: Text("Properties")),
         body: getListViewBody(context)
         );
   }

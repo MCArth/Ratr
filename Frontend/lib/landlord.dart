@@ -133,45 +133,46 @@ class _LandlordProfile extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 35),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 2.0, vertical: 5),
-            child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Landlord Information:',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.left,
-                )),
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
-            //todo backend stuff here
-            child: Text('No information yet.'),
-            decoration:
-                BoxDecoration(border: Border.all(), shape: BoxShape.rectangle),
-          ),
-          SizedBox(height: 20.0),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 2.0, vertical: 5),
-            child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Landlord Experiences:',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.left,
-                )),
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
-            child: Text('No information yet.'),
-            decoration:
-                BoxDecoration(border: Border.all(), shape: BoxShape.rectangle),
+          SizedBox(height: 10),
+          DefaultTabController(
+            length: 2,
+            child: (SizedBox(
+                height: 250,
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      child: TabBar(
+                        tabs: <Widget>[
+                          Tab(icon: Icon(Icons.person), text: 'Info'),
+                          Tab(
+                            icon: Icon(Icons.format_list_bulleted),
+                            text: 'Reviews',
+                          )
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: TabBarView(
+                        children: <Widget>[
+                          Container(
+                            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
+                            //todo backend stuff here
+                            child: Text('No information yet.'),
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
+                            child: Text('No information yet.'),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ))),
           ),
           SizedBox(height: 35),
           Container(
               child: Align(
-                  alignment: Alignment.centerRight,
+                  alignment: Alignment.bottomRight,
                   child: FloatingActionButton(
                     heroTag: "dog",
                     elevation: 0.0,
