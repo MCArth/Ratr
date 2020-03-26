@@ -183,7 +183,10 @@ class _addProperty extends State<addProperty> {
                                               /***
                                                * ERROR HERREEEEE
                                                * error:: Failed assertion: line 2330 pos 12: '!_debugLocked': is not true.
+                                               * The error happens when you complete the form correctly
                                                * It works fine with registration.dart where i am popping until i reach the login screen but not here
+                                               *
+                                               * All i want to do is go back to the home page after they successfully added a property
                                                */
                                               Navigator.popUntil(
                                                   context,
