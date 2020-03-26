@@ -17,7 +17,6 @@ class LandlordReview extends StatefulWidget {
 }
 
 class _LandlordReview extends State<LandlordReview> {
-  //todo change this to do backend stuff
   String name = "Landlord Review";
   String landlordReview = "";
   final formKey = GlobalKey<FormState>();
@@ -29,8 +28,6 @@ class _LandlordReview extends State<LandlordReview> {
 
   @override
   Widget build(BuildContext context) {
-    //todo get from backend stuff
-
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -74,42 +71,6 @@ class _LandlordReview extends State<LandlordReview> {
                                   textAlign: TextAlign.left,
                                 )),
                           ),
-//                          Container(
-//                            padding: EdgeInsets.symmetric(vertical: 10),
-//                            child: TextFormField(
-//                              keyboardType: TextInputType.multiline,
-//                              minLines: 7,
-//                              maxLines: 7,
-//                              decoration: InputDecoration(
-//                                  border: OutlineInputBorder(
-//                                      borderRadius: BorderRadius.circular(3.0),
-//                                      borderSide: BorderSide(
-//                                          width: 10.0,
-//                                          style: BorderStyle.solid)),
-//                                  filled: true,
-//                                  hintText: 'Write your review here...'),
-//                              validator: (input) => !matches(
-//                                  input, r'^[A-Za-z\n]+$')
-//                                  ? 'Invalid description, needs to consist of letters'
-//                                  : null,
-//                              onSaved: (input) => propertyReview = input,
-//                              //labelText: 'House Review')
-//                            ),
-//                          ),
-//                          Align(
-//                            alignment: Alignment.centerRight,
-//                            child: RaisedButton(
-//                                color: Colors.blue,
-//                                //disabledColor: Colors.pink,
-//                                disabledTextColor: Colors.black,
-//                                splashColor: Colors.lightGreen,
-//                                child: Text(
-//                                  'POST',
-//                                  style: TextStyle(color: Colors.white),
-//                                ),
-//                                //todo stuff goes here
-//                                onPressed: _submitPropertyReview),
-//                          ),
                           Container(
                             padding: EdgeInsets.symmetric(vertical: 10),
                             child: TextFormField(
@@ -135,21 +96,6 @@ class _LandlordReview extends State<LandlordReview> {
                           SizedBox(
                             height: 12,
                           ),
-//                          Align(
-//                            alignment: Alignment.centerRight,
-//                            child: RaisedButton(
-//                                //color: Colors.orange,
-//                                color: Colors.blue,
-//                                disabledColor: Colors.pink,
-//                                disabledTextColor: Colors.black,
-//                                splashColor: Colors.lightGreen,
-//                                child: Text(
-//                                  'POST',
-//                                  style: TextStyle(color: Colors.white),
-//                                ),
-//                                //todo stuff goes here
-//                                onPressed: _submitLandlordReview),
-//                          ),
                           Container(
                             padding: EdgeInsets.symmetric(
                                 horizontal: 2.0, vertical: 5),
@@ -221,7 +167,7 @@ class _LandlordReview extends State<LandlordReview> {
                                   'POST',
                                   style: TextStyle(color: Colors.white),
                                 ),
-                                //todo stuff goes here
+                                //todo Update backend here!!
                                 onPressed: () {}),
                           )
                           //text to show slider value + colour

@@ -19,7 +19,6 @@ class LandlordProfile extends StatelessWidget {
 }
 
 class _LandlordProfile extends StatelessWidget {
-  //todo change this
   final String name = landlordList[landIndex].name.toString();
   final String rating = landlordList[landIndex].avgRating.toString();
   final int number = landlordList[landIndex].houses.length;
@@ -122,7 +121,7 @@ class _LandlordProfile extends StatelessWidget {
                               fontSize: 18,
                               decoration: TextDecoration.underline),
                         ),
-                        onTap: () {//todo stuff goes here, should go to a list view of houses?
+                        onTap: () {
                           Navigator.push(
                             context,
                             //goes to review; passes lat and long into the class
@@ -165,7 +164,6 @@ class _LandlordProfile extends StatelessWidget {
           ),
           Container(
             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
-            //todo backend stuff here
             child: Text('No information yet.'),
             decoration:
                 BoxDecoration(border: Border.all(), shape: BoxShape.rectangle),
@@ -180,8 +178,6 @@ class _LandlordProfile extends StatelessWidget {
                     child: Icon(Icons.add),
                     //backgroundColor: Colors.orange,
                     onPressed: () {
-                      //todo this goes to wrong review page lol
-                      //todo must change
                       Navigator.push(
                         context,
                         //goes to review; passes lat and long into the class

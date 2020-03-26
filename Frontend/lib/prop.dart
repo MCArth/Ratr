@@ -79,7 +79,6 @@ class PropertyProfile extends StatelessWidget {
                             ),
                             Container(
                                 child: Text(
-                                    //todo this is just a place holder
                                     houseList[propIndex].postCode.toString(),
                                     style: TextStyle(
                                         fontSize: 16,
@@ -97,8 +96,7 @@ class PropertyProfile extends StatelessWidget {
                                   textAlign: TextAlign.left),
                             ),
                             Container(
-                              //todo change or delete this if no backend change
-                              child: Text('Roger Mexico',
+                              child: Text(houseList[propIndex].landlord,
                                   style: TextStyle(
                                       color: Colors.red,
                                       fontSize: 16,
@@ -160,8 +158,6 @@ class PropertyProfile extends StatelessWidget {
                                 Column(
                                   children: <Widget>[
                                     Align(
-                                      //padding: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
-                                      //todo backend stuff here
                                       child: Text('Price: ' +
                                           '£' +
                                           (houseList[propIndex].price / 12)
@@ -182,35 +178,6 @@ class PropertyProfile extends StatelessWidget {
                   ],
                 ))),
           ),
-//          Container(
-//            padding: EdgeInsets.symmetric(horizontal: 2.0, vertical: 5),
-//            child: Align(
-//                alignment: Alignment.centerLeft,
-//                child: Text(
-//                  'Property Information:',
-//                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-//                  textAlign: TextAlign.left,
-//                )),
-//          ),
-
-//          SizedBox(height: 20.0),
-//          Container(
-//            padding: EdgeInsets.symmetric(horizontal: 2.0, vertical: 5),
-//            child: Align(
-//                alignment: Alignment.centerLeft,
-//                child: Text(
-//                  'Property Experiences:',
-//                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-//                  textAlign: TextAlign.left,
-//                )),
-//          ),
-//          Container(
-//            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
-//            //todo backend stuff here
-//            child: Text('No information yet.'),
-//            decoration:
-//                BoxDecoration(border: Border.all(), shape: BoxShape.rectangle),
-//          ),
           SizedBox(height: 50),
           Align(
               alignment: Alignment.bottomRight,
