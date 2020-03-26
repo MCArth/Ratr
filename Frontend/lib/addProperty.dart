@@ -25,14 +25,14 @@ class _addProperty extends State<addProperty> {
         ),
         body: SafeArea(
           child: Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Form(
                 key: formKey,
                 child: ListView(
                   children: <Widget>[
                     Container(child: Header("Price per month:")),
                     Container(
-                      child: Text("Selected: $printPrice £"),
+                      child: Text("Selected:   £$printPrice"),
                     ),
                     Container(
                       child: Slider(
@@ -48,7 +48,9 @@ class _addProperty extends State<addProperty> {
                         },
                       ),
                     ),
-                    Container(child: Header("Address:")),
+                    SizedBox(height: 14,),
+                    Container(child: Text("Address:", style:
+                    TextStyle(fontSize: 18, fontWeight: FontWeight.bold),)),
                     Container(
                         child: TextFormField(
                           keyboardType: TextInputType.multiline,
@@ -63,13 +65,14 @@ class _addProperty extends State<addProperty> {
                               : null,
                           onSaved: (input) => address = input,
                         )),
-                    Container(child: Header("Description:")),
+                    SizedBox(height: 20,),
+                    Container(child: Text("Description:", style:
+                    TextStyle(fontSize: 18, fontWeight: FontWeight.bold),)),
                     Container(
                       child: TextFormField(
                         keyboardType: TextInputType.multiline,
-
-                        minLines: 3,
-                        maxLines: 8,
+                        minLines: 2,
+                        maxLines: 4,
                         decoration: InputDecoration(
                           hintText: "Insert description of property"
                         ),
@@ -80,11 +83,14 @@ class _addProperty extends State<addProperty> {
                         onSaved: (input) => description = input,
                       ),
                     ),
+                    SizedBox(height: 20,),
                     Row(
                       children: <Widget>[
                         Column(
                           children: <Widget>[
-                            Header("Number of Bedrooms:"),
+                            Text('Number of Bedrooms:',
+                            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),),
+                            //Header("Number of Bedrooms:"),
                             SizedBox(
                               height: 90,
                               child: NumberPicker.integer(infiniteLoop: true, initialValue: nBedrooms, minValue: 1, maxValue: 15, onChanged: (newValue) =>
@@ -95,7 +101,8 @@ class _addProperty extends State<addProperty> {
                         Spacer(),
                         Column(
                           children: <Widget>[
-                            Header("Number of Bathrooms:"),
+                            Text('Number of Bathrooms:',
+                              style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold),),
                             SizedBox(
                               height: 90,
                               child: NumberPicker.integer(infiniteLoop: true, initialValue: nBathrooms, minValue: 1, maxValue: 15, onChanged: (newValue) =>
@@ -105,7 +112,9 @@ class _addProperty extends State<addProperty> {
                         ),
                       ],
                     ),
-                    Container(child: Header("Landlord:")),
+                    SizedBox(height: 25,),
+                    Container(child: Text("Landlord:", style:
+                      TextStyle(fontSize: 18, fontWeight: FontWeight.bold),)),
                     Container(
                         child: TextFormField(
                           decoration: InputDecoration(
@@ -113,34 +122,6 @@ class _addProperty extends State<addProperty> {
                           ),
                           validator: (input) => !matches(input, r'^[A-Z][a-z]+\s[A-Z][a-z]+$') ? 'Not a valid Full Name' : null,
                           onSaved: (input) => landlord = input,
-                        )),
-                    Container(child: Header("Contact number of Landlord:")),
-                    Container(
-                        child: TextFormField(
-                          //Accepts:
-                          //
-                          //+(01) 123 (456) 789 ext555
-                          //123456
-                          //*44 123-456-789 [321]
-                          //123456
-                          //123456789012345678901234567890123456789012345
-                          //*****++[](][((( 123456tteexxttppww
-                          //Rejects:
-                          //
-                          //mob 07777 777777
-                          //1234 567 890 after 5pm
-                          //john smith
-                          //(empty)
-                          //1234567890123456789012345678901234567890123456
-                          //911
-                          decoration: InputDecoration(
-                            hintText: "+44(0) 815-389-5634"
-                          ),
-                          validator: (input) => !matches(input,
-                              r'^[+#*\(\)\[\]]*([0-9][ ext+-pw#*\(\)\[\]]*){6,45}$')
-                              ? 'Not a valid Phone Number'
-                              : null,
-                          onSaved: (input) => phoneNumber = input,
                         )),
                     Container(
                       padding:
