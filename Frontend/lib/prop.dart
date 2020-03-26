@@ -39,6 +39,7 @@ class PropertyProfile extends StatelessWidget {
       ),
       body: SafeArea(
           child: ListView(
+        shrinkWrap: true,
         padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 12.0),
         children: <Widget>[
           Column(
@@ -129,88 +130,104 @@ class PropertyProfile extends StatelessWidget {
                   ))
             ],
           ),
-          SizedBox(height: 35),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 2.0, vertical: 5),
-            child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Property Information:',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.left,
-                )),
-          ),
-          Container(
-            height: 80,
-            child: ListView (
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
-              children: <Widget>[
-                Column(
+          SizedBox(height: 10),
+          DefaultTabController(
+            length: 2,
+            child: (SizedBox(
+                height: 250,
+                child: Column(
                   children: <Widget>[
-                    Align(
-                      //padding: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
-                      //todo backend stuff here
-                      child: Text('Price: '+ '£'+
-                          (houseList[propIndex].price/12).toString()),
-                      alignment: Alignment.centerLeft,
+                    Container(
+                      child: TabBar(
+                        tabs: <Widget>[
+                          Tab(icon: Icon(Icons.home), text: 'Info'),
+                          Tab(
+                            icon: Icon(Icons.format_list_bulleted),
+                            text: 'Reviews',
+                          )
+                        ],
+                      ),
                     ),
+                    Expanded(
+                      child: TabBarView(
+                        children: <Widget>[
+                          Container(
+                            height: 80,
+                            child: ListView(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 2),
+                              children: <Widget>[
+                                Column(
+                                  children: <Widget>[
+                                    Align(
+                                      //padding: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
+                                      //todo backend stuff here
+                                      child: Text('Price: ' +
+                                          '£' +
+                                          (houseList[propIndex].price / 12)
+                                              .toString()),
+                                      alignment: Alignment.centerLeft,
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                          Container(
+                            child: Text('Dog'),
+                          )
+                        ],
+                      ),
+                    )
                   ],
-                )
-              ],
-            ),
-          ),
-          SizedBox(height: 20.0),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 2.0, vertical: 5),
-            child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Property Experiences:',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.left,
-                )),
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
-            //todo backend stuff here
-            child: Text('No information yet.'),
-            decoration:
-                BoxDecoration(border: Border.all(), shape: BoxShape.rectangle),
+                ))),
           ),
 //          Container(
-//            padding: EdgeInsets.symmetric(vertical: 10),
-//            child: TextField(
-//                keyboardType: TextInputType.multiline,
-//                minLines: 4,
-//                maxLines: 4,
-//                decoration: InputDecoration(
-//                    border: OutlineInputBorder(
-//                        borderRadius: BorderRadius.circular(3.0),
-//                        borderSide:
-//                            BorderSide(width: 10.0, style: BorderStyle.solid)),
-//                    filled: true,
-//                    hintText: 'Stuff goes here....')
-//                //labelText: 'House Review')
-//                ),
+//            padding: EdgeInsets.symmetric(horizontal: 2.0, vertical: 5),
+//            child: Align(
+//                alignment: Alignment.centerLeft,
+//                child: Text(
+//                  'Property Information:',
+//                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+//                  textAlign: TextAlign.left,
+//                )),
 //          ),
-          SizedBox(height: 35),
-          Container(
-              child: Align(
-                  alignment: Alignment.centerRight,
-                  child: FloatingActionButton(
-                    elevation: 0.0,
-                    child: Icon(Icons.add),
-                    //backgroundColor: Colors.orange,
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        //goes to review; passes lat and long into the class
-                        MaterialPageRoute(
-                            builder: (context) => ReviewPage(propIndex)),
-                      );
-                    },
-                    splashColor: Colors.lightGreen,
-                  )))
+
+//          SizedBox(height: 20.0),
+//          Container(
+//            padding: EdgeInsets.symmetric(horizontal: 2.0, vertical: 5),
+//            child: Align(
+//                alignment: Alignment.centerLeft,
+//                child: Text(
+//                  'Property Experiences:',
+//                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+//                  textAlign: TextAlign.left,
+//                )),
+//          ),
+//          Container(
+//            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
+//            //todo backend stuff here
+//            child: Text('No information yet.'),
+//            decoration:
+//                BoxDecoration(border: Border.all(), shape: BoxShape.rectangle),
+//          ),
+          SizedBox(height: 50),
+          Align(
+              alignment: Alignment.bottomRight,
+              child: FloatingActionButton(
+                elevation: 0.0,
+                child: Icon(Icons.add),
+                //backgroundColor: Colors.orange,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    //goes to review; passes lat and long into the class
+                    MaterialPageRoute(
+                        builder: (context) => ReviewPage(propIndex)),
+                  );
+                },
+                splashColor: Colors.lightGreen,
+              ))
         ],
       )),
     );
