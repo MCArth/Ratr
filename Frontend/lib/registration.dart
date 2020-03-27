@@ -123,28 +123,31 @@ class _RegistrationPage extends State<RegistrationPage> {
                                                   context: context,
                                                   barrierDismissible: false,
                                                   builder: (BuildContext context) {
-                                                    return AlertDialog(
-                                                      title: Text("Well Done!"),
-                                                      content:
-                                                      SingleChildScrollView(
-                                                        child: ListBody(
-                                                          children: <Widget>[
-                                                            Text(
-                                                                "You successfully created an account 🎉🎉")
-                                                          ],
+                                                    return WillPopScope(
+                                                      onWillPop: () => Future.value(false),
+                                                      child: AlertDialog(
+                                                        title: Text("Well Done!"),
+                                                        content:
+                                                        SingleChildScrollView(
+                                                          child: ListBody(
+                                                            children: <Widget>[
+                                                              Text(
+                                                                  "You successfully created an account 🎉🎉")
+                                                            ],
+                                                          ),
                                                         ),
+                                                        actions: <Widget>[
+                                                          FlatButton(
+                                                            onPressed: () {
+                                                              Navigator.popUntil(
+                                                                  context,
+                                                                  ModalRoute.withName(
+                                                                      '/login'));
+                                                            },
+                                                            child: Text("Ok"),
+                                                          )
+                                                        ],
                                                       ),
-                                                      actions: <Widget>[
-                                                        FlatButton(
-                                                          onPressed: () {
-                                                            Navigator.popUntil(
-                                                                context,
-                                                                ModalRoute.withName(
-                                                                    '/login'));
-                                                          },
-                                                          child: Text("Ok"),
-                                                        )
-                                                      ],
                                                     );
                                                   });
                                               //ENDS HERE

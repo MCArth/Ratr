@@ -62,7 +62,6 @@ makeHouseCard(BuildContext context, int index){
             //Navigator.pushNamed(context, '/property');
             Navigator.push(
               context,
-              //todo change this index stuff
               MaterialPageRoute(builder: (context) => Property(index)),
             );
           }

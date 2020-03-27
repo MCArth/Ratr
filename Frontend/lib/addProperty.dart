@@ -25,14 +25,14 @@ class _addProperty extends State<addProperty> {
         ),
         body: SafeArea(
           child: Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Form(
                 key: formKey,
                 child: ListView(
                   children: <Widget>[
                     Container(child: Header("Price per month:")),
                     Container(
-                      child: Text("Selected: $printPrice £"),
+                      child: Text("Selected:   £$printPrice"),
                     ),
                     Container(
                       child: Slider(
@@ -48,14 +48,16 @@ class _addProperty extends State<addProperty> {
                         },
                       ),
                     ),
-                    Container(child: Header("Address:")),
+                    SizedBox(height: 14,),
+                    Container(child: Text("Address:", style:
+                    TextStyle(fontSize: 18, fontWeight: FontWeight.bold),)),
                     Container(
                         child: TextFormField(
                           keyboardType: TextInputType.multiline,
                           minLines: 2,
                           maxLines: 4,
                           decoration: InputDecoration(
-                            hintText: "2 Beckhampton road, Bath \nSomerset, England, BA2 3LL"
+                              hintText: "2 Beckhampton road, Bath \nSomerset, England, BA2 3LL"
                           ),
                           validator: (input) =>
                           !matches(input, r'^[#.0-9a-zA-Z\s,-]+$')
@@ -63,16 +65,17 @@ class _addProperty extends State<addProperty> {
                               : null,
                           onSaved: (input) => address = input,
                         )),
-                    Container(child: Header("Description:")),
+                    SizedBox(height: 20,),
+                    Container(child: Text("Description:", style:
+                    TextStyle(fontSize: 18, fontWeight: FontWeight.bold),)),
                     Container(
                       child: TextFormField(
                         keyboardType: TextInputType.multiline,
-
-                        minLines: 3,
-                        maxLines: 8,
-                        decoration: InputDecoration(
-                          hintText: "Insert description of property"
-                        ),
+                        minLines: 2,
+                        maxLines: 4,
+//                        decoration: InputDecoration(
+//                            hintText: "Insert description of property"
+//                        ),
                         validator: (input) =>
                         !matches(input, r'^[#.0-9a-zA-Z\s,-]+$')
                             ? 'Not a valid Description'
@@ -80,11 +83,14 @@ class _addProperty extends State<addProperty> {
                         onSaved: (input) => description = input,
                       ),
                     ),
+                    SizedBox(height: 20,),
                     Row(
                       children: <Widget>[
                         Column(
                           children: <Widget>[
-                            Header("Number of Bedrooms:"),
+                            Text('Number of Bedrooms:',
+                            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),),
+                            //Header("Number of Bedrooms:"),
                             SizedBox(
                               height: 90,
                               child: NumberPicker.integer(infiniteLoop: true, initialValue: nBedrooms, minValue: 1, maxValue: 15, onChanged: (newValue) =>
@@ -95,7 +101,8 @@ class _addProperty extends State<addProperty> {
                         Spacer(),
                         Column(
                           children: <Widget>[
-                            Header("Number of Bathrooms:"),
+                            Text('Number of Bathrooms:',
+                              style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold),),
                             SizedBox(
                               height: 90,
                               child: NumberPicker.integer(infiniteLoop: true, initialValue: nBathrooms, minValue: 1, maxValue: 15, onChanged: (newValue) =>
@@ -105,42 +112,16 @@ class _addProperty extends State<addProperty> {
                         ),
                       ],
                     ),
-                    Container(child: Header("Landlord:")),
+                    SizedBox(height: 25,),
+                    Container(child: Text("Landlord:", style:
+                      TextStyle(fontSize: 18, fontWeight: FontWeight.bold),)),
                     Container(
                         child: TextFormField(
                           decoration: InputDecoration(
-                            hintText: "Yassin Ouzzane"
+                              hintText: "Yassin Ouzzane"
                           ),
                           validator: (input) => !matches(input, r'^[A-Z][a-z]+\s[A-Z][a-z]+$') ? 'Not a valid Full Name' : null,
                           onSaved: (input) => landlord = input,
-                        )),
-                    Container(child: Header("Contact number of Landlord:")),
-                    Container(
-                        child: TextFormField(
-                          //Accepts:
-                          //
-                          //+(01) 123 (456) 789 ext555
-                          //123456
-                          //*44 123-456-789 [321]
-                          //123456
-                          //123456789012345678901234567890123456789012345
-                          //*****++[](][((( 123456tteexxttppww
-                          //Rejects:
-                          //
-                          //mob 07777 777777
-                          //1234 567 890 after 5pm
-                          //john smith
-                          //(empty)
-                          //1234567890123456789012345678901234567890123456
-                          //911
-                          decoration: InputDecoration(
-                            hintText: "+44(0) 815-389-5634"
-                          ),
-                          validator: (input) => !matches(input,
-                              r'^[+#*\(\)\[\]]*([0-9][ ext+-pw#*\(\)\[\]]*){6,45}$')
-                              ? 'Not a valid Phone Number'
-                              : null,
-                          onSaved: (input) => phoneNumber = input,
                         )),
                     Container(
                       padding:
@@ -167,35 +148,26 @@ class _addProperty extends State<addProperty> {
                                     context: context,
                                     barrierDismissible: false,
                                     builder: (BuildContext context) {
-                                      return AlertDialog(
-                                        title: Text("Well Done!"),
-                                        content: SingleChildScrollView(
-                                          child: ListBody(
-                                            children: <Widget>[
-                                              Text(
-                                                  "You successfully created an property profile 🎉🎉")
-                                            ],
+                                      return WillPopScope(
+                                        onWillPop: () => Future.value(false),
+                                        child: AlertDialog(
+                                          title: Text("Well Done!"),
+                                          content: SingleChildScrollView(
+                                            child: ListBody(
+                                              children: <Widget>[
+                                                Text(
+                                                    "You successfully created an property profile 🎉🎉")
+                                              ],
+                                            ),
                                           ),
+                                          actions: <Widget>[
+                                            FlatButton(
+                                              onPressed: () {
+                                                Navigator.of(context).popUntil(ModalRoute.withName(Navigator.defaultRouteName));},
+                                              child: Text("Ok"),
+                                            )
+                                          ],
                                         ),
-                                        actions: <Widget>[
-                                          FlatButton(
-                                            onPressed: () {
-                                              /***
-                                               * ERROR HERREEEEE
-                                               * error:: Failed assertion: line 2330 pos 12: '!_debugLocked': is not true.
-                                               * The error happens when you complete the form correctly
-                                               * It works fine with registration.dart where i am popping until i reach the login screen but not here
-                                               *
-                                               * All i want to do is go back to the home page after they successfully added a property
-                                               */
-                                              Navigator.popUntil(
-                                                  context,
-                                                  ModalRoute.withName(
-                                                      '/homePage'));
-                                            },
-                                            child: Text("Ok"),
-                                          )
-                                        ],
                                       );
                                     });
                                 //ENDS HERE

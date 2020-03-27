@@ -34,15 +34,15 @@ class House{
   int id;
   double avgRating;
   int bedrooms;
+  int bathrooms;
   int houseNum;
+  int price;
   double lat;
   double long;
-  String postCode;
-  String street;
-  int price;
+  String postCode,street,landlord;
   LatLng latlng;
-
-  House({this.lat,this.long,this.avgRating,this.bedrooms,this.houseNum,this.street,this.postCode,this.price,this.latlng});
+  List<String> reviews;
+  House({this.lat,this.long,this.avgRating,this.bedrooms,this.houseNum,this.street,this.postCode,this.price,this.latlng,this.bathrooms,this.landlord});
 
   factory House.fromJson(Map<String,dynamic> json){
     return House(
@@ -84,6 +84,7 @@ Future fetchHouses() async {
     //REturn house from json
     //final out = HouseBasic.fromJson(json.decode(response.body));
     var data = json.decode(response.body);
+    print(data);
     for(Map i in data){
       houseList.add(House.fromJson(i));
     }
@@ -126,7 +127,6 @@ Future fetchLandlords() async {
 //   var result = getFromAddress("The address as string (e.g. 80 Third Avenue)");
 //   result.then((latlng) => print(latlng));
 //   where you replace print with whatever you want to do to the result 
-//
 
 Future<LatLng> getFromAddress(String address) async{
   var query = address + ", Bath";
@@ -136,7 +136,9 @@ Future<LatLng> getFromAddress(String address) async{
   return out;
 }
 
+
 //Checks if a house with a given latLng is in database, returns true if already exists, else false
+
 bool houseExists(LatLng latlng){
   for(House house in houseList){
     if(house.latlng == latlng){

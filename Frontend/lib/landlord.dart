@@ -19,14 +19,13 @@ class LandlordProfile extends StatelessWidget {
 }
 
 class _LandlordProfile extends StatelessWidget {
-  //todo change this
   final String name = landlordList[landIndex].name.toString();
   final String rating = landlordList[landIndex].avgRating.toString();
   final int number = landlordList[landIndex].houses.length;
 
   Color getColour(double num) {
-    if (num >= 7.5) return Colors.green;
-    if (num > 5) return Colors.orange;
+    if (num >= 3.8) return Colors.green;
+    if (num > 2.5) return Colors.orange;
     else return Colors.red;
   }
 
@@ -122,7 +121,7 @@ class _LandlordProfile extends StatelessWidget {
                               fontSize: 18,
                               decoration: TextDecoration.underline),
                         ),
-                        onTap: () {//todo stuff goes here, should go to a list view of houses?
+                        onTap: () {
                           Navigator.push(
                             context,
                             //goes to review; passes lat and long into the class
@@ -134,54 +133,52 @@ class _LandlordProfile extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 35),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 2.0, vertical: 5),
-            child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Landlord Information:',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.left,
-                )),
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
-            //todo backend stuff here
-            child: Text('No information yet.'),
-            decoration:
-                BoxDecoration(border: Border.all(), shape: BoxShape.rectangle),
-          ),
-          SizedBox(height: 20.0),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 2.0, vertical: 5),
-            child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Landlord Experiences:',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.left,
-                )),
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
-            //todo backend stuff here
-            child: Text('No information yet.'),
-            decoration:
-                BoxDecoration(border: Border.all(), shape: BoxShape.rectangle),
+          SizedBox(height: 10),
+          DefaultTabController(
+            length: 2,
+            child: (SizedBox(
+                height: 250,
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      child: TabBar(
+                        tabs: <Widget>[
+                          Tab(icon: Icon(Icons.person), text: 'Info'),
+                          Tab(
+                            icon: Icon(Icons.format_list_bulleted),
+                            text: 'Reviews',
+                          )
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: TabBarView(
+                        children: <Widget>[
+                          Container(
+                            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
+                            //todo backend stuff here
+                            child: Text('No information yet.'),
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
+                            child: Text('No information yet.'),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ))),
           ),
           SizedBox(height: 35),
           Container(
               child: Align(
-                  alignment: Alignment.centerRight,
+                  alignment: Alignment.bottomRight,
                   child: FloatingActionButton(
                     heroTag: "dog",
                     elevation: 0.0,
                     child: Icon(Icons.add),
                     //backgroundColor: Colors.orange,
                     onPressed: () {
-                      //todo this goes to wrong review page lol
-                      //todo must change
                       Navigator.push(
                         context,
                         //goes to review; passes lat and long into the class

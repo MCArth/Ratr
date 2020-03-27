@@ -11,7 +11,7 @@ class RentierListPage extends StatelessWidget{
   Widget build(BuildContext context){
     return Scaffold(
       appBar: new AppBar(
-        title: Text("List View")),
+        title: Text("Landlords")),
         body: getRentierListViewBody(context)
         );
   }
@@ -21,7 +21,6 @@ class RentierListPage extends StatelessWidget{
 makeLandlordCard(BuildContext context, int index){
   print(index);
   return Card(
-
     elevation: 8.0,
     margin: new EdgeInsets.symmetric(
       horizontal: 10.0,
@@ -37,7 +36,7 @@ makeLandlordCard(BuildContext context, int index){
                   decoration: new BoxDecoration(
                       border: new Border(
                           right: new BorderSide(width: 1.0, color: Colors.white24))),
-                  child: Icon(Icons.home, color: Colors.white),
+                  child: Icon(Icons.person, color: Colors.white),
                 ),
                 title: Text(
                   (landlordList[index].name),
