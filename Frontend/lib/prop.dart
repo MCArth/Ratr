@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nexus_app/review.dart';
+import 'package:string_validator/string_validator.dart';
 import 'review.dart';
 import 'package:nexus_app/functionsAndData.dart';
 
@@ -7,6 +8,7 @@ import 'package:nexus_app/functionsAndData.dart';
 
 //Global variables to be passed in from list of houses
 int propIndex;
+int rating;
 
 class Property extends StatelessWidget {
   Property(int index) {
@@ -24,6 +26,13 @@ class PropertyProfile extends StatelessWidget {
   final String propertyName = houseList[propIndex].houseNum.toString() +
       " " +
       houseList[propIndex].street.toString();
+  final String rating = houseList[propIndex].avgRating.toString();
+
+  Color getColour(double num) {
+    if (num >= 3.8) return Colors.green;
+    if (num > 2.5) return Colors.orange;
+    else return Colors.red;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,25 +54,45 @@ class PropertyProfile extends StatelessWidget {
           Column(
             children: <Widget>[
               Container(
-                  padding: EdgeInsets.symmetric(vertical: 23.0),
+                  padding: EdgeInsets.symmetric(vertical: 15.0),
                   decoration: BoxDecoration(
                       border: Border.all(width: 2),
                       borderRadius: BorderRadius.all(Radius.circular(7.0)),
                       color: Colors.black),
                   child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    //crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Padding(
                         padding: EdgeInsets.symmetric(
-                            horizontal: 1.0, vertical: 1.0),
+                            horizontal: 9.0, vertical: 1.0),
                       ),
-                      Container(
-                          child: Icon(
-                        //todo property image goes here
-                        Icons.image,
-                        size: 110,
-                      )),
-                      SizedBox(width: 30.0),
+                      Column(
+                        children: <Widget>[
+                          Align(
+                            alignment: Alignment.center,
+                              child: Icon(
+                                //todo property image goes here
+                                Icons.image,
+                                size: 75,
+                              )),
+                          SizedBox(height: 12,),
+                          Container(
+                              height: 60,
+                              width: 60,
+                              child: FloatingActionButton(
+                                heroTag: 'idekwhatthisis',
+                                backgroundColor: Colors.white,
+                                splashColor: Colors.blueAccent,
+                                onPressed: () {},
+                                child: Text(
+                                  rating,
+                                  style: TextStyle(
+                                      fontSize: 20.0, color: getColour(toDouble(rating))),
+                                ),
+                              )),
+                        ],
+                      ),
+                      SizedBox(width: 40.0),
                       Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
@@ -164,13 +193,24 @@ class PropertyProfile extends StatelessWidget {
                                               .toString()),
                                       alignment: Alignment.centerLeft,
                                     ),
+                                    Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text('Bedrooms: ' +
+                                      houseList[propIndex].bedrooms.toString()),
+                                    ),
+                                    Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text('Bathrooms ' +
+                                      houseList[propIndex].bathrooms.toString(),)
+                                    ),
                                   ],
                                 )
                               ],
                             ),
                           ),
                           Container(
-                            child: Text('Dog'),
+                            //todo JSON list stuff with reviews
+                            child: Text('No reviews yet.'),
                           )
                         ],
                       ),

@@ -24,8 +24,8 @@ class _LandlordProfile extends StatelessWidget {
   final int number = landlordList[landIndex].houses.length;
 
   Color getColour(double num) {
-    if (num >= 7.5) return Colors.green;
-    if (num > 5) return Colors.orange;
+    if (num >= 3.8) return Colors.green;
+    if (num > 2.5) return Colors.orange;
     else return Colors.red;
   }
 
