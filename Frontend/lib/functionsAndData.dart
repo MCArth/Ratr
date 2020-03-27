@@ -50,7 +50,7 @@ class House{
       street: json["houseStreet"],
       bedrooms: json["roomInfo"]["numBedrooms"],
       postCode: json["postCode"],
-      bathrooms: json["numBathrooms"],
+      bathrooms: json["roomInfo"]["numBathrooms"],
       landlord: json["landlord"],
       price: json["pricePerAnnum"],
       reviews: json["reviews"],

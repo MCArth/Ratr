@@ -209,8 +209,8 @@ class PropertyProfile extends StatelessWidget {
                             ),
                           ),
                           Container(
-                            //todo JSON list stuff with reviews
-                            child: Text('No reviews yet.'),
+                            //todo get all reviews from list
+                            child: Text(houseList[propIndex].reviews[0].review),
                           )
                         ],
                       ),
