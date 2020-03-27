@@ -4,7 +4,7 @@ import 'dart:async';
 import 'mapStuff.dart';
 
 
-Set<Marker> markers = buildMapMarkers();
+
 
 // TODO Create class that, on map creation, iterates through database and places markers at properties location. Markers should 
 // link to property page
@@ -22,18 +22,20 @@ class _MapState extends State<MapPage>{
 
   @override
   Widget build(BuildContext context) {
-
+    Set<Marker> markers = buildMapMarkers(context);
     return Scaffold(
       appBar: AppBar(
           title: Text('Bath Properties'),
         ),
         body: GoogleMap(
+          cameraTargetBounds: bath,
           markers: markers,
           onMapCreated: _onMapCreated,
           initialCameraPosition: CameraPosition(
             target: _center,
             zoom: 12.0,
           ),
+          
     )
     );
   }

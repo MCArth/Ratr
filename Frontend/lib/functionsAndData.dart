@@ -150,3 +150,9 @@ bool houseExists(LatLng latlng){
   }
   return false;
 }
+
+void printAllHouses(){
+  for(House house in houseList){
+    print(house.houseNum.toString() + house.street);
+  }
+}
