@@ -5,6 +5,7 @@ import 'package:nexus_app/revland.dart';
 import 'package:string_validator/string_validator.dart';
 
 int landIndex;
+double widthScreen;
 
 class LandlordProfile extends StatelessWidget {
 
@@ -14,6 +15,7 @@ class LandlordProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    widthScreen = MediaQuery.of(context).size.width;
     return _LandlordProfile();
   }
 }
@@ -161,8 +163,33 @@ class _LandlordProfile extends StatelessWidget {
                           ),
                           Container(
                             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
-                            child: Text('No information yet.'),
-                          ),
+                            child: Row(
+                              children: <Widget>[
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    for (var i in landlordList[landIndex].reviews)
+                                      Container(
+                                        width: widthScreen*0.7,
+                                        padding: EdgeInsets.symmetric(vertical: 10),
+                                        child: Text(i.review),
+                                      ),
+                                  ],
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    for (var i in landlordList[landIndex].reviews)
+                                      Container(
+                                        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+                                        child: Text(i.rating.toString()),
+                                      ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            //child: Text('Dog'),
+                          )
                         ],
                       ),
                     )

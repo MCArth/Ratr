@@ -9,6 +9,7 @@ import 'package:nexus_app/functionsAndData.dart';
 //Global variables to be passed in from list of houses
 int propIndex;
 int rating;
+double widthScreen;
 
 class Property extends StatelessWidget {
   Property(int index) {
@@ -18,6 +19,7 @@ class Property extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    widthScreen = MediaQuery.of(context).size.width;
     return PropertyProfile();
   }
 }
@@ -209,8 +211,33 @@ class PropertyProfile extends StatelessWidget {
                             ),
                           ),
                           Container(
-                            //todo get all reviews from list
-                            child: Text(houseList[propIndex].reviews[0].review),
+                            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
+                            child: Row(
+                              children: <Widget>[
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    for (var i in houseList[propIndex].reviews)
+                                      Container(
+                                        width: widthScreen*0.7,
+                                        padding: EdgeInsets.symmetric(vertical: 10),
+                                        child: Text(i.review),
+                                      ),
+                                  ],
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    for (var i in houseList[propIndex].reviews)
+                                      Container(
+                                        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+                                        child: Text(i.rating.toString()),
+                                      ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            //child: Text('Dog'),
                           )
                         ],
                       ),
