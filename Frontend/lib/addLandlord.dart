@@ -177,8 +177,8 @@ class _addLandlord extends State<addLandlord> {
                                 label: '$value',
                                 value: value,
                                 min: 0.0,
-                                max: 10.0,
-                                divisions: 20,
+                                max: 5.0,
+                                divisions: 40,
                                 onChanged: (newValue) {
                                   setState(() {
                                     value = newValue;

@@ -20,7 +20,7 @@ class _LandlordReview extends State<LandlordReview> {
   String name = "Landlord Review";
   String landlordReview = "";
   final formKey = GlobalKey<FormState>();
-  double value = 5.0;
+  double value = 2.5;
   var ratingIcon = Icons.account_circle;
   var iconColour = Colors.white;
 
@@ -132,8 +132,8 @@ class _LandlordReview extends State<LandlordReview> {
                                       label: '$value',
                                       value: value,
                                       min: 0.0,
-                                      max: 10.0,
-                                      divisions: 20,
+                                      max: 5.0,
+                                      divisions: 40,
                                       onChanged: (newValue) {
                                         setState(() {
                                           value = newValue;

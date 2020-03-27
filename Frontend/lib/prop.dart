@@ -28,7 +28,7 @@ class PropertyProfile extends StatelessWidget {
   final String propertyName = houseList[propIndex].houseNum.toString() +
       " " +
       houseList[propIndex].street.toString();
-  final String rating = houseList[propIndex].avgRating.toString();
+  final String rating = houseList[propIndex].avgRating.toStringAsFixed(1);
 
   Color getColour(double num) {
     if (num >= 3.8) return Colors.green;

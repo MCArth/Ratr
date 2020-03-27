@@ -22,7 +22,7 @@ class LandlordProfile extends StatelessWidget {
 
 class _LandlordProfile extends StatelessWidget {
   final String name = landlordList[landIndex].name.toString();
-  final String rating = landlordList[landIndex].avgRating.toString();
+  final String rating = landlordList[landIndex].avgRating.toStringAsFixed(1);
   final int number = landlordList[landIndex].houses.length;
 
   Color getColour(double num) {

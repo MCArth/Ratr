@@ -14,7 +14,7 @@ List<Landlord> landlordList = [];
 
 class Landlord{
   String name;
-  int avgRating;
+  double avgRating;
   List<dynamic> houses;
   List<dynamic> reviews;
 
@@ -25,7 +25,7 @@ class Landlord{
       name: json["name"],
       reviews: json["reviews"],
       houses: json["houses"],
-      avgRating: json["avgRating"],
+      avgRating: json["avgRating"].toDouble(),
     );
   }
 }
