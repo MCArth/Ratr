@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:geocoder/geocoder.dart';
 
 // Classes, getters, builders, etc. for accessing json go here for the time being //
-// CLASS IS IN SESSION //
+// CLASSES //
 
 
 
@@ -30,19 +30,16 @@ class Landlord{
   }
 }
 
+//TODO add room attributes, create room class
 class House{
-  int id;
   double avgRating;
-  int bedrooms;
-  int bathrooms;
-  int houseNum;
-  int price;
-  double lat;
-  double long;
+  int bedrooms,bathrooms,houseNum,price;
+  double lat,long;
   String postCode,street,landlord;
   LatLng latlng;
-  List<String> reviews;
-  House({this.lat,this.long,this.avgRating,this.bedrooms,this.houseNum,this.street,this.postCode,this.price,this.latlng,this.bathrooms,this.landlord});
+  List<dynamic> reviews;
+
+  House({this.lat,this.long,this.avgRating,this.bedrooms,this.houseNum,this.street,this.postCode,this.price,this.latlng,this.bathrooms,this.landlord,this.reviews});
 
   factory House.fromJson(Map<String,dynamic> json){
     return House(
@@ -53,7 +50,10 @@ class House{
       street: json["houseStreet"],
       bedrooms: json["roomInfo"]["numBedrooms"],
       postCode: json["postCode"],
+      bathrooms: json["numBathrooms"],
+      landlord: json["landlord"],
       price: json["pricePerAnnum"],
+      reviews: json["reviews"],
       latlng: LatLng(json["lat"],json["long"])
     );
   }
@@ -84,11 +84,14 @@ Future fetchHouses() async {
     //REturn house from json
     //final out = HouseBasic.fromJson(json.decode(response.body));
     var data = json.decode(response.body);
-    print(data);
     for(Map i in data){
       houseList.add(House.fromJson(i));
     }
-
+    for(House house in houseList){
+      for(var j = 0; j < house.reviews.length; j++){
+        house.reviews[j] = Review.fromJson(house.reviews[j]);
+      }
+    }
   } else {
     throw Exception('Failed to load houses! (Probably the server is down)');
   }
