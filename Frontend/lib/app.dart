@@ -24,7 +24,7 @@ class NexusApp extends StatelessWidget {
         brightness: Brightness.dark,
         primaryColor: Colors.blueGrey[700],
         accentColor: Colors.pink[600],
-        fontFamily: 'Rubik',
+        fontFamily: 'Rubik',  
       ),
         //If logged in go to home, else go to login page. Currently j goes to login for testing purposes
         home: HomePage(),

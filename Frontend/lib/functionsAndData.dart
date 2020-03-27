@@ -15,8 +15,7 @@ List<Landlord> landlordList = [];
 class Landlord{
   String name;
   double avgRating;
-  List<dynamic> houses;
-  List<dynamic> reviews;
+  List<dynamic> houses,reviews;
 
   Landlord({this.name,this.avgRating,this.houses,this.reviews});
 

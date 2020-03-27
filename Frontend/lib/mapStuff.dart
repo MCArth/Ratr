@@ -15,11 +15,10 @@ CameraTargetBounds bath = new CameraTargetBounds(
 //This function creates a marker from a house entry
 Marker getMarker(BuildContext context,House house){
   var markerID = MarkerId(house.latlng.toString());
-  var pos = LatLng(51.3782, -2.3264);
   //Ref: https://medium.com/@rajesh.muthyala/flutter-with-google-maps-and-google-place-85ccee3f0371
   Marker out = new Marker(
       markerId: markerID,
-      position: pos,
+      position: house.latlng,
       infoWindow: InfoWindow(
       ),
       icon: BitmapDescriptor.defaultMarker,
