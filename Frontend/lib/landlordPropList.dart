@@ -52,7 +52,7 @@ makeHouseCard(BuildContext context, int index){
 
           subtitle: Row(
             children: <Widget>[
-              Text(houseList[index].bedrooms.toString() + " Bedroom House")
+              Text(landlordList[index].houses.length.toString())
             ],
           ),
           //todo address potential issue with passing in index

@@ -19,13 +19,13 @@ class NexusApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Rental Nexus',
-      //Build theme that will be inherited by rest of application
+      // defines theme that will be inherited by rest of application
       theme: ThemeData(
         brightness: Brightness.dark,
         primaryColor: Colors.blueGrey[700],
         accentColor: Colors.pink[600],
         fontFamily: 'Rubik',
-        
+        typography: Typography.material2018(),
       ),
         //If logged in go to home, else go to login page. Currently j goes to login for testing purposes
         home: HomePage(),

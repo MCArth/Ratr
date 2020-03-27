@@ -20,6 +20,11 @@ class Landlord{
 
   Landlord({this.name,this.avgRating,this.houses,this.reviews});
 
+  // gets number of properties owned by a landlord
+  int get numProperties{
+      return houses.length;
+  }
+
   factory Landlord.fromJson(Map<String,dynamic> json){
     return Landlord(
       name: json["name"],
@@ -39,7 +44,8 @@ class House{
   LatLng latlng;
   List<dynamic> reviews;
 
-  House({this.lat,this.long,this.avgRating,this.bedrooms,this.houseNum,this.street,this.postCode,this.price,this.latlng,this.bathrooms,this.landlord,this.reviews});
+  House(
+    {this.lat,this.long,this.avgRating,this.bedrooms,this.houseNum,this.street,this.postCode,this.price,this.latlng,this.bathrooms,this.landlord,this.reviews});
 
   factory House.fromJson(Map<String,dynamic> json){
     return House(
@@ -54,7 +60,7 @@ class House{
       landlord: json["landlord"],
       price: json["pricePerAnnum"],
       reviews: json["reviews"],
-      latlng: LatLng(json["lat"],json["long"])
+      latlng: LatLng(json["lat"],json["long"]),
     );
   }
 }
