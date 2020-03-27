@@ -34,12 +34,7 @@ class _MapState extends State<MapPage>{
             target: _center,
             zoom: 12.0,
           ),
-    ),
-    floatingActionButton: FloatingActionButton(
-      onPressed: () {},
-      child: Icon(Icons.navigation),
-      backgroundColor: Colors.blue,
-    ),
+    )
     );
   }
 }
