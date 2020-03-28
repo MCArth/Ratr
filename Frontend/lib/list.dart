@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nexus_app/app.dart';
 import 'package:nexus_app/prop.dart';
 import 'functionsAndData.dart';
 
@@ -35,7 +36,7 @@ makeHouseCard(BuildContext context, int index){
                   padding: EdgeInsets.only(right: 12.0),
                   decoration: new BoxDecoration(
                       border: new Border(
-                          right: new BorderSide(width: 1.0, color: Colors.white24))),
+                          right: new BorderSide(width: 2.0, color: themeYellow))),
                   child: Icon(Icons.home, color: Colors.white),
                 ),
                 title: Text(
