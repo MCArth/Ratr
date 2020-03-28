@@ -119,7 +119,7 @@ class _LandlordProfile extends StatelessWidget {
                         child: Text(
                           'List of Properties',
                           style: TextStyle(
-                              color: Colors.deepOrange,
+                              color: Color(0xF9AA33).withOpacity(1),
                               fontSize: 18,
                               decoration: TextDecoration.underline),
                         ),

@@ -26,7 +26,7 @@ class _addLandlord extends State<addLandlord> {
       ),
       body: SafeArea(
           child: Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
             child: Form(
               key: formKey,
               child: ListView(
@@ -55,7 +55,7 @@ class _addLandlord extends State<addLandlord> {
                         'Please write your review below for '
                             'the landlord chosen:',
                         textDirection: TextDirection.ltr,
-                        style: TextStyle(fontSize: 18),
+                        style: TextStyle(fontSize: 18, color: Color(0xF9AA33).withOpacity(1)),
                       ),
                     ),
                     Container(

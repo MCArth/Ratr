@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:nexus_app/review.dart';
+import 'package:nexus_app/landlord.dart';
 import 'package:string_validator/string_validator.dart';
 import 'review.dart';
 import 'package:nexus_app/functionsAndData.dart';
-
-//void main() => runApp(Property());
 
 //Global variables to be passed in from list of houses
 int propIndex;
@@ -116,7 +115,7 @@ class PropertyProfile extends StatelessWidget {
                                         fontStyle: FontStyle.italic),
                                     textAlign: TextAlign.left)),
                             SizedBox(
-                              height: 4,
+                              height: 10,
                             ),
                             Container(
                               child: Text('Last Known Landlord:',
@@ -126,34 +125,26 @@ class PropertyProfile extends StatelessWidget {
                                       fontStyle: FontStyle.italic),
                                   textAlign: TextAlign.left),
                             ),
-                            Container(
+                            SizedBox(height: 4,),
+                            InkWell(
                               child: Text(houseList[propIndex].landlord,
                                   style: TextStyle(
-                                      color: Colors.red,
-                                      fontSize: 16,
+                                      color: Color(0xF9AA33).withOpacity(1),
+                                      fontSize: 18,
+                                      decoration: TextDecoration.underline,
                                       fontWeight: FontWeight.bold),
                                   textAlign: TextAlign.left),
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    //todo CHANGE THIS, DON'T PASS INDEX IN
+                                    MaterialPageRoute(builder: (context) => LandlordProfile(propIndex)),
+                                  );
+                                }
                             ),
                             SizedBox(
                               height: 4,
                             ),
-                            Container(
-                              child: Text('Last Known Agency:',
-                                  style: TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 16,
-                                      fontStyle: FontStyle.italic),
-                                  textAlign: TextAlign.left),
-                            ),
-                            Container(
-                              //todo change or delete this if no backend change
-                              child: Text('Trustease',
-                                  style: TextStyle(
-                                      color: Colors.red,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
-                                  textAlign: TextAlign.left),
-                            )
                           ])
                     ],
                   ))
