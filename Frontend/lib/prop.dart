@@ -161,7 +161,7 @@ class PropertyProfile extends StatelessWidget {
           ),
           SizedBox(height: 10),
           DefaultTabController(
-            length: 2,
+            length: 3,
             child: (SizedBox(
                 height: 250,
                 child: Column(
@@ -173,7 +173,11 @@ class PropertyProfile extends StatelessWidget {
                           Tab(
                             icon: Icon(Icons.format_list_bulleted),
                             text: 'Reviews',
-                          )
+                          ),
+                          Tab(
+                            icon: Icon(Icons.image),
+                            text: 'Photos',
+                          ),
                         ],
                       ),
                     ),
@@ -238,7 +242,11 @@ class PropertyProfile extends StatelessWidget {
                               ],
                             ),
                             //child: Text('Dog'),
-                          )
+                          ),
+                          Container(
+                            //todo ALEX YOUR STUFF GOES HERE
+                            //This container corresponds to the 3rd tab!
+                          ),
                         ],
                       ),
                     )
