@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget{
     fetchLandlords();
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text("Home Screen"),
+        title: new Text("Welcome!"),
       ),
       body: SafeArea(
         child: Center(

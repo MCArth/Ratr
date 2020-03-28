@@ -153,7 +153,8 @@ class _RegistrationPage extends State<RegistrationPage> {
                                               //ENDS HERE
                                             }
                                           },
-                                          child: Text('Create Account')),
+                                          child: Text('Create Account'),
+                                          color: Color(0xF9AA33).withOpacity(1)),
                                     ))
                               ],
                             ))

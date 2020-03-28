@@ -61,6 +61,7 @@ class _LoginPageState extends State<LoginPage> {
                     }
                   ),
                   RaisedButton(
+                    color: Color(0xF9AA33).withOpacity(1),
                     child: Text('LOGIN'),
                     onPressed: () {
                       Navigator.pop(context);

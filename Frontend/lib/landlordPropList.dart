@@ -18,13 +18,13 @@ class LandProp extends StatelessWidget{
     return Scaffold(
         appBar: new AppBar(
             title: Text("Properties")),
-        body: getListViewBody(context)
+        body: getRentierListViewBody(context)
     );
   }
 }
 
 //Generates an instance of a card for a house
-makeHouseCard(BuildContext context, int index){
+makeRentierCard(BuildContext context, int index){
   return Card(
     elevation: 8.0,
     margin: new EdgeInsets.symmetric(
@@ -71,14 +71,14 @@ makeHouseCard(BuildContext context, int index){
 }
 
 //Function that gets all houses from database, creates card for each one
-Widget getListViewBody(BuildContext context){
+Widget getRentierListViewBody(BuildContext context){
   return Container(
       child: ListView.builder(
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
         itemCount: landlordList[lpIndex].houses.length,
         itemBuilder: (BuildContext context, int index){
-          return makeHouseCard(context,index);
+          return makeRentierCard(context,index);
         },
       )
   );

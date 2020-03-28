@@ -59,6 +59,8 @@ flutter:
       fonts:
         - asset: assets/Rubik-Regular.ttf
         - asset: assets/Rubik-Medium.ttf
+        - asset: assets/Rubik-Bold.ttf
+        - asset: assets/Rubik-Italic.ttf
           weight: 500
 
   # The following line ensures that the Material Icons font is

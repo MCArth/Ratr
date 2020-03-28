@@ -22,11 +22,10 @@ class NexusApp extends StatelessWidget {
       // defines theme that will be inherited by rest of application
       theme: ThemeData(
         brightness: Brightness.dark,
-        //primaryColor: Colors.blueGrey[700],
-        primaryColor: Color(0x7D4427).withOpacity(1),
-        //accentColor: Colors.pink[600],
-        accentColor: Color(0x7D4427).withOpacity(1),
+        primaryColor: Colors.blueGrey[700],
+        accentColor: Color(0xF9AA33).withOpacity(1),
         fontFamily: 'Rubik', 
+        textTheme: TextTheme()
        
       ),
         //If logged in go to home, else go to login page. Currently j goes to login for testing purposes
