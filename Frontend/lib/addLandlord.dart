@@ -55,7 +55,7 @@ class _addLandlord extends State<addLandlord> {
                         'Please write your review below for '
                             'the landlord chosen:',
                         textDirection: TextDirection.ltr,
-                        style: TextStyle(fontSize: 18, color: Colors.black),
+                        style: TextStyle(fontSize: 18),
                       ),
                     ),
                     Container(

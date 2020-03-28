@@ -46,8 +46,13 @@ dev_dependencies:
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.
-flutter:
 
+flutter:
+  ## Gets asets
+  assets:
+    - assets/0.5x/
+    - assets/1x/
+    - assets/2x/
   #Theme font
   fonts:
     - family: Rubik
