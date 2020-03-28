@@ -48,7 +48,7 @@ class HomePage extends StatelessWidget{
                       SizedBox(height: 12.0,),
                       FloatingActionButton.extended(
                         icon: Icon(Icons.person),
-                        label: Text('Property Owners'),
+                        label: Text('Landlords'),
                         heroTag: "landlordlst",
                         onPressed: () {
                           Navigator.pushNamed(context,'/rentierList');
