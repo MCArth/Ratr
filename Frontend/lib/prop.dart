@@ -242,7 +242,7 @@ class PropertyProfile extends StatelessWidget {
                               crossAxisCount: 3,
                               children: <Widget>[
                                 // the following lines are hard coded shit for presentation purposes
-                                //TODO replace these
+                                //TODO replace these because they're not good
                                 if(thisHouse.latlng == LatLng(51.374515,-2.377066))
                                   for(var i=0; i < 15; i++)
                                     Padding(padding:EdgeInsets.fromLTRB(5.0, 0, 5.0, 0),child: Image.asset('assets/House 1/prop1 $i.jpg')),
@@ -260,10 +260,10 @@ class PropertyProfile extends StatelessWidget {
                   ],
                 ))),
           ),
-          SizedBox(height: 10,),
-          Align(
-              alignment: Alignment.bottomRight,
-              child: FloatingActionButton(
+        ],
+      )
+      ),
+      floatingActionButton: FloatingActionButton(
                 elevation: 0.0,
                 child: Icon(Icons.add),
                 //backgroundColor: Colors.orange,
@@ -276,9 +276,7 @@ class PropertyProfile extends StatelessWidget {
                   );
                 },
                 splashColor: Colors.lightGreen,
-              ))
-        ],
-      )),
+              ),
     );
   }
 
