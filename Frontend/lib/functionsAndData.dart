@@ -14,10 +14,11 @@ List<Landlord> landlordList = [];
 
 class Landlord{
   String name;
+  int uniqueID;
   double avgRating;
   List<dynamic> houses,reviews;
 
-  Landlord({this.name,this.avgRating,this.houses,this.reviews});
+  Landlord({this.name,this.avgRating,this.houses,this.reviews,this.uniqueID});
 
   // gets number of properties owned by a landlord
   int get numProperties{
@@ -30,6 +31,7 @@ class Landlord{
       reviews: json["reviews"],
       houses: json["houses"],
       avgRating: json["avgRating"].toDouble(),
+      uniqueID: landlordList.length  ,
     );
   }
 }
@@ -39,7 +41,8 @@ class House{
   double avgRating;
   int bedrooms,bathrooms,houseNum,price;
   double lat,long;
-  String postCode,street,landlord;
+  String postCode,street;
+  String landlord;
   LatLng latlng;
   List<dynamic> reviews;
 
@@ -62,6 +65,13 @@ class House{
       latlng: LatLng(json["lat"],json["long"]),
     );
   }
+
+  String get fullAddress{
+    String address = (this.houseNum.toString() + " " + this.street);
+    return address;
+  }
+
+
 }
 
 class Review{
@@ -154,6 +164,24 @@ bool houseExists(LatLng latlng){
     }
   }
   return false;
+}
+// Gets a landlord from list of landlords from name
+Landlord getRentierFromName(String name){
+  for(Landlord rentier in landlordList){
+    if(rentier.name == name){
+      return rentier;
+    }
+  }
+  return null;
+} 
+// Gets a house from latlng, assuming exists. if it doesn't, return null
+House getHouseFromLatLng(LatLng latlng){
+  for(House house in houseList){
+    if(house.latlng == latlng){
+      return house;
+    }
+  }
+  return null;
 }
 
 void printAllHouses(){

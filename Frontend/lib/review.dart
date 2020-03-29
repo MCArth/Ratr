@@ -1,20 +1,17 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart'; // For Image Picker
 import 'package:string_validator/string_validator.dart';
 import 'dart:developer';
 
-//void main() => runApp(ReviewPage());
-//No need for main here, can be accessed from app
-
 //Global variables to do db stuff
-int revIndex;
+
 
 class ReviewPage extends StatefulWidget {
 
-  ReviewPage(int index) {
-    revIndex = index;
+  ReviewPage(LatLng latLng) {
   }
 
   @override

@@ -4,16 +4,16 @@ import 'dart:async';
 import 'mapStuff.dart';
 
 
-
-
 // TODO Create class that, on map creation, iterates through database and places markers at properties location. Markers should 
 // link to property page
 class MapPage extends StatefulWidget{ 
   @override
+  
   _MapState createState() => _MapState();
 }
  
 class _MapState extends State<MapPage>{
+  
   Completer<GoogleMapController> _controller = Completer();
   static const LatLng _center = const LatLng(51.382675, -2.366787);
   void _onMapCreated(GoogleMapController controller) {
@@ -22,6 +22,7 @@ class _MapState extends State<MapPage>{
 
   @override
   Widget build(BuildContext context) {
+    
     Set<Marker> markers = buildMapMarkers(context);
     return Scaffold(
       appBar: AppBar(
