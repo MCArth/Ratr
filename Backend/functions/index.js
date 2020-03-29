@@ -104,20 +104,35 @@ for(var user in usersList){
 }
 
 exports.updateHouse = functions.https.onRequest(async (req, res) => {
+
+	// Database reference
 	const housesRef = db.ref('/houses');
 
+	// Get updated house JSON
 	const newHouseInfo = req.query.text;
-	console.log(newHouseInfo);
+
+	// Change JSON from string representation to object representation
 	const newHouseJson = JSON.parse(newHouseInfo);
+
+	// Read houses database
 	housesRef.once('value', snap =>  {
+			// Get the db in object representation
 			json = snap.val();
 			let allHouses = json;
+
+			// Looking at each house to find the house to update
 			for(var databaseId in json) {
 				houseInfo = JSON.parse(allHouses[databaseId]["original"]);
+
+				// The lat and long match, so this is house to update
 				if (houseInfo['lat'] === newHouseJson['lat'] && houseInfo['long'] === newHouseJson['long']) {
+
+					// Update
 					db.ref("/houses/" + databaseId).set({"original": newHouseInfo});
 				}
 			}
+
+			// Respond update reached server and process completed
 			res.json("{'status': 200}");
 
 			return json;
