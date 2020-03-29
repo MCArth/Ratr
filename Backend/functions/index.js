@@ -104,37 +104,40 @@ for(var user in usersList){
 }
 
 exports.updateHouse = functions.https.onRequest(async (req, res) => {
+
+	// Database reference
 	const housesRef = db.ref('/houses');
 
+	// Get updated house JSON
 	const newHouseInfo = req.query.text;
-	console.log(newHouseInfo);
-	// const newHouseJson = JSON.parse(newHouseInfo);
+
+	// Change JSON from string representation to object representation
 	const newHouseJson = JSON.parse(newHouseInfo);
+
+	// Read houses database
 	housesRef.once('value', snap =>  {
+			// Get the db in object representation
 			json = snap.val();
-			console.log(json);
 			let allHouses = json;
+
+			// Looking at each house to find the house to update
 			for(var databaseId in json) {
 				houseInfo = JSON.parse(allHouses[databaseId]["original"]);
-				console.log(houseInfo);
+
+				// The lat and long match, so this is house to update
 				if (houseInfo['lat'] === newHouseJson['lat'] && houseInfo['long'] === newHouseJson['long']) {
+
+					// Update
 					db.ref("/houses/" + databaseId).set({"original": newHouseInfo});
 				}
 			}
+
+			// Respond update reached server and process completed
 			res.json("{'status': 200}");
 
 			return json;
 		},
 		).then((json) => {
-			// console.log(json);
-			// let allHouses = json;
-			// allHouses.array.forEach(databaseId => {
-			// 	houseInfo = allHouses[databaseId];
-			// 	if (houseInfo['lat'] === newHouseJson['lat'] && houseInfo['long'] === newHouseJson['long']) {
-			// 		housesRef.child(databaseId).update(newHouseInfo);
-			// 	}
-			// });
-			// res.json("{'status': 200}");
 			return null;
 		}).catch((err) => {console.log(err); return null;})
 });
@@ -144,8 +147,9 @@ exports.updateHouse = functions.https.onRequest(async (req, res) => {
 	// var json;
 	admin.database().ref('houses').once('value', snap =>  {
 				json = snap.val()
-				res.json(json)
-				return json
+				returnData = removeDBDataToArr(json);
+				res.json(returnData)
+				return returnData;
 			},
 		).then((json) => {
 			console.log(json);
@@ -266,8 +270,9 @@ exports.getLandlords = functions.https.onRequest((req, res) => {
 	// var json;
 	admin.database().ref('landlords').once('value', snap =>  {
 				json = snap.val()
-				res.json(json)
-				return json
+				returnInfo = removeDBDataToArr(json);
+				res.json(returnInfo)
+				return returnInfo
 			},
 		).then((json) => {
 			console.log(json);
@@ -275,19 +280,22 @@ exports.getLandlords = functions.https.onRequest((req, res) => {
 		}).catch((err) => {console.log(err); return null;})
  });
 
+function removeDBDataToArr(dbCallbackResult) {
+	let houses = [];
+	for(var databaseId in dbCallbackResult) {
+		houseInfo = JSON.parse(dbCallbackResult[databaseId]["original"]);
+		houses.push(houseInfo);
+	}
+	return houses;
+}
 
 exports.getPropertyStats = functions.https.onRequest((req, res) => {
 	admin.database().ref('landlords').once('value', snap =>  {
 			json = snap.val()
 			result = {};
-			houses = [];
+			houses = removeDBDataToArr(json);
 
-			let allHouses = json;
-			for(var databaseId in json) {
-				houseInfo = JSON.parse(allHouses[databaseId]["original"]);
-				houses.push(houseInfo);
-			}
-			if(house.length === 0) {
+			if(houses.length === 0) {
 				res.json({})
 				return {}
 			}
