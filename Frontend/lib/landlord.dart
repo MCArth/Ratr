@@ -138,7 +138,7 @@ class _LandlordProfile extends StatelessWidget {
           ),
           SizedBox(height: 10),
           DefaultTabController(
-            length: 2,
+            length: 1,
             child: (SizedBox(
                 height: 250,
                 child: Column(
@@ -146,7 +146,6 @@ class _LandlordProfile extends StatelessWidget {
                     Container(
                       child: TabBar(
                         tabs: <Widget>[
-                          Tab(icon: Icon(Icons.person), text: 'Info'),
                           Tab(
                             icon: Icon(Icons.format_list_bulleted),
                             text: 'Reviews',
@@ -157,11 +156,6 @@ class _LandlordProfile extends StatelessWidget {
                     Expanded(
                       child: TabBarView(
                         children: <Widget>[
-                          Container(
-                            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
-                            //todo backend stuff here
-                            child: Text('No information yet.'),
-                          ),
                           Container(
                             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
                             child: Row(
