@@ -108,15 +108,12 @@ exports.updateHouse = functions.https.onRequest(async (req, res) => {
 
 	const newHouseInfo = req.query.text;
 	console.log(newHouseInfo);
-	// const newHouseJson = JSON.parse(newHouseInfo);
 	const newHouseJson = JSON.parse(newHouseInfo);
 	housesRef.once('value', snap =>  {
 			json = snap.val();
-			console.log(json);
 			let allHouses = json;
 			for(var databaseId in json) {
 				houseInfo = JSON.parse(allHouses[databaseId]["original"]);
-				console.log(houseInfo);
 				if (houseInfo['lat'] === newHouseJson['lat'] && houseInfo['long'] === newHouseJson['long']) {
 					db.ref("/houses/" + databaseId).set({"original": newHouseInfo});
 				}
@@ -126,15 +123,6 @@ exports.updateHouse = functions.https.onRequest(async (req, res) => {
 			return json;
 		},
 		).then((json) => {
-			// console.log(json);
-			// let allHouses = json;
-			// allHouses.array.forEach(databaseId => {
-			// 	houseInfo = allHouses[databaseId];
-			// 	if (houseInfo['lat'] === newHouseJson['lat'] && houseInfo['long'] === newHouseJson['long']) {
-			// 		housesRef.child(databaseId).update(newHouseInfo);
-			// 	}
-			// });
-			// res.json("{'status': 200}");
 			return null;
 		}).catch((err) => {console.log(err); return null;})
 });
@@ -144,8 +132,9 @@ exports.updateHouse = functions.https.onRequest(async (req, res) => {
 	// var json;
 	admin.database().ref('houses').once('value', snap =>  {
 				json = snap.val()
-				res.json(json)
-				return json
+				returnData = removeDBDataToArr(json);
+				res.json(returnData)
+				return returnData;
 			},
 		).then((json) => {
 			console.log(json);
@@ -266,8 +255,9 @@ exports.getLandlords = functions.https.onRequest((req, res) => {
 	// var json;
 	admin.database().ref('landlords').once('value', snap =>  {
 				json = snap.val()
-				res.json(json)
-				return json
+				returnInfo = removeDBDataToArr(json);
+				res.json(returnInfo)
+				return returnInfo
 			},
 		).then((json) => {
 			console.log(json);
@@ -275,19 +265,22 @@ exports.getLandlords = functions.https.onRequest((req, res) => {
 		}).catch((err) => {console.log(err); return null;})
  });
 
+function removeDBDataToArr(dbCallbackResult) {
+	let houses = [];
+	for(var databaseId in dbCallbackResult) {
+		houseInfo = JSON.parse(dbCallbackResult[databaseId]["original"]);
+		houses.push(houseInfo);
+	}
+	return houses;
+}
 
 exports.getPropertyStats = functions.https.onRequest((req, res) => {
 	admin.database().ref('landlords').once('value', snap =>  {
 			json = snap.val()
 			result = {};
-			houses = [];
+			houses = removeDBDataToArr(json);
 
-			let allHouses = json;
-			for(var databaseId in json) {
-				houseInfo = JSON.parse(allHouses[databaseId]["original"]);
-				houses.push(houseInfo);
-			}
-			if(house.length === 0) {
+			if(houses.length === 0) {
 				res.json({})
 				return {}
 			}
