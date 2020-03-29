@@ -73,8 +73,8 @@ class PropertyProfile extends StatelessWidget {
                           Align(
                             alignment: Alignment.center,
                               child: SizedBox(
-                                width: 120,
-                                height: 120,
+                                width: 70,
+                                height: 70,
                                 child: _getImage(),
                               )
                               ),
@@ -245,11 +245,11 @@ class PropertyProfile extends StatelessWidget {
                                 //TODO replace these
                                 if(thisHouse.latlng == LatLng(51.374515,-2.377066))
                                   for(var i=0; i < 15; i++)
-                                    Padding(padding:EdgeInsets.fromLTRB(3.0, 0, 3.0, 0),child: Image.asset('assets/House 1/prop1 $i.jpg')),
+                                    Padding(padding:EdgeInsets.fromLTRB(5.0, 0, 5.0, 0),child: Image.asset('assets/House 1/prop1 $i.jpg')),
                                 
                                 if(thisHouse.latlng == LatLng(51.380551,-2.37488))
                                   for(var i=0; i < 20; i++)
-                                    Padding(padding:EdgeInsets.fromLTRB(3.0, 0, 3.0, 0),child: Image.asset('assets/House 2/prop2 $i.jpg')),
+                                    Padding(padding:EdgeInsets.fromLTRB(5.0, 0, 5.0, 0),child: Image.asset('assets/House 2/prop2 $i.jpg')),
                                 
                               ],
                             ),
@@ -260,7 +260,7 @@ class PropertyProfile extends StatelessWidget {
                   ],
                 ))),
           ),
-          SizedBox(height: 15,),
+          SizedBox(height: 10,),
           Align(
               alignment: Alignment.bottomRight,
               child: FloatingActionButton(
