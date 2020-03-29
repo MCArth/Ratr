@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nexus_app/app.dart';
 import 'package:nexus_app/prop.dart';
 import 'functionsAndData.dart';
 
@@ -10,7 +11,7 @@ class ListPage extends StatelessWidget{
   Widget build(BuildContext context){
     return Scaffold(
       appBar: new AppBar(
-        title: Text("Properties")),
+        title: Text("Properties we know about:")),
         body: getListViewBody(context)
         );
   }
@@ -35,8 +36,8 @@ makeHouseCard(BuildContext context, int index){
                   padding: EdgeInsets.only(right: 12.0),
                   decoration: new BoxDecoration(
                       border: new Border(
-                          right: new BorderSide(width: 1.0, color: Colors.white24))),
-                  child: Icon(Icons.home, color: Colors.white),
+                          right: new BorderSide(width: 1.0, color: themeYellow))),
+                  child: Icon(Icons.home, color: Colors.white,size: 40.0,),
                 ),
                 title: Text(
                   (houseList[index].houseNum.toString() + " " + houseList[index].street),
@@ -49,12 +50,12 @@ makeHouseCard(BuildContext context, int index){
                   ],
                 ),
                 trailing:
-                    Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0),
+                    Icon(Icons.keyboard_arrow_right, color: themeYellow, size: 50.0),
                 onTap: () {
                         //Navigator.pushNamed(context, '/property');
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Property(index)),
+                    MaterialPageRoute(builder: (context) => Property(houseList[index].latlng)),
                   );
                         }
         ),

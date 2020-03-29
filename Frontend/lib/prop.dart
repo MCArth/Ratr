@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:nexus_app/review.dart';
+import 'package:nexus_app/landlord.dart';
 import 'package:string_validator/string_validator.dart';
 import 'review.dart';
 import 'package:nexus_app/functionsAndData.dart';
-
-//void main() => runApp(Property());
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 //Global variables to be passed in from list of houses
-int propIndex;
 int rating;
 double widthScreen;
+House thisHouse;
+
 
 class Property extends StatelessWidget {
-  Property(int index) {
-    propIndex = index;
+  Property(LatLng latlng) {
+    thisHouse = getHouseFromLatLng(latlng);
   }
 
   // This widget is the root of your application.
@@ -25,10 +26,8 @@ class Property extends StatelessWidget {
 }
 
 class PropertyProfile extends StatelessWidget {
-  final String propertyName = houseList[propIndex].houseNum.toString() +
-      " " +
-      houseList[propIndex].street.toString();
-  final String rating = houseList[propIndex].avgRating.toStringAsFixed(1);
+  final String propertyName = thisHouse.fullAddress;
+  final String rating = thisHouse.avgRating.toStringAsFixed(1);
 
   Color getColour(double num) {
     if (num >= 3.8) return Colors.green;
@@ -111,13 +110,13 @@ class PropertyProfile extends StatelessWidget {
                             ),
                             Container(
                                 child: Text(
-                                    houseList[propIndex].postCode.toString(),
+                                    thisHouse.postCode.toString(),
                                     style: TextStyle(
                                         fontSize: 16,
                                         fontStyle: FontStyle.italic),
                                     textAlign: TextAlign.left)),
                             SizedBox(
-                              height: 4,
+                              height: 10,
                             ),
                             Container(
                               child: Text('Last Known Landlord:',
@@ -127,34 +126,26 @@ class PropertyProfile extends StatelessWidget {
                                       fontStyle: FontStyle.italic),
                                   textAlign: TextAlign.left),
                             ),
-                            Container(
-                              child: Text(houseList[propIndex].landlord,
+                            SizedBox(height: 4,),
+                            InkWell(
+                              child: Text(thisHouse.landlord,
                                   style: TextStyle(
-                                      color: Colors.red,
-                                      fontSize: 16,
+                                      color: Color(0xF9AA33).withOpacity(1),
+                                      fontSize: 18,
+                                      decoration: TextDecoration.underline,
                                       fontWeight: FontWeight.bold),
                                   textAlign: TextAlign.left),
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    //todo CHANGE THIS, DON'T PASS INDEX IN
+                                    MaterialPageRoute(builder: (context) => LandlordProfile(getRentierFromName(thisHouse.landlord).uniqueID)),
+                                  );
+                                }
                             ),
                             SizedBox(
                               height: 4,
                             ),
-                            Container(
-                              child: Text('Last Known Agency:',
-                                  style: TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 16,
-                                      fontStyle: FontStyle.italic),
-                                  textAlign: TextAlign.left),
-                            ),
-                            Container(
-                              //todo change or delete this if no backend change
-                              child: Text('Trustease',
-                                  style: TextStyle(
-                                      color: Colors.red,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
-                                  textAlign: TextAlign.left),
-                            )
                           ])
                     ],
                   ))
@@ -196,19 +187,19 @@ class PropertyProfile extends StatelessWidget {
                                     Align(
                                       child: Text('Price: ' +
                                           '£' +
-                                          (houseList[propIndex].price / 12)
+                                          (thisHouse.price / 12)
                                               .toString()),
                                       alignment: Alignment.centerLeft,
                                     ),
                                     Align(
                                       alignment: Alignment.centerLeft,
                                       child: Text('Bedrooms: ' +
-                                      houseList[propIndex].bedrooms.toString()),
+                                      thisHouse.bedrooms.toString()),
                                     ),
                                     Align(
                                       alignment: Alignment.centerLeft,
                                       child: Text('Bathrooms ' +
-                                      houseList[propIndex].bathrooms.toString(),)
+                                      thisHouse.bathrooms.toString(),)
                                     ),
                                   ],
                                 )
@@ -222,7 +213,7 @@ class PropertyProfile extends StatelessWidget {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
-                                    for (var i in houseList[propIndex].reviews)
+                                    for (var i in thisHouse.reviews)
                                       Container(
                                         width: widthScreen*0.7,
                                         padding: EdgeInsets.symmetric(vertical: 10),
@@ -233,7 +224,7 @@ class PropertyProfile extends StatelessWidget {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
-                                    for (var i in houseList[propIndex].reviews)
+                                    for (var i in thisHouse.reviews)
                                       Container(
                                         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
                                         child: Text(i.rating.toString()),
@@ -278,7 +269,7 @@ class PropertyProfile extends StatelessWidget {
                     context,
                     //goes to review; passes lat and long into the class
                     MaterialPageRoute(
-                        builder: (context) => ReviewPage(propIndex)),
+                        builder: (context) => ReviewPage(thisHouse.latlng)),
                   );
                 },
                 splashColor: Colors.lightGreen,

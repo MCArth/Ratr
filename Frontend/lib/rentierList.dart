@@ -35,8 +35,8 @@ makeLandlordCard(BuildContext context, int index){
                   padding: EdgeInsets.only(right: 12.0),
                   decoration: new BoxDecoration(
                       border: new Border(
-                          right: new BorderSide(width: 1.0, color: Colors.white24))),
-                  child: Icon(Icons.person, color: Colors.white),
+                          right: new BorderSide(width: 1.0, color: themeYellow))),
+                  child: Icon(Icons.person, color: Colors.white,size: 40.0),
                 ),
                 title: Text(
                   (landlordList[index].name),
@@ -45,11 +45,11 @@ makeLandlordCard(BuildContext context, int index){
 
                 subtitle: Row(
                   children: <Widget>[
-                    Text(houseList[index].bedrooms.toString() + " Bedroom House")
+                    Text("Has " + landlordList[index].houses.length.toString() + " known property")
                   ],
                 ),
                 trailing:
-                    Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0),
+                    Icon(Icons.keyboard_arrow_right, color: themeYellow, size: 50.0),
                 onTap: () {
                   Navigator.push(
                     context,

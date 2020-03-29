@@ -19,7 +19,7 @@ class _RegistrationPage extends State<RegistrationPage> {
         ),
         body: SafeArea(
             child: Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 4),
                 child: Form(
                     key: formKey,
                     child: Column(
@@ -106,7 +106,7 @@ class _RegistrationPage extends State<RegistrationPage> {
                                 Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: SizedBox(
-                                      width: 350,
+                                      width: 300,
                                       height: 50,
                                       child: RaisedButton(
                                           onPressed: () {
@@ -116,7 +116,8 @@ class _RegistrationPage extends State<RegistrationPage> {
                                               print(email);
                                               print(password);
                                               print(firstName);
-                                              //TODO: Link with RL DBS], if everything goes well show the bellow code (STARTS HERE to ENDS HERE) else dont
+                                              //TODO: Link with RL DBS], if everything
+                                              // goes well show the bellow code (STARTS HERE to ENDS HERE) else dont
 
                                               //STARTS HERE
                                               showDialog(

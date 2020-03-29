@@ -18,13 +18,13 @@ class LandProp extends StatelessWidget{
     return Scaffold(
         appBar: new AppBar(
             title: Text("Properties")),
-        body: getRentierListViewBody(context)
+        body: getListViewBody(context)
     );
   }
 }
 
 //Generates an instance of a card for a house
-makeRentierCard(BuildContext context, int index){
+makeListCard(BuildContext context, int index){
   return Card(
     elevation: 8.0,
     margin: new EdgeInsets.symmetric(
@@ -52,7 +52,7 @@ makeRentierCard(BuildContext context, int index){
 
           subtitle: Row(
             children: <Widget>[
-              Text(landlordList[index].houses.length.toString())
+              Text("I broke this sorry :(")
             ],
           ),
           //todo address potential issue with passing in index
@@ -62,7 +62,7 @@ makeRentierCard(BuildContext context, int index){
             //Navigator.pushNamed(context, '/property');
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Property(index)),
+              MaterialPageRoute(builder: (context) => Property(landlordList[lpIndex].houses[index].latlng)),
             );
           }
       ),
@@ -71,14 +71,14 @@ makeRentierCard(BuildContext context, int index){
 }
 
 //Function that gets all houses from database, creates card for each one
-Widget getRentierListViewBody(BuildContext context){
+Widget getListViewBody(BuildContext context){
   return Container(
       child: ListView.builder(
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
         itemCount: landlordList[lpIndex].houses.length,
         itemBuilder: (BuildContext context, int index){
-          return makeRentierCard(context,index);
+          return makeListCard(context,index);
         },
       )
   );

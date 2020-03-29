@@ -4,6 +4,7 @@ import 'dart:async';
 import 'functionsAndData.dart';
 import 'prop.dart';
 
+BitmapDescriptor pinIcon;
 // LatLng bounds for Bath camera view
 CameraTargetBounds bath = new CameraTargetBounds(
   LatLngBounds(
@@ -21,11 +22,11 @@ Marker getMarker(BuildContext context,House house){
       position: house.latlng,
       infoWindow: InfoWindow(
       ),
-      icon: BitmapDescriptor.defaultMarker,
+      icon: pinIcon,
       onTap: () => {
          Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Property(houseList.indexOf(house))),
+                    MaterialPageRoute(builder: (context) => Property(house.latlng)),
          )
       }
     );
@@ -41,3 +42,8 @@ Set<Marker> buildMapMarkers(BuildContext context){
   return out;
 }
 
+void setCustomMapPin() async {
+      pinIcon = await BitmapDescriptor.fromAssetImage(
+      ImageConfiguration(devicePixelRatio: 4),
+      'assets/1x/pin.png');
+   }

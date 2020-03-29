@@ -12,18 +12,23 @@ import 'registration.dart';
 import 'prop.dart';
 import 'list.dart';
 import 'rentierList.dart';
+import 'mapStuff.dart';
+
+
+var themeYellow = Color(0xF9AA33).withOpacity(1);
 
 class NexusApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    setCustomMapPin();
     return MaterialApp(
       title: 'Rental Nexus',
       // defines theme that will be inherited by rest of application
       theme: ThemeData(
         brightness: Brightness.dark,
         primaryColor: Colors.blueGrey[700],
-        accentColor: Color(0xF9AA33).withOpacity(1),
+        accentColor: themeYellow,
         fontFamily: 'Rubik', 
         textTheme: TextTheme()
        
