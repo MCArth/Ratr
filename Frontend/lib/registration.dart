@@ -80,7 +80,7 @@ class _RegistrationPage extends State<RegistrationPage> {
                               validator: (input) {
                                 if (!matches(input,
                                     r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$")) {
-                                  return 'Minimum 8 characters, at least 1 uppercase, lowercase and number';
+                                  return 'Minimum 8 characters, at least 1\nuppercase, lowercase and number';
                                 } else {
                                   testPassword = input;
                                   return null;
