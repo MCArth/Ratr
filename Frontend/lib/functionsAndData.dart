@@ -186,6 +186,6 @@ House getHouseFromLatLng(LatLng latlng){
 
 void printAllHouses(){
   for(House house in houseList){
-    print(house.houseNum.toString() + house.street);
+    print(house.fullAddress);
   }
 }

@@ -16,6 +16,7 @@ House thisHouse;
 class Property extends StatelessWidget {
   Property(LatLng latlng) {
     thisHouse = getHouseFromLatLng(latlng);
+    
   }
 
   // This widget is the root of your application.
@@ -72,11 +73,12 @@ class PropertyProfile extends StatelessWidget {
                         children: <Widget>[
                           Align(
                             alignment: Alignment.center,
-                              child: Icon(
-                                //todo property image goes hereyou
-                                Icons.image,
-                                size: 75,
-                              )),
+                              child: SizedBox(
+                                width: 120,
+                                height: 120,
+                                child: _getImage(),
+                              )
+                              ),
                           SizedBox(height: 12,),
                           Container(
                               height: 60,
@@ -154,7 +156,7 @@ class PropertyProfile extends StatelessWidget {
           DefaultTabController(
             length: 3,
             child: (SizedBox(
-                height: 250,
+                height: 350,
                 child: Column(
                   children: <Widget>[
                     Container(
@@ -237,6 +239,21 @@ class PropertyProfile extends StatelessWidget {
                           Container(
                             //todo ALEX YOUR STUFF GOES HERE
                             //This container corresponds to the 3rd tab!
+                            child: GridView.count(
+                              crossAxisCount: 3,
+                              children: <Widget>[
+                                // the following lines are hard coded shit for presentation purposes
+                                //TODO replace these
+                                if(thisHouse.latlng == LatLng(51.374515,-2.377066))
+                                  for(var i=0; i < 15; i++)
+                                    Padding(padding:EdgeInsets.fromLTRB(3.0, 0, 3.0, 0),child: Image.asset('assets/House 1/prop1 $i.jpg')),
+                                
+                                if(thisHouse.latlng == LatLng(51.380551,-2.37488))
+                                  for(var i=0; i < 20; i++)
+                                    Padding(padding:EdgeInsets.fromLTRB(3.0, 0, 3.0, 0),child: Image.asset('assets/House 2/prop2 $i.jpg')),
+                                
+                              ],
+                            ),
                           ),
                         ],
                       ),
@@ -244,7 +261,7 @@ class PropertyProfile extends StatelessWidget {
                   ],
                 ))),
           ),
-          SizedBox(height: 50),
+          SizedBox(height: 15,),
           Align(
               alignment: Alignment.bottomRight,
               child: FloatingActionButton(
@@ -264,5 +281,15 @@ class PropertyProfile extends StatelessWidget {
         ],
       )),
     );
+  }
+
+  Widget _getImage() {
+    if(thisHouse.latlng == LatLng(51.374515,-2.377066)){
+      return Image.asset('assets/House 1/prop1 15.jpg');
+    }
+    if(thisHouse.latlng == LatLng(51.380551,-2.37488)){
+      return Image.asset('assets/House 2/prop2 17.jpg');
+    }
+    return Icon(Icons.image);
   }
 }

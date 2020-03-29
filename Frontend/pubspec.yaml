@@ -50,6 +50,8 @@ dev_dependencies:
 flutter:
   ## Gets asets
   assets:
+    - assets/House 1/
+    - assets/House 2/
     - assets/0.5x/
     - assets/1x/
     - assets/2x/
