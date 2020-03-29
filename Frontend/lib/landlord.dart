@@ -3,6 +3,7 @@ import 'package:nexus_app/landlordPropList.dart';
 import 'package:nexus_app/functionsAndData.dart';
 import 'package:nexus_app/revland.dart';
 import 'package:string_validator/string_validator.dart';
+import 'app.dart';
 
 int landIndex;
 double widthScreen;
@@ -54,7 +55,7 @@ class _LandlordProfile extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 23.0),
                 decoration: BoxDecoration(border: Border.all(width: 2),borderRadius: BorderRadius.all(
                   Radius.circular(7.0)
-                ), color: Colors.black),
+                ), color: themeGrey),
                 //color: Colors.grey,
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
