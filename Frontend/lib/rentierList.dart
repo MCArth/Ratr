@@ -68,7 +68,7 @@ makeLandlordCard(BuildContext context, int index){
 Widget getRentierListViewBody(BuildContext context){
   return Column(children: <Widget>[
     SizedBox(height: 10),
-    Container(
+    Expanded(
       child: ListView.builder(
         scrollDirection: Axis.vertical,
         shrinkWrap: true,

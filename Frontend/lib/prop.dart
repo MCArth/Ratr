@@ -30,12 +30,6 @@ class PropertyProfile extends StatelessWidget {
   final String propertyName = thisHouse.fullAddress;
   final String rating = thisHouse.avgRating.toStringAsFixed(1);
 
-  Color getColour(double num) {
-    if (num >= 3.8) return Colors.green;
-    if (num > 2.5) return Colors.orange;
-    else return Colors.red;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -217,20 +211,20 @@ class PropertyProfile extends StatelessWidget {
                                       Container(
                                         width: widthScreen*0.7,
                                         padding: EdgeInsets.symmetric(vertical: 10),
-                                        child: Text(i.review),
+                                        child: getRow(i.review, i.rating),
                                       ),
                                   ],
                                 ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    for (var i in thisHouse.reviews)
-                                      Container(
-                                        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
-                                        child: Text(i.rating.toString()),
-                                      ),
-                                  ],
-                                ),
+//                                Column(
+//                                  crossAxisAlignment: CrossAxisAlignment.start,
+//                                  children: <Widget>[
+//                                    for (var i in thisHouse.reviews)
+//                                      Container(
+//                                        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+//                                        child: Text(i.rating.toString()),
+//                                      ),
+//                                  ],
+//                                ),
                               ],
                             ),
                             //child: Text('Dog'),
@@ -289,4 +283,38 @@ class PropertyProfile extends StatelessWidget {
     }
     return Icon(Icons.image);
   }
+}
+
+Color getColour(double num) {
+  if (num >= 3.8) return Colors.green;
+  if (num > 2.5) return Colors.orange;
+  else return Colors.red;
+}
+
+Widget getRow(String review, double rating) {
+  return RichText(
+    text: TextSpan(
+      children: [
+        WidgetSpan(
+          child: Container(
+              height: 50,
+              width: 50,
+              child: FloatingActionButton(
+                heroTag: 'littlerating',
+                backgroundColor: Colors.white,
+                splashColor: Colors.blueAccent,
+                onPressed: () {},
+                child: Text(
+                  rating.toString(),
+                  style: TextStyle(
+                      fontSize: 11.0, color: getColour(rating)),
+                ),
+              )),
+        ),
+        TextSpan(
+          text: "      "+review
+        )
+      ]
+    ),
+  );
 }
