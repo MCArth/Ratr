@@ -11,7 +11,7 @@ class RentierListPage extends StatelessWidget{
   Widget build(BuildContext context){
     return Scaffold(
       appBar: new AppBar(
-        title: Text("Landlords we know about")),
+        title: Text("Landlord List")),
         body: getRentierListViewBody(context)
         );
   }

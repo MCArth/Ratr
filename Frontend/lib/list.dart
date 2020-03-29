@@ -11,7 +11,7 @@ class ListPage extends StatelessWidget{
   Widget build(BuildContext context){
     return Scaffold(
       appBar: new AppBar(
-        title: Text("Properties we know about")),
+        title: Text("Property List")),
         body: getListViewBody(context)
         );
   }

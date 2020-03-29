@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget{
     return new Scaffold(
       appBar: new AppBar(
         centerTitle: true,
-        title: new Text("rental nexus"),
+        title: new Text("Rental Nexus"),
       ),
       body: SafeArea(
         child: Center(
@@ -31,7 +31,7 @@ class HomePage extends StatelessWidget{
                       FloatingActionButton.extended(
                         icon: Icon(Icons.map,color: themeYellow,),
                         backgroundColor: themeGrey,
-                        label: Text('Properties on a map',style: TextStyle(color: Colors.white,fontSize: 20.0)),
+                        label: Text('Property Map',style: TextStyle(color: Colors.white,fontSize: 18.0)),
                         heroTag: "mapbtn",
                         onPressed: () {
                           //Navigate to map page
@@ -42,7 +42,7 @@ class HomePage extends StatelessWidget{
                       FloatingActionButton.extended(
                         icon: Icon(Icons.list,color: themeYellow,),
                         backgroundColor: themeGrey,
-                        label: Text('List of properties',style: TextStyle(color: Colors.white,fontSize: 20.0)),
+                        label: Text('Properties',style: TextStyle(color: Colors.white,fontSize: 18.0)),
                         heroTag: "listbtn",
                         onPressed: () {
                           Navigator.pushNamed(context,'/list');
@@ -52,7 +52,7 @@ class HomePage extends StatelessWidget{
                       FloatingActionButton.extended(
                         icon: Icon(Icons.person,color: themeYellow,),
                         backgroundColor: themeGrey,
-                        label: Text('List of landlords',style: TextStyle(color: Colors.white,fontSize: 20.0)),
+                        label: Text('Landlords',style: TextStyle(color: Colors.white,fontSize: 18.0)),
                         heroTag: "landlordlst",
                         onPressed: () {
                           Navigator.pushNamed(context,'/rentierList');
