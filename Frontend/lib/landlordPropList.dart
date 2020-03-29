@@ -29,7 +29,7 @@ class LandProp extends StatelessWidget{
 //Generates an instance of a card for a house
 makeListCard(BuildContext context, int index){
   //ERROR IS HERE @SAM
-  house = getHouseFromLatLng(landlordList[landLordID].houses[index].latlng);
+  house = getHouseFromLatLng(landlordList[landLordID].houses[index]);
   return Card(
     elevation: 8.0,
     margin: new EdgeInsets.symmetric(
