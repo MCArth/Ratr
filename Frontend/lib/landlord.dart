@@ -158,27 +158,31 @@ class _LandlordProfile extends StatelessWidget {
                         children: <Widget>[
                           Container(
                             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
-                            child: Row(
+                            child: ListView(
                               children: <Widget>[
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                Row(
                                   children: <Widget>[
-                                    for (var i in landlordList[landID].reviews)
-                                      Container(
-                                        width: widthScreen*0.7,
-                                        padding: EdgeInsets.symmetric(vertical: 10),
-                                        child: Text(i.review),
-                                      ),
-                                  ],
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    for (var i in landlordList[landID].reviews)
-                                      Container(
-                                        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
-                                        child: Text(i.rating.toString()),
-                                      ),
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        for (var i in landlordList[landID].reviews)
+                                          Container(
+                                            width: widthScreen*0.7,
+                                            padding: EdgeInsets.symmetric(vertical: 10),
+                                            child: Text(i.review),
+                                          ),
+                                      ],
+                                    ),
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        for (var i in landlordList[landID].reviews)
+                                          Container(
+                                            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+                                            child: Text(i.rating.toString()),
+                                          ),
+                                      ],
+                                    ),
                                   ],
                                 ),
                               ],

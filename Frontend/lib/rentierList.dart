@@ -19,6 +19,7 @@ class RentierListPage extends StatelessWidget{
 
 //Generates an instance of a card for a house
 makeLandlordCard(BuildContext context, int index){
+  int num = landlordList[index].houses.length;
   print(index);
   return Card(
     elevation: 8.0,
@@ -47,7 +48,7 @@ makeLandlordCard(BuildContext context, int index){
 
                 subtitle: Row(
                   children: <Widget>[
-                    Text("Has " + landlordList[index].houses.length.toString() + " known property")
+                    getText(num)
                   ],
                 ),
                 trailing:
@@ -79,4 +80,13 @@ Widget getRentierListViewBody(BuildContext context){
   ),
   ]
   );
+}
+
+Text getText(int num) {
+  if (num == 1) {
+    return Text("Has " + num.toString() + " known property");
+  }
+  else {
+    return Text("Has " + num.toString() + " known properties");
+  }
 }

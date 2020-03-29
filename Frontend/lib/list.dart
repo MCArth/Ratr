@@ -70,7 +70,7 @@ makeHouseCard(BuildContext context, int index){
 Widget getListViewBody(BuildContext context){
   return Column(children: <Widget>[
     SizedBox(height:10),
-    Container(
+    Expanded(
       child: ListView.builder(
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
