@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'functionsAndData.dart';
-
+import 'app.dart';
 
 //TODO implement map and list as states of home page, with bottom navigation bar, do more encapsulation
 class HomePage extends StatelessWidget{
@@ -14,7 +14,8 @@ class HomePage extends StatelessWidget{
     fetchLandlords();
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text("Welcome!"),
+        centerTitle: true,
+        title: new Text("rental nexus"),
       ),
       body: SafeArea(
         child: Center(
@@ -23,13 +24,14 @@ class HomePage extends StatelessWidget{
               Expanded(
                 child: Container(
                   child: ListView(
-                    padding: EdgeInsets.all(16),
+                    padding: EdgeInsets.symmetric(horizontal: 16),
                     children: <Widget>[
                       //TODO implement search bar here 
                       SizedBox(height: 24.0),
                       FloatingActionButton.extended(
-                        icon: Icon(Icons.map),
-                        label: Text('Property Map'),
+                        icon: Icon(Icons.map,color: themeYellow,),
+                        backgroundColor: themeGrey,
+                        label: Text('Properties on a map',style: TextStyle(color: Colors.white,fontSize: 20.0)),
                         heroTag: "mapbtn",
                         onPressed: () {
                           //Navigate to map page
@@ -38,8 +40,9 @@ class HomePage extends StatelessWidget{
                       ),
                       SizedBox(height: 12.0,),
                       FloatingActionButton.extended(
-                        icon: Icon(Icons.list),
-                        label: Text('Property List'),
+                        icon: Icon(Icons.list,color: themeYellow,),
+                        backgroundColor: themeGrey,
+                        label: Text('List of properties',style: TextStyle(color: Colors.white,fontSize: 20.0)),
                         heroTag: "listbtn",
                         onPressed: () {
                           Navigator.pushNamed(context,'/list');
@@ -47,13 +50,15 @@ class HomePage extends StatelessWidget{
                       ),
                       SizedBox(height: 12.0,),
                       FloatingActionButton.extended(
-                        icon: Icon(Icons.person),
-                        label: Text('Landlords'),
+                        icon: Icon(Icons.person,color: themeYellow,),
+                        backgroundColor: themeGrey,
+                        label: Text('List of landlords',style: TextStyle(color: Colors.white,fontSize: 20.0)),
                         heroTag: "landlordlst",
                         onPressed: () {
                           Navigator.pushNamed(context,'/rentierList');
-                        })
-                  
+                        }
+                        ),
+                        
               ],),
   
             ),

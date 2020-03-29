@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nexus_app/app.dart';
 import 'package:nexus_app/review.dart';
 import 'package:nexus_app/landlord.dart';
 import 'package:string_validator/string_validator.dart';
@@ -59,7 +60,7 @@ class PropertyProfile extends StatelessWidget {
                   decoration: BoxDecoration(
                       border: Border.all(width: 2),
                       borderRadius: BorderRadius.all(Radius.circular(7.0)),
-                      color: Colors.black),
+                      color: themeGrey),
                   child: Row(
                     //crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -72,7 +73,7 @@ class PropertyProfile extends StatelessWidget {
                           Align(
                             alignment: Alignment.center,
                               child: Icon(
-                                //todo property image goes here
+                                //todo property image goes hereyou
                                 Icons.image,
                                 size: 75,
                               )),
@@ -120,7 +121,7 @@ class PropertyProfile extends StatelessWidget {
                             Container(
                               child: Text('Last Known Landlord:',
                                   style: TextStyle(
-                                      color: Colors.grey,
+                                      color: Colors.white,
                                       fontSize: 16,
                                       fontStyle: FontStyle.italic),
                                   textAlign: TextAlign.left),
@@ -129,7 +130,7 @@ class PropertyProfile extends StatelessWidget {
                             InkWell(
                               child: Text(thisHouse.landlord,
                                   style: TextStyle(
-                                      color: Color(0xF9AA33).withOpacity(1),
+                                      color: themeYellow,
                                       fontSize: 18,
                                       decoration: TextDecoration.underline,
                                       fontWeight: FontWeight.bold),
@@ -137,7 +138,6 @@ class PropertyProfile extends StatelessWidget {
                                 onTap: () {
                                   Navigator.push(
                                     context,
-                                    //todo CHANGE THIS, DON'T PASS INDEX IN
                                     MaterialPageRoute(builder: (context) => LandlordProfile(getRentierFromName(thisHouse.landlord).uniqueID)),
                                   );
                                 }

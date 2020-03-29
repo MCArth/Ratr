@@ -11,7 +11,7 @@ class RentierListPage extends StatelessWidget{
   Widget build(BuildContext context){
     return Scaffold(
       appBar: new AppBar(
-        title: Text("Landlords")),
+        title: Text("Landlords we know about")),
         body: getRentierListViewBody(context)
         );
   }
@@ -28,6 +28,8 @@ makeLandlordCard(BuildContext context, int index){
     ),
     child: Container(
       decoration: BoxDecoration(
+        color: themeGrey,
+        borderRadius: BorderRadius.all(Radius.circular(10.0)),
       ),
       child: ListTile(
                 contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
@@ -63,17 +65,18 @@ makeLandlordCard(BuildContext context, int index){
 
 //Function that gets all houses from database, creates card for each one
 Widget getRentierListViewBody(BuildContext context){
-  print("current house list length");
-  return Container(
-    child: ListView.builder(
-      scrollDirection: Axis.vertical,
-      shrinkWrap: true,
-      //TODO make this dynamically size house directory 
-
-      itemCount: landlordList.length,
-      itemBuilder: (BuildContext context, int index){
-        return makeLandlordCard(context,index);
-      },
-    )
+  return Column(children: <Widget>[
+    SizedBox(height: 10),
+    Container(
+      child: ListView.builder(
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
+        itemCount: landlordList.length,
+        itemBuilder: (BuildContext context, int index){
+          return makeLandlordCard(context,index);
+        },
+      )
+  ),
+  ]
   );
 }

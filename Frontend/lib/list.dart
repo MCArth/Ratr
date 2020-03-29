@@ -11,7 +11,7 @@ class ListPage extends StatelessWidget{
   Widget build(BuildContext context){
     return Scaffold(
       appBar: new AppBar(
-        title: Text("Properties we know about:")),
+        title: Text("Properties we know about")),
         body: getListViewBody(context)
         );
   }
@@ -29,6 +29,8 @@ makeHouseCard(BuildContext context, int index){
     ),
     child: Container(
       decoration: BoxDecoration(
+        color: themeGrey,
+        borderRadius: BorderRadius.all(Radius.circular(10.0)),
       ),
       child: ListTile(
                 contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
@@ -59,23 +61,26 @@ makeHouseCard(BuildContext context, int index){
                   );
                         }
         ),
+
       ),
   );
 }
 
 //Function that gets all houses from database, creates card for each one
 Widget getListViewBody(BuildContext context){
-  print("current house list length");
-  return Container(
-    child: ListView.builder(
-      scrollDirection: Axis.vertical,
-      shrinkWrap: true,
-      //TODO make this dynamically size house directory 
-
-      itemCount: houseList.length,
-      itemBuilder: (BuildContext context, int index){
-        return makeHouseCard(context,index);
-      },
-    )
+  return Column(children: <Widget>[
+    SizedBox(height:10),
+    Container(
+      child: ListView.builder(
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
+        itemCount: houseList.length,
+        itemBuilder: (BuildContext context, int index){
+          return makeHouseCard(context,index);
+        },
+      )
+     ),
+    ],
   );
+   
 }

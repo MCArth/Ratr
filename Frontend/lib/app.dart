@@ -16,18 +16,19 @@ import 'mapStuff.dart';
 
 
 var themeYellow = Color(0xF9AA33).withOpacity(1);
-
+var themeGrey = Colors.blueGrey[700];
 class NexusApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    //loads custom map display pin
     setCustomMapPin();
     return MaterialApp(
       title: 'Rental Nexus',
       // defines theme that will be inherited by rest of application
       theme: ThemeData(
         brightness: Brightness.dark,
-        primaryColor: Colors.blueGrey[700],
+        primaryColor: themeGrey,
         accentColor: themeYellow,
         fontFamily: 'Rubik', 
         textTheme: TextTheme()
