@@ -55,7 +55,7 @@ makeLandlordCard(BuildContext context, int index){
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => LandlordProfile(index)),
+                    MaterialPageRoute(builder: (context) => LandlordProfile(landlordList[index].uniqueID)),
                   );
                         }
         ),

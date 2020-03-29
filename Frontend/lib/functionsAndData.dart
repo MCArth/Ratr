@@ -31,7 +31,7 @@ class Landlord{
       reviews: json["reviews"],
       houses: json["houses"],
       avgRating: json["avgRating"].toDouble(),
-      uniqueID: landlordList.length  ,
+      uniqueID: landlordList.length,
     );
   }
 }

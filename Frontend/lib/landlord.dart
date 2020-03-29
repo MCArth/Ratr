@@ -5,13 +5,13 @@ import 'package:nexus_app/revland.dart';
 import 'package:string_validator/string_validator.dart';
 import 'app.dart';
 
-int landIndex;
+int landID;
 double widthScreen;
 
 class LandlordProfile extends StatelessWidget {
 
   LandlordProfile(int index) {
-    landIndex = index;
+    landID = index;
   }
 
   @override
@@ -22,9 +22,9 @@ class LandlordProfile extends StatelessWidget {
 }
 
 class _LandlordProfile extends StatelessWidget {
-  final String name = landlordList[landIndex].name.toString();
-  final String rating = landlordList[landIndex].avgRating.toStringAsFixed(1);
-  final int number = landlordList[landIndex].houses.length;
+  final String name = landlordList[landID].name.toString();
+  final String rating = landlordList[landID].avgRating.toStringAsFixed(1);
+  final int number = landlordList[landID].houses.length;
 
   Color getColour(double num) {
     if (num >= 3.8) return Colors.green;
@@ -128,7 +128,7 @@ class _LandlordProfile extends StatelessWidget {
                           Navigator.push(
                             context,
                             //goes to review; passes lat and long into the class
-                            MaterialPageRoute(builder: (context) => LandProp(landIndex)),
+                            MaterialPageRoute(builder: (context) => LandProp(landID)),
                           );
                            }
                       ),
@@ -169,7 +169,7 @@ class _LandlordProfile extends StatelessWidget {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
-                                    for (var i in landlordList[landIndex].reviews)
+                                    for (var i in landlordList[landID].reviews)
                                       Container(
                                         width: widthScreen*0.7,
                                         padding: EdgeInsets.symmetric(vertical: 10),
@@ -180,7 +180,7 @@ class _LandlordProfile extends StatelessWidget {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
-                                    for (var i in landlordList[landIndex].reviews)
+                                    for (var i in landlordList[landID].reviews)
                                       Container(
                                         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
                                         child: Text(i.rating.toString()),

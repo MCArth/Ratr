@@ -16,7 +16,6 @@ House thisHouse;
 class Property extends StatelessWidget {
   Property(LatLng latlng) {
     thisHouse = getHouseFromLatLng(latlng);
-    
   }
 
   // This widget is the root of your application.

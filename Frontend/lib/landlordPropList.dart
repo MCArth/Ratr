@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:nexus_app/prop.dart';
 import 'functionsAndData.dart';
 
-int lpIndex;
+int landLordID;
+House house;
+var themeYellow;
 
 /*
 Page displaying each property a landlord owns
@@ -10,7 +12,8 @@ Page displaying each property a landlord owns
 class LandProp extends StatelessWidget{
 
   LandProp(int index) {
-    lpIndex = index;
+    landLordID = index;
+    themeYellow = Color(0xF9AA33).withOpacity(1);
   }
 
   @override
@@ -25,6 +28,8 @@ class LandProp extends StatelessWidget{
 
 //Generates an instance of a card for a house
 makeListCard(BuildContext context, int index){
+  //ERROR IS HERE @SAM
+  house = getHouseFromLatLng(landlordList[landLordID].houses[index].latlng);
   return Card(
     elevation: 8.0,
     margin: new EdgeInsets.symmetric(
@@ -41,28 +46,25 @@ makeListCard(BuildContext context, int index){
             decoration: new BoxDecoration(
                 border: new Border(
                     right: new BorderSide(width: 1.0, color: Colors.white24))),
-            child: Icon(Icons.home, color: Colors.white),
+            child: Icon(Icons.home, color: Colors.white, size: 40,),
           ),
           title: Text(
-            //(houseList[index].houseNum.toString() + " " + houseList[index].street),
-            //todo change this in functions and data
-            landlordList[lpIndex].houses[index].toString(),
+            house.fullAddress.toString(),
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
 
           subtitle: Row(
             children: <Widget>[
-              Text("I broke this sorry :(")
+              Text(house.bedrooms.toString()+" Bedroom House")
             ],
           ),
           //todo address potential issue with passing in index
           trailing:
-          Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0),
+          Icon(Icons.keyboard_arrow_right, color: themeYellow, size: 50.0),
           onTap: () {
-            //Navigator.pushNamed(context, '/property');
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Property(landlordList[lpIndex].houses[index].latlng)),
+              MaterialPageRoute(builder: (context) => Property(house.latlng)),
             );
           }
       ),
@@ -76,7 +78,8 @@ Widget getListViewBody(BuildContext context){
       child: ListView.builder(
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
-        itemCount: landlordList[lpIndex].houses.length,
+        //Might also be here?
+        itemCount: landlordList[landLordID].houses.length,
         itemBuilder: (BuildContext context, int index){
           return makeListCard(context,index);
         },
