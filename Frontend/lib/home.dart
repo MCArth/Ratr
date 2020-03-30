@@ -13,6 +13,15 @@ class HomePage extends StatelessWidget {
       appBar: new AppBar(
         centerTitle: true,
         title: new Text("Rental Nexus"),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.help_outline),
+            color: themeYellow,
+            onPressed: () {
+              Navigator.pushNamed(context,'/help');}
+            )
+
+        ]
       ),
       body: SafeArea(
         child: Center(

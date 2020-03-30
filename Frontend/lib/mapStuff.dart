@@ -11,7 +11,6 @@ CameraTargetBounds bath = new CameraTargetBounds(
     northeast: LatLng(51.409029,-2.321211),
     southwest: LatLng(51.372760,-2.404860)));
 
-//TODO marker todos must link to properties 
 
 //This function creates a marker from a house entry
 Marker getMarker(BuildContext context,House house){

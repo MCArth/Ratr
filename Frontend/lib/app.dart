@@ -13,7 +13,7 @@ import 'prop.dart';
 import 'list.dart';
 import 'rentierList.dart';
 import 'mapStuff.dart';
-
+import 'help.dart';
 
 var themeYellow = Color(0xF9AA33).withOpacity(1);
 var themeGrey = Colors.blueGrey[700];
@@ -47,6 +47,7 @@ class NexusApp extends StatelessWidget {
           '/addLand': (BuildContext context) {return addLandlord();},
           '/rentierList': (BuildContext context) {return RentierListPage();},
           '/homePage': (BuildContext context) {return HomePage();},
+          '/help': (BuildContext context) {return HelpPage();},
 
           //'/property': (BuildContext context) {return Property();},
         }
