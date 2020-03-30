@@ -36,7 +36,7 @@ class Landlord{
   }
 }
 
-//TODO add room attributes, create room class
+// Class for storing property information locally from JSON
 class House{
   double avgRating;
   int bedrooms,bathrooms,houseNum,price;

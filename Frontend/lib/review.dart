@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart'; // For Image Picker
+import 'package:nexus_app/app.dart';
 import 'package:string_validator/string_validator.dart';
 import 'dart:developer';
 
@@ -53,11 +54,10 @@ class _ReviewPage extends State<ReviewPage> {
                           Container(
                             padding: EdgeInsets.symmetric(vertical: 15.0),
                             child: Text(
-                              'Please write your review below for '
-                                  'the property chosen:',
+                              'Tell us about your experience with this property:',
                               textDirection: TextDirection.ltr,
                               style:
-                              TextStyle(fontSize: 18, color: Colors.black),
+                              TextStyle(fontSize: 18, color: Colors.white),
                             ),
                           ),
                           Container(
@@ -128,7 +128,7 @@ class _ReviewPage extends State<ReviewPage> {
                                     ),
                                     child: Slider(
 //                                      inactiveColor: Colors.white,
-                                      activeColor: Colors.black,
+                                      activeColor: themeGrey,
                                       label: '$value',
                                       value: value,
                                       min: 0.0,
@@ -183,7 +183,7 @@ class _ReviewPage extends State<ReviewPage> {
                                         alignment: Alignment.centerRight,
                                         child: FloatingActionButton(
                                           child: Icon(Icons.add, size: 40, color: Colors.white,),
-                                          backgroundColor: Colors.black,
+                                          backgroundColor: themeYellow,
                                           //todo IMAGE SELECTION GOES HERE
                                           onPressed: () {chooseImage();},
                                           materialTapTargetSize:
@@ -195,7 +195,7 @@ class _ReviewPage extends State<ReviewPage> {
                                   alignment: Alignment.centerRight,
                                   child: RaisedButton(
                                     //color: Colors.orange,
-                                      color: Colors.blue,
+                                      color: themeYellow,
                                       disabledColor: Colors.pink,
                                       disabledTextColor: Colors.black,
                                       splashColor: Colors.lightGreen,
@@ -204,14 +204,32 @@ class _ReviewPage extends State<ReviewPage> {
                                         style: TextStyle(color: Colors.white),
                                       ),
                                       //todo UPLOAD IMAGE TO DB
-                                      onPressed: _submitImage),
+                                      onPressed: () {
+                                        _submitImage();
+                                        Navigator.pop(context);
+                                      }
                                 )
-                              ])
-                        ])
+                                )
+                              ]
+                              )
+                        ]
+                        )
                       ],
                     )))),
       ),
     );
+  }
+
+  showReviewAlert(BuildContext context){
+    AlertDialog alert = AlertDialog(
+      title: Text("Review successfully posted!"),
+      actions: [
+        FlatButton(
+          child: Text("Okay"),
+          onPressed: () {Navigator.pop(context);},),
+      ]
+    );
+    return alert;
   }
 
   void _submitPropertyReview() {
@@ -256,7 +274,8 @@ class _ImageUpload extends State<Image> {
       _image = cropped ?? _image;
     });
   }
-
+  //TODO Catch PlatformException(photo_access_denied, The user did not allow photo access.,)
+  //TODO catch error on going back from image picker
   Future chooseFile() async {
     await ImagePicker.pickImage(source: ImageSource.gallery).then((image) {
       setState(() {

@@ -53,8 +53,7 @@ class _LandlordReview extends State<LandlordReview> {
                           Container(
                             padding: EdgeInsets.symmetric(vertical: 15.0),
                             child: Text(
-                              'Please write your review below for '
-                              'the landlord chosen:',
+                              'Let us know about your experience with this landlord',
                               textDirection: TextDirection.ltr,
                               style:
                                   TextStyle(fontSize: 18, color: themeYellow),
@@ -130,7 +129,7 @@ class _LandlordReview extends State<LandlordReview> {
                                     ),
                                     child: Slider(
 //                                      inactiveColor: Colors.white,
-                                      activeColor: Colors.black,
+                                      activeColor: themeYellow,
                                       label: '$value',
                                       value: value,
                                       min: 0.0,
@@ -158,7 +157,7 @@ class _LandlordReview extends State<LandlordReview> {
                             alignment: Alignment.centerRight,
                             child: RaisedButton(
                                 //color: Colors.orange,
-                                color: Colors.blue,
+                                color: themeYellow,
                                 disabledColor: Colors.pink,
                                 disabledTextColor: Colors.black,
                                 splashColor: Colors.lightGreen,
@@ -167,7 +166,9 @@ class _LandlordReview extends State<LandlordReview> {
                                   style: TextStyle(color: Colors.white),
                                 ),
                                 //todo Update backend here!!
-                                onPressed: () {}),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                }),
                           )
                           //text to show slider value + colour
 //                          Container(

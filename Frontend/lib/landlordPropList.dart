@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:nexus_app/prop.dart';
 import 'functionsAndData.dart';
-
+import 'app.dart';
 int landLordID;
 House house;
-var themeYellow;
 
 /*
 Page displaying each property a landlord owns
@@ -13,7 +12,6 @@ class LandProp extends StatelessWidget{
 
   LandProp(int index) {
     landLordID = index;
-    themeYellow = Color(0xF9AA33).withOpacity(1);
   }
 
   @override
@@ -30,7 +28,6 @@ class LandProp extends StatelessWidget{
 
 //Generates an instance of a card for a house
 makeListCard(BuildContext context, int index){
-  //ERROR IS HERE @SAM
   house = getHouseFromLatLng(landlordList[landLordID].houses[index]);
   return Card(
     elevation: 8.0,
@@ -39,7 +36,10 @@ makeListCard(BuildContext context, int index){
       vertical: 6.0,
     ),
     child: Container(
+      
       decoration: BoxDecoration(
+        color: themeGrey,
+        borderRadius: BorderRadius.all(Radius.circular(10.0)),
       ),
       child: ListTile(
           contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
@@ -47,7 +47,7 @@ makeListCard(BuildContext context, int index){
             padding: EdgeInsets.only(right: 12.0),
             decoration: new BoxDecoration(
                 border: new Border(
-                    right: new BorderSide(width: 1.0, color: Colors.white24))),
+                    right: new BorderSide(width: 1.0, color: themeYellow))),
             child: Icon(Icons.home, color: Colors.white, size: 40,),
           ),
           title: Text(
