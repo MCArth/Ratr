@@ -41,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
                 controller: _usernameController,
                 decoration: InputDecoration(
                   filled: true,
-                  labelText: 'Username',  
+                  hintText: 'Username',  
                 ),
               ),
             ),
@@ -55,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
                 controller: _passwordController,
                 decoration: InputDecoration(
                   filled: true,
-                  labelText: 'Password',
+                  hintText: 'Password',
                 ),
                 obscureText: true,
               ),

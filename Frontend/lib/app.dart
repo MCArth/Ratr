@@ -24,6 +24,7 @@ class NexusApp extends StatelessWidget {
     //loads custom map display pin
     setCustomMapPin();
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Rental Nexus',
       // defines theme that will be inherited by rest of application
       theme: ThemeData(
