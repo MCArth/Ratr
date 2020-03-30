@@ -206,7 +206,7 @@ class _ReviewPage extends State<ReviewPage> {
                                       //todo UPLOAD IMAGE TO DB
                                       onPressed: () {
                                         _submitImage();
-                                        Navigator.pop(context);
+                                        _reviewPostDialog();
                                       }
                                 )
                                 )
@@ -220,17 +220,25 @@ class _ReviewPage extends State<ReviewPage> {
     );
   }
 
-  showReviewAlert(BuildContext context){
-    AlertDialog alert = AlertDialog(
-      title: Text("Review successfully posted!"),
-      actions: [
-        FlatButton(
-          child: Text("Okay"),
-          onPressed: () {Navigator.pop(context);},),
-      ]
-    );
-    return alert;
-  }
+ void _reviewPostDialog(){
+   showDialog(
+     context: context,
+     builder: (BuildContext context){
+      return AlertDialog(
+        title:Text("Thanks!"),
+        content: Text("We've received your review!"),
+        actions: <Widget>[
+          new FlatButton(
+            child: Text("Okay"),
+            onPressed: () {
+              Navigator.of(context)..popUntil((route) => route.isFirst);
+              },
+          ),
+        ],
+      );
+     }
+   );
+ }
 
   void _submitPropertyReview() {
     if (formKey.currentState.validate()) {

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:string_validator/string_validator.dart';
 import 'dart:developer';
+import 'review.dart';
 
 //void main() => runApp(ReviewPage());
 //No need for main here, can be accessed from app
@@ -167,7 +168,7 @@ class _LandlordReview extends State<LandlordReview> {
                                 ),
                                 //todo Update backend here!!
                                 onPressed: () {
-                                  Navigator.pop(context);
+                                  _reviewPostDialog();
                                 }),
                           )
                           //text to show slider value + colour
@@ -187,7 +188,25 @@ class _LandlordReview extends State<LandlordReview> {
       ),
     );
   }
-
+  void _reviewPostDialog(){
+   showDialog(
+     context: context,
+     builder: (BuildContext context){
+      return AlertDialog(
+        title:Text("Thanks!"),
+        content: Text("We've received your review!"),
+        actions: <Widget>[
+          new FlatButton(
+            child: Text("Okay"),
+            onPressed: () {
+              Navigator.of(context)..popUntil((route) => route.isFirst);
+              },
+          ),
+        ],
+      );
+     }
+   );
+ }
   void _submitLandlordReview() {
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
