@@ -26,12 +26,6 @@ class _LandlordProfile extends StatelessWidget {
   final String rating = landlordList[landID].avgRating.toStringAsFixed(1);
   final int number = landlordList[landID].houses.length;
 
-  Color getColour(double num) {
-    if (num >= 3.8) return Colors.green;
-    if (num > 2.5) return Colors.orange;
-    else return Colors.red;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -169,17 +163,8 @@ class _LandlordProfile extends StatelessWidget {
                                           Container(
                                             width: widthScreen*0.7,
                                             padding: EdgeInsets.symmetric(vertical: 10),
-                                            child: Text(i.review),
-                                          ),
-                                      ],
-                                    ),
-                                    Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        for (var i in landlordList[landID].reviews)
-                                          Container(
-                                            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
-                                            child: Text(i.rating.toString()),
+                                            child: getRowLand(i.review, i.rating),
+                                            //child: Text(i.review),
                                           ),
                                       ],
                                     ),
@@ -187,7 +172,6 @@ class _LandlordProfile extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            //child: Text('Dog'),
                           )
                         ],
                       ),
@@ -216,4 +200,38 @@ class _LandlordProfile extends StatelessWidget {
       )),
     );
   }
+}
+
+Color getColour(double num) {
+  if (num >= 3.8) return Colors.green;
+  if (num > 2.5) return Colors.orange;
+  else return Colors.red;
+}
+
+Widget getRowLand(String review, double rating) {
+  return RichText(
+    text: TextSpan(
+        children: [
+          WidgetSpan(
+            child: Container(
+                height: 50,
+                width: 50,
+                child: FloatingActionButton(
+                  heroTag: 'landRating'+review,
+                  backgroundColor: Colors.white,
+                  splashColor: Colors.blueAccent,
+                  onPressed: null,
+                  child: Text(
+                    rating.toString(),
+                    style: TextStyle(
+                        fontSize: 11.0, color: getColour(rating)),
+                  ),
+                )),
+          ),
+          TextSpan(
+              text: "      "+review
+          )
+        ]
+    ),
+  );
 }

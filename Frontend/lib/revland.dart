@@ -10,6 +10,7 @@ import 'dart:developer';
 //Global variables to do db stuff
 int landLat;
 int landLong;
+var themeYellow;
 
 class LandlordReview extends StatefulWidget {
   @override
@@ -23,6 +24,7 @@ class _LandlordReview extends State<LandlordReview> {
   double value = 2.5;
   var ratingIcon = Icons.account_circle;
   var iconColour = Colors.white;
+  final themeYellow = Color(0xF9AA33).withOpacity(1);
 
   //RangeValues values = RangeValues(0, 10);
 
@@ -55,7 +57,7 @@ class _LandlordReview extends State<LandlordReview> {
                               'the landlord chosen:',
                               textDirection: TextDirection.ltr,
                               style:
-                                  TextStyle(fontSize: 18, color: Colors.black),
+                                  TextStyle(fontSize: 18, color: themeYellow),
                             ),
                           ),
                           Container(
@@ -137,20 +139,17 @@ class _LandlordReview extends State<LandlordReview> {
                                       onChanged: (newValue) {
                                         setState(() {
                                           value = newValue;
-                                          if (value >= 7.0) {
+                                          if (value >= 3.8) {
                                             iconColour = Colors.green;
                                             return;
                                           }
-                                          if (value >= 4.0) {
+                                          if (value > 2.5) {
                                             iconColour = Colors.yellow;
                                           } else
                                             iconColour = Colors.red;
                                         });
                                       },
                                     ))),
-//                            Expanded(
-//                              child: Text('10'),
-//                            ),
                           ]),
                           SizedBox(
                             height: 22,

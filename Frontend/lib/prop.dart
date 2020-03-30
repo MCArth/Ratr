@@ -12,7 +12,6 @@ int rating;
 double widthScreen;
 House thisHouse;
 
-
 class Property extends StatelessWidget {
   Property(LatLng latlng) {
     thisHouse = getHouseFromLatLng(latlng);
@@ -65,14 +64,15 @@ class PropertyProfile extends StatelessWidget {
                       Column(
                         children: <Widget>[
                           Align(
-                            alignment: Alignment.center,
+                              alignment: Alignment.center,
                               child: SizedBox(
                                 width: 70,
                                 height: 70,
                                 child: _getImage(),
-                              )
-                              ),
-                          SizedBox(height: 12,),
+                              )),
+                          SizedBox(
+                            height: 12,
+                          ),
                           Container(
                               height: 60,
                               width: 60,
@@ -84,7 +84,8 @@ class PropertyProfile extends StatelessWidget {
                                 child: Text(
                                   rating,
                                   style: TextStyle(
-                                      fontSize: 20.0, color: getColour(toDouble(rating))),
+                                      fontSize: 20.0,
+                                      color: getColour(toDouble(rating))),
                                 ),
                               )),
                         ],
@@ -104,8 +105,7 @@ class PropertyProfile extends StatelessWidget {
                               height: 4,
                             ),
                             Container(
-                                child: Text(
-                                    thisHouse.postCode.toString(),
+                                child: Text(thisHouse.postCode.toString(),
                                     style: TextStyle(
                                         fontSize: 16,
                                         fontStyle: FontStyle.italic),
@@ -121,22 +121,27 @@ class PropertyProfile extends StatelessWidget {
                                       fontStyle: FontStyle.italic),
                                   textAlign: TextAlign.left),
                             ),
-                            SizedBox(height: 4,),
+                            SizedBox(
+                              height: 4,
+                            ),
                             InkWell(
-                              child: Text(thisHouse.landlord,
-                                  style: TextStyle(
-                                      color: themeYellow,
-                                      fontSize: 18,
-                                      decoration: TextDecoration.underline,
-                                      fontWeight: FontWeight.bold),
-                                  textAlign: TextAlign.left),
+                                child: Text(thisHouse.landlord,
+                                    style: TextStyle(
+                                        color: themeYellow,
+                                        fontSize: 18,
+                                        decoration: TextDecoration.underline,
+                                        fontWeight: FontWeight.bold),
+                                    textAlign: TextAlign.left),
                                 onTap: () {
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => LandlordProfile(getRentierFromName(thisHouse.landlord).uniqueID)),
+                                    MaterialPageRoute(
+                                        builder: (context) => LandlordProfile(
+                                            getRentierFromName(
+                                                    thisHouse.landlord)
+                                                .uniqueID)),
                                   );
-                                }
-                            ),
+                                }),
                             SizedBox(
                               height: 4,
                             ),
@@ -178,57 +183,85 @@ class PropertyProfile extends StatelessWidget {
                               children: <Widget>[
                                 Column(
                                   children: <Widget>[
+                                    SizedBox(height: 5,),
                                     Align(
-                                      child: Text('Price: ' +
-                                          '£' +
-                                          (thisHouse.price / 12)
-                                              .toString()),
-                                      alignment: Alignment.centerLeft,
+                                      child: Text('£' +
+                                          (thisHouse.price / 12).toStringAsFixed(2)+' / month', style: TextStyle(
+                                        fontSize: 18, fontWeight: FontWeight.bold
+                                      ),),
+                                      alignment: Alignment.center,
                                     ),
+                                    SizedBox(height: 12,),
                                     Align(
-                                      alignment: Alignment.centerLeft,
+                                      alignment: Alignment.center,
                                       child: Text('Bedrooms: ' +
-                                      thisHouse.bedrooms.toString()),
+                                          thisHouse.bedrooms.toString(), style: TextStyle(
+                                        fontSize: 16
+                                      ),),
                                     ),
+                                    SizedBox(height: 12,),
                                     Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: Text('Bathrooms ' +
-                                      thisHouse.bathrooms.toString(),)
-                                    ),
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          'Bathrooms ' +
+                                              thisHouse.bathrooms.toString(),
+                                          style: TextStyle(
+                                            fontSize: 16
+                                          ),
+                                        )),
                                   ],
                                 )
                               ],
                             ),
                           ),
                           Container(
-                            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
-                            child: Row(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 2),
+                            child: ListView(
                               children: <Widget>[
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                Row(
                                   children: <Widget>[
-                                    for (var i in thisHouse.reviews)
-                                      Container(
-                                        width: widthScreen*0.7,
-                                        padding: EdgeInsets.symmetric(vertical: 10),
-                                        child: getRow(i.review, i.rating),
-                                      ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        for (var i in thisHouse.reviews)
+                                          Container(
+                                            width: widthScreen * 0.7,
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 10),
+                                            child: getRow(i.review, i.rating),
+                                            //child: Text(i.review),
+                                          ),
+                                      ],
+                                    ),
                                   ],
                                 ),
-//                                Column(
-//                                  crossAxisAlignment: CrossAxisAlignment.start,
-//                                  children: <Widget>[
-//                                    for (var i in thisHouse.reviews)
-//                                      Container(
-//                                        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
-//                                        child: Text(i.rating.toString()),
-//                                      ),
-//                                  ],
-//                                ),
                               ],
                             ),
-                            //child: Text('Dog'),
                           ),
+//                          Container(
+//                            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
+//                            child: Row(
+//                              children: <Widget>[
+//                                Container(
+//                                  height: 300,
+//                                  width: widthScreen*0.7,
+//                                  child:
+//                                ListView(
+//                                  //crossAxisAlignment: CrossAxisAlignment.start,
+//                                  children: <Widget>[
+//                                    for (var i in thisHouse.reviews)
+//                                      Container (
+//                                        //width: widthScreen*0.8,
+//                                        padding: EdgeInsets.symmetric(vertical: 10),
+//                                        child: getRow(i.review, i.rating),
+//                                      ),
+//                                  ],
+//                                ),)
+//                              ],
+//                            ),
+//                          ),
                           Container(
                             //todo ALEX YOUR STUFF GOES HERE
                             //This container corresponds to the 3rd tab!
@@ -237,14 +270,23 @@ class PropertyProfile extends StatelessWidget {
                               children: <Widget>[
                                 // the following lines are hard coded shit for presentation purposes
                                 //TODO replace these because they're not good
-                                if(thisHouse.latlng == LatLng(51.374515,-2.377066))
-                                  for(var i=0; i < 15; i++)
-                                    Padding(padding:EdgeInsets.fromLTRB(5.0, 0, 5.0, 0),child: Image.asset('assets/House 1/prop1 $i.jpg')),
-                                
-                                if(thisHouse.latlng == LatLng(51.380551,-2.37488))
-                                  for(var i=0; i < 20; i++)
-                                    Padding(padding:EdgeInsets.fromLTRB(5.0, 0, 5.0, 0),child: Image.asset('assets/House 2/prop2 $i.jpg')),
-                                
+                                if (thisHouse.latlng ==
+                                    LatLng(51.374515, -2.377066))
+                                  for (var i = 0; i < 15; i++)
+                                    Padding(
+                                        padding:
+                                            EdgeInsets.fromLTRB(5.0, 0, 5.0, 0),
+                                        child: Image.asset(
+                                            'assets/House 1/prop1 $i.jpg')),
+
+                                if (thisHouse.latlng ==
+                                    LatLng(51.380551, -2.37488))
+                                  for (var i = 0; i < 20; i++)
+                                    Padding(
+                                        padding:
+                                            EdgeInsets.fromLTRB(5.0, 0, 5.0, 0),
+                                        child: Image.asset(
+                                            'assets/House 2/prop2 $i.jpg')),
                               ],
                             ),
                           ),
@@ -255,30 +297,30 @@ class PropertyProfile extends StatelessWidget {
                 ))),
           ),
         ],
-      )
-      ),
+      )),
       floatingActionButton: FloatingActionButton(
-                elevation: 0.0,
-                child: Icon(Icons.add),
-                //backgroundColor: Colors.orange,
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    //goes to review; passes lat and long into the class
-                    MaterialPageRoute(
-                        builder: (context) => ReviewPage(thisHouse.latlng)),
-                  );
-                },
-                splashColor: Colors.lightGreen,
-              ),
+        heroTag: thisHouse.reviews[1].toString() + 55.toString(),
+        elevation: 0.0,
+        child: Icon(Icons.add),
+        //backgroundColor: Colors.orange,
+        onPressed: () {
+          Navigator.push(
+            context,
+            //goes to review; passes lat and long into the class
+            MaterialPageRoute(
+                builder: (context) => ReviewPage(thisHouse.latlng)),
+          );
+        },
+        splashColor: Colors.lightGreen,
+      ),
     );
   }
 
   Widget _getImage() {
-    if(thisHouse.latlng == LatLng(51.374515,-2.377066)){
+    if (thisHouse.latlng == LatLng(51.374515, -2.377066)) {
       return Image.asset('assets/House 1/prop1 15.jpg');
     }
-    if(thisHouse.latlng == LatLng(51.380551,-2.37488)){
+    if (thisHouse.latlng == LatLng(51.380551, -2.37488)) {
       return Image.asset('assets/House 2/prop2 17.jpg');
     }
     return Icon(Icons.image);
@@ -287,34 +329,31 @@ class PropertyProfile extends StatelessWidget {
 
 Color getColour(double num) {
   if (num >= 3.8) return Colors.green;
-  if (num > 2.5) return Colors.orange;
-  else return Colors.red;
+  if (num > 2.5)
+    return Colors.orange;
+  else
+    return Colors.red;
 }
 
 Widget getRow(String review, double rating) {
   return RichText(
-    text: TextSpan(
-      children: [
-        WidgetSpan(
-          child: Container(
-              height: 50,
-              width: 50,
-              child: FloatingActionButton(
-                heroTag: 'littlerating',
-                backgroundColor: Colors.white,
-                splashColor: Colors.blueAccent,
-                onPressed: () {},
-                child: Text(
-                  rating.toString(),
-                  style: TextStyle(
-                      fontSize: 11.0, color: getColour(rating)),
-                ),
-              )),
-        ),
-        TextSpan(
-          text: "      "+review
-        )
-      ]
-    ),
+    text: TextSpan(children: [
+      WidgetSpan(
+        child: Container(
+            height: 50,
+            width: 50,
+            child: FloatingActionButton(
+              heroTag: 'littlerating' + review.toString(),
+              backgroundColor: Colors.white,
+              splashColor: Colors.blueAccent,
+              onPressed: null,
+              child: Text(
+                rating.toString(),
+                style: TextStyle(fontSize: 11.0, color: getColour(rating)),
+              ),
+            )),
+      ),
+      TextSpan(text: "      " + review)
+    ]),
   );
 }

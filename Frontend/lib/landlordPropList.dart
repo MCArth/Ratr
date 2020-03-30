@@ -20,7 +20,9 @@ class LandProp extends StatelessWidget{
   Widget build(BuildContext context){
     return Scaffold(
         appBar: new AppBar(
-            title: Text("Properties")),
+            title: Text(landlordList[landLordID].name+"'s Properties", style: TextStyle(
+              fontSize: 19
+            ),)),
         body: getListViewBody(context)
     );
   }

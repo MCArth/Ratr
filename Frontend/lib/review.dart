@@ -8,7 +8,6 @@ import 'dart:developer';
 
 //Global variables to do db stuff
 
-
 class ReviewPage extends StatefulWidget {
 
   ReviewPage(LatLng latLng) {
@@ -24,6 +23,9 @@ class _ReviewPage extends State<ReviewPage> {
   String propertyReview = "";
   String landlordReview = "";
   final formKey = GlobalKey<FormState>();
+  var ratingIcon = Icons.account_circle;
+  var iconColour = Colors.white;
+  double value = 2.5;
 
   @override
   Widget build(BuildContext context) {
@@ -93,20 +95,61 @@ class _ReviewPage extends State<ReviewPage> {
                               //labelText: 'House Review')
                             ),
                           ),
-                          Align(
-                            //todo GET ALL POST BUTTONS TO WORK
-                            alignment: Alignment.centerRight,
-                            child: RaisedButton(
-                              color: Colors.blue,
-                              //disabledColor: Colors.pink,
-                                disabledTextColor: Colors.black,
-                                splashColor: Colors.lightGreen,
+                          SizedBox(height: 10,),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 2.0, vertical: 5),
+                            child: Align(
+                                alignment: Alignment.centerLeft,
                                 child: Text(
-                                  'POST',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                onPressed: _submitPropertyReview),
+                                  'Property Rating:',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                  textAlign: TextAlign.left,
+                                )),
                           ),
+                          SizedBox(height: 16),
+                          Row(children: <Widget>[
+                            Expanded(
+                                child: SliderTheme(
+                                    data: SliderTheme.of(context).copyWith(
+                                      trackShape: RoundedRectSliderTrackShape(),
+                                      trackHeight: 3.0,
+                                      thumbShape: RoundSliderThumbShape(
+                                          enabledThumbRadius: 15.0),
+                                      //overlayShape: RoundSliderOverlayShape(overlayRadius: 28.0),
+                                      tickMarkShape: RoundSliderTickMarkShape(),
+                                      valueIndicatorShape:
+                                      PaddleSliderValueIndicatorShape(),
+                                      valueIndicatorTextStyle: TextStyle(
+                                        color: iconColour,
+                                      ),
+                                    ),
+                                    child: Slider(
+//                                      inactiveColor: Colors.white,
+                                      activeColor: Colors.black,
+                                      label: '$value',
+                                      value: value,
+                                      min: 0.0,
+                                      max: 5.0,
+                                      divisions: 40,
+                                      onChanged: (newValue) {
+                                        setState(() {
+                                          value = newValue;
+                                          if (value >= 3.8) {
+                                            iconColour = Colors.green;
+                                            return;
+                                          }
+                                          if (value > 2.5) {
+                                            iconColour = Colors.yellow;
+                                          } else
+                                            iconColour = Colors.red;
+                                        });
+                                      },
+                                    ))),
+                          ]),
+                          SizedBox(height: 15,),
                           Container(
                             padding: EdgeInsets.symmetric(horizontal: 2.0),
                             child: Align(
@@ -139,7 +182,7 @@ class _ReviewPage extends State<ReviewPage> {
                                             vertical: 20.0),
                                         alignment: Alignment.centerRight,
                                         child: FloatingActionButton(
-                                          child: Icon(Icons.add, size: 40),
+                                          child: Icon(Icons.add, size: 40, color: Colors.white,),
                                           backgroundColor: Colors.black,
                                           //todo IMAGE SELECTION GOES HERE
                                           onPressed: () {},
