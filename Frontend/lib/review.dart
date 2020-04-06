@@ -237,14 +237,14 @@ class _ReviewPage extends State<ReviewPage> {
         print(a.review);
         total += a.rating;
       }
-      var newAvg = total/revs.length;
-      print("New avg: "+newAvg.toString());
+      total += value;
+      double newAvg = total/(revs.length+1);
+
       print("New rev: " + propertyReview);
       print("New rating: " + value.toString());
+      print("New avg: "+newAvg.toString());
 
-      addNewReview(cord, propertyReview, value,newAvg);
-
-      //end of backend stuff
+      addNewReview(cord, propertyReview, value, newAvg);
 
       showDialog(
           context: context,
