@@ -89,6 +89,10 @@ class Review{
   }
 }
 
+void addNewReview(LatLng latlng, String review, double rating, double newAvgRating) {
+  //todo Some stuff goes here
+}
+
 // Retreives a list of houses from database
 Future fetchHouses() async {
   //clears previous version of houseList
@@ -153,6 +157,7 @@ Future<LatLng> getFromAddress(String address) async{
   LatLng out = new LatLng(first.coordinates.latitude,first.coordinates.longitude);
   return out;
 }
+
 
 
 //Checks if a house with a given latLng is in database, returns true if already exists, else false
