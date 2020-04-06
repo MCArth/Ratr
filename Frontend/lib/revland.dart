@@ -130,7 +130,7 @@ class _LandlordReview extends State<LandlordReview> {
                                     ),
                                     child: Slider(
 //                                      inactiveColor: Colors.white,
-                                      activeColor: themeYellow,
+                                      activeColor: Colors.black,
                                       label: '$value',
                                       value: value,
                                       min: 0.0,
@@ -171,17 +171,6 @@ class _LandlordReview extends State<LandlordReview> {
                                   _submitLandlordReview();
                                 }),
                           )
-                          //text to show slider value + colour
-//                          Container(
-//                            //child: Icon(ratingIcon, size: 50, color: iconColour,),
-//                            child: Text(
-//                              value.toString(),
-//                              style: TextStyle(
-//                                color: iconColour,
-//                                fontSize: 28,
-//                              ),
-//                            ),
-//                          )
                         ])
                       ],
                     )))),
@@ -214,6 +203,4 @@ class _LandlordReview extends State<LandlordReview> {
       );
     }
   }
-
-  void _submitImage() {}
 }

@@ -134,7 +134,7 @@ class _ReviewPage extends State<ReviewPage> {
                                     ),
                                     child: Slider(
 //                                      inactiveColor: Colors.white,
-                                      activeColor: themeGrey,
+                                      activeColor: Colors.black,
                                       label: '$value',
                                       value: value,
                                       min: 0.0,
