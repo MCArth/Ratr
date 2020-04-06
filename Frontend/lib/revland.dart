@@ -168,7 +168,7 @@ class _LandlordReview extends State<LandlordReview> {
                                 ),
                                 //todo Update backend here!!
                                 onPressed: () {
-                                  _reviewPostDialog();
+                                  _submitLandlordReview();
                                 }),
                           )
                           //text to show slider value + colour
@@ -188,32 +188,30 @@ class _LandlordReview extends State<LandlordReview> {
       ),
     );
   }
-  void _reviewPostDialog(){
-   showDialog(
-     context: context,
-     builder: (BuildContext context){
-      return AlertDialog(
-        title:Text("Thanks!"),
-        content: Text("We've received your review!"),
-        actions: <Widget>[
-          new FlatButton(
-            child: Text("Okay"),
-            onPressed: () {
-              Navigator.of(context)..popUntil((route) => route.isFirst);
-              },
-          ),
-        ],
-      );
-     }
-   );
- }
+
+
   void _submitLandlordReview() {
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
       log(landlordReview);
-      //Popup saying that account was created successfully
-      //Link with RL DBS
-      //Go back to home bage
+
+      showDialog(
+          context: context,
+          builder: (BuildContext context){
+            return AlertDialog(
+              title:Text("Thanks!"),
+              content: Text("We've received your review!"),
+              actions: <Widget>[
+                new FlatButton(
+                  child: Text("Okay"),
+                  onPressed: () {
+                    Navigator.of(context)..popUntil((route) => route.isFirst);
+                  },
+                ),
+              ],
+            );
+          }
+      );
     }
   }
 
