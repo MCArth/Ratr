@@ -4,14 +4,20 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart'; // For Image Picker
 import 'package:nexus_app/app.dart';
+import 'package:nexus_app/functionsAndData.dart';
+import 'package:nexus_app/prop.dart';
 import 'package:string_validator/string_validator.dart';
 import 'dart:developer';
 
 //Global variables to do db stuff
+House house;
+var cord;
 
 class ReviewPage extends StatefulWidget {
 
   ReviewPage(LatLng latLng) {
+    house = getHouseFromLatLng(latLng);
+    cord = latLng;
   }
 
   @override
@@ -128,7 +134,7 @@ class _ReviewPage extends State<ReviewPage> {
                                     ),
                                     child: Slider(
 //                                      inactiveColor: Colors.white,
-                                      activeColor: themeGrey,
+                                      activeColor: Colors.black,
                                       label: '$value',
                                       value: value,
                                       min: 0.0,
@@ -205,8 +211,8 @@ class _ReviewPage extends State<ReviewPage> {
                                       ),
                                       //todo UPLOAD IMAGE TO DB
                                       onPressed: () {
-                                        _submitImage();
-                                        _reviewPostDialog();
+                                        //_submitImage();
+                                        _submitPropertyReview();
                                       }
                                 )
                                 )
@@ -220,42 +226,43 @@ class _ReviewPage extends State<ReviewPage> {
     );
   }
 
- void _reviewPostDialog(){
-   showDialog(
-     context: context,
-     builder: (BuildContext context){
-      return AlertDialog(
-        title:Text("Thanks!"),
-        content: Text("We've received your review!"),
-        actions: <Widget>[
-          new FlatButton(
-            child: Text("Okay"),
-            onPressed: () {
-              Navigator.of(context)..popUntil((route) => route.isFirst);
-              },
-          ),
-        ],
-      );
-     }
-   );
- }
-
   void _submitPropertyReview() {
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
       log(propertyReview);
-      //Popup saying that account was created successfully
-      //Go back to home page
-    }
-  }
+      double total = 0;
+      //todo backend stuff goes here
+      var revs = house.reviews;
+      for (var a in revs) {
+        print(a.review);
+        total += a.rating;
+      }
+      total += value;
+      double newAvg = total/(revs.length+1);
 
-  void _submitLandlordReview() {
-    if (formKey.currentState.validate()) {
-      formKey.currentState.save();
-      log(landlordReview);
-      //Popup saying that account was created successfully
-      //Link with RL DBS
-      //Go back to home bage
+      print("New rev: " + propertyReview);
+      print("New rating: " + value.toString());
+      print("New avg: "+newAvg.toString());
+
+      addNewReview(cord, propertyReview, value, newAvg);
+
+      showDialog(
+          context: context,
+          builder: (BuildContext context){
+            return AlertDialog(
+              title:Text("Thanks!"),
+              content: Text("We've received your review!"),
+              actions: <Widget>[
+                new FlatButton(
+                  child: Text("Okay"),
+                  onPressed: () {
+                    Navigator.of(context)..popUntil((route) => route.isFirst);
+                  },
+                ),
+              ],
+            );
+          }
+      );
     }
   }
 

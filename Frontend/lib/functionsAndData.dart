@@ -87,6 +87,10 @@ class Review{
   }
 }
 
+void addNewReview(LatLng latlng, String review, double rating, double newAvgRating) {
+  //todo Some stuff goes here
+}
+
 // Retreives a list of houses from database
 Future fetchHouses() async {
   //clears previous version of houseList
@@ -153,6 +157,7 @@ Future<LatLng> getFromAddress(String address) async{
 }
 
 
+
 //Checks if a house with a given latLng is in database, returns true if already exists, else false
 
 bool houseExists(LatLng latlng){
@@ -171,7 +176,8 @@ Landlord getRentierFromName(String name){
     }
   }
   return null;
-} 
+}
+
 // Gets a house from latlng, assuming exists. if it doesn't, return null
 House getHouseFromLatLng(LatLng latlng){
   for(House house in houseList){

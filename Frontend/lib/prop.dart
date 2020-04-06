@@ -240,28 +240,6 @@ class PropertyProfile extends StatelessWidget {
                               ],
                             ),
                           ),
-//                          Container(
-//                            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
-//                            child: Row(
-//                              children: <Widget>[
-//                                Container(
-//                                  height: 300,
-//                                  width: widthScreen*0.7,
-//                                  child:
-//                                ListView(
-//                                  //crossAxisAlignment: CrossAxisAlignment.start,
-//                                  children: <Widget>[
-//                                    for (var i in thisHouse.reviews)
-//                                      Container (
-//                                        //width: widthScreen*0.8,
-//                                        padding: EdgeInsets.symmetric(vertical: 10),
-//                                        child: getRow(i.review, i.rating),
-//                                      ),
-//                                  ],
-//                                ),)
-//                              ],
-//                            ),
-//                          ),
                           Container(
                             //todo ALEX YOUR STUFF GOES HERE
                             //This container corresponds to the 3rd tab!
