@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:string_validator/string_validator.dart';
 import 'dart:developer';
-import 'review.dart';
+import 'app.dart';
 
 //void main() => runApp(ReviewPage());
 //No need for main here, can be accessed from app
@@ -130,7 +130,7 @@ class _LandlordReview extends State<LandlordReview> {
                                     ),
                                     child: Slider(
 //                                      inactiveColor: Colors.white,
-                                      activeColor: themeYellow,
+                                      activeColor: themeGrey,
                                       label: '$value',
                                       value: value,
                                       min: 0.0,

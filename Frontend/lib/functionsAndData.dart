@@ -6,8 +6,6 @@ import 'package:geocoder/geocoder.dart';
 // Classes, getters, builders, etc. for accessing json go here for the time being //
 // CLASSES //
 
-
-
 // Global lists storing data from database
 List<House> houseList = [];
 List<Landlord> landlordList = [];
@@ -188,4 +186,10 @@ void printAllHouses(){
   for(House house in houseList){
     print(house.fullAddress);
   }
+}
+
+// Sorting
+
+void sortByPrice(){
+
 }

@@ -1,5 +1,5 @@
 import 'dart:developer';
-
+import 'app.dart';
 import 'package:flutter/material.dart';
 import 'package:string_validator/string_validator.dart';
 
@@ -173,7 +173,7 @@ class _addLandlord extends State<addLandlord> {
                               ),
                               child: Slider(
 //                                      inactiveColor: Colors.white,
-                                activeColor: Colors.black,
+                                activeColor: themeGrey,
                                 label: '$value',
                                 value: value,
                                 min: 0.0,
@@ -204,7 +204,7 @@ class _addLandlord extends State<addLandlord> {
                       alignment: Alignment.centerRight,
                       child: RaisedButton(
                         //color: Colors.orange,
-                          color: Colors.blue,
+                          color: themeYellow,
                           disabledColor: Colors.pink,
                           disabledTextColor: Colors.black,
                           splashColor: Colors.lightGreen,
@@ -213,7 +213,34 @@ class _addLandlord extends State<addLandlord> {
                             style: TextStyle(color: Colors.white),
                           ),
                           //todo stuff goes here
-                          onPressed: () {}),
+                          onPressed: () {
+                            showDialog(
+                                    context: context,
+                                    barrierDismissible: false,
+                                    builder: (BuildContext context) {
+                                      return WillPopScope(
+                                        onWillPop: () => Future.value(false),
+                                        child: AlertDialog(
+                                          title: Text("Well Done!"),
+                                          content: SingleChildScrollView(
+                                            child: ListBody(
+                                              children: <Widget>[
+                                                Text(
+                                                    "You successfully created an property profile 🎉🎉")
+                                              ],
+                                            ),
+                                          ),
+                                          actions: <Widget>[
+                                            FlatButton(
+                                              onPressed: () {
+                                                Navigator.of(context).popUntil(ModalRoute.withName(Navigator.defaultRouteName));},
+                                              child: Text("Ok"),
+                                            )
+                                          ],
+                                        ),
+                                      );
+                                    });
+                          }),
                     )
                     //text to show slider value + colour
 //                          Container(
