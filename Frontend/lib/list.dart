@@ -3,6 +3,9 @@ import 'package:nexus_app/app.dart';
 import 'package:nexus_app/prop.dart';
 import 'functionsAndData.dart';
 
+
+String filter = "default";
+
 //page displaying all available properties in a relational database
 //required to display only a small amount of information that nevertheless expresses the general sense for a property at a glance
 //Maybe use tiles to display an image + price per month + an address
@@ -71,16 +74,22 @@ Widget getListViewBody(BuildContext context){
   return Column(children: <Widget>[
     SizedBox(height:10),
     Expanded(
-      child: ListView.builder(
-        scrollDirection: Axis.vertical,
-        shrinkWrap: true,
-        itemCount: houseList.length,
-        itemBuilder: (BuildContext context, int index){
-          return makeHouseCard(context,index);
-        },
+      child: listBuildChild(context)
       )
-     ),
     ],
   );
    
+}
+
+Widget listBuildChild(BuildContext context){
+  if(filter == "default"){
+    return ListView.builder(
+      scrollDirection: Axis.vertical,
+      shrinkWrap: true,
+      itemCount: houseList.length,
+      itemBuilder: (BuildContext context, int index){
+        return makeHouseCard(context,index);
+      }
+    );
+  }
 }

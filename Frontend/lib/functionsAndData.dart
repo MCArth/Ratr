@@ -99,7 +99,6 @@ Future fetchHouses() async {
 
   if(response.statusCode == 200){
     //REturn house from json
-    //final out = HouseBasic.fromJson(json.decode(response.body));
     var data = json.decode(response.body);
     for(Map i in data){
       houseList.add(House.fromJson(i));
@@ -194,8 +193,21 @@ void printAllHouses(){
   }
 }
 
-// Sorting
+// Sorting //
 
-void sortByPrice(){
+// Specifically, house sorting
+
+sortByPrice(){
+  houseList.sort((a,b) => a.price.compareTo(b.price));
+}
+
+sortByRating(List<House> houselist){
+  houseList.sort((a,b) => a.avgRating.compareTo(b.avgRating));
+}
+sortByBedrooms(List<House> houselist){
+  houseList.sort((a,b) => a.bedrooms.compareTo(b.bedrooms));
+}
+
+void filter(){
 
 }
