@@ -230,15 +230,9 @@ class _ReviewPage extends State<ReviewPage> {
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
       log(propertyReview);
-      double total = 0;
-
-
       print("New rev: " + propertyReview);
       print("New rating: " + value.toString());
-
-
       addNewHouseReview(cord, propertyReview, value);
-
       showDialog(
           context: context,
           builder: (BuildContext context){
