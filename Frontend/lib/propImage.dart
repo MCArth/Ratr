@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+
 class ImageDisplay extends StatelessWidget {
   String imageDir;
+
+  ImageDisplay(String imageDir) {
+    this.imageDir = imageDir;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -10,9 +16,5 @@ class ImageDisplay extends StatelessWidget {
             child: Image.asset(imageDir)),
         ),
     );
-  }
-
-  ImageDisplay(String imageDir) {
-    this.imageDir = imageDir;
   }
 }
