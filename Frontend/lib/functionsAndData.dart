@@ -44,14 +44,24 @@ class Landlord {
     }
     this.avgRating = total/(this.reviews.length);
   }
+
+  List<Weirdlatlng> get latlngAsList{
+    List<Weirdlatlng> weirdlatlngs = [];
+    for(var i = 0; i < this.houses.length; i++){
+      weirdlatlngs.add(Weirdlatlng(houses[i]));
+    }
+    return weirdlatlngs;
+  }
+
   Map<String,dynamic> toJson() => {
     "name": this.name,
     "reviews": this.reviews,
-    "houses": this.houses,
+    "houses": this.latlngAsList,
     "avgRating": this.avgRating,
-    //TODO figure out how to handle list of 
+    //TODO figure out how to handle list of latlngs
   };
 }
+
 
 
 // Class for storing property information locally from JSON
@@ -137,6 +147,7 @@ class RoomInfo{
     "numBedrooms": this.numBedrooms,
   };
 }
+
 @JsonSerializable()
 class Review {
   double rating;
@@ -337,3 +348,18 @@ toggleSort(int index, int whichList) {
 }
 
 void filter() {}
+
+
+class Weirdlatlng{
+  double lat;
+  double long;
+  Weirdlatlng(LatLng latlng){
+    this.lat = latlng.latitude;
+    this.long = latlng.longitude;
+  }
+
+  Map<String,dynamic> toJson() => {
+    "lat": num.parse(this.lat.toStringAsFixed(8)),
+    "long": num.parse(this.lat.toStringAsFixed(8)),
+  };
+}

@@ -16,14 +16,14 @@ void addNewHouseReview(LatLng latlng, String reviewText, double rating) {
   http.get("https://us-central1-ridr-cc2ec.cloudfunctions.net/updateHouse?text=" + json);
 }
 
-// void addNewLandlordReview(int id, String reviewText, double rating){
-//   Review review = new Review(rating: rating, review: reviewText);
-//   Landlord landlord = getRentierFromID(id);
-//   landlord.addReview = review;
-//   String json = jsonEncode(landlord);
-//   print(json);
-//   http.get("https://us-central1-ridr-cc2ec.cloudfunctions.net/updateLandlord?text=" + json);
-// }
+void addNewLandlordReview(int id, String reviewText, double rating){
+  Review review = new Review(rating: rating, review: reviewText);
+  Landlord landlord = getRentierFromID(id);
+  landlord.addReview = review;
+  String json = jsonEncode(landlord);
+  print(json);
+  //http.get("https://us-central1-ridr-cc2ec.cloudfunctions.net/updateLandlord?text=" + json);
+}
 
 void propertyToDatabase(House house){
   //If house already exists, either abort or direct them towards review creation page
@@ -38,3 +38,10 @@ void propertyToDatabase(House house){
   }
 }
 
+void landlordToDatabase(Landlord landlord){
+  //If house already exists, either abort or direct them towards review creation page
+    landlordList.add(landlord);
+    String json = jsonEncode(landlord);
+
+    http.get("https://us-central1-ridr-cc2ec.cloudfunctions.net/addLandlord?text=" + json);
+}
