@@ -187,6 +187,15 @@ Landlord getRentierFromName(String name) {
   return null;
 }
 
+Landlord getRentierFromID(int id){
+  for(Landlord rentier in landlordList){
+    if(rentier.uniqueID == id){
+      return rentier;
+    }
+  }
+  return null;
+}
+
 // Gets a house from latlng, assuming exists. if it doesn't, return null
 House getHouseFromLatLng(LatLng latlng) {
   for (House house in houseList) {
