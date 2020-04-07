@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:nexus_app/prop.dart';
 import 'functionsAndData.dart';
 import 'app.dart';
+
 int landLordID;
 House house;
+Landlord landlord;
 
 /*
 Page displaying each property a landlord owns
@@ -12,13 +14,14 @@ class LandProp extends StatelessWidget{
 
   LandProp(int index) {
     landLordID = index;
+    landlord = getRentierFromID(landLordID);
   }
 
   @override
   Widget build(BuildContext context){
     return Scaffold(
         appBar: new AppBar(
-            title: Text(landlordList[landLordID].name+"'s Properties", style: TextStyle(
+            title: Text(landlord.name+"'s Properties", style: TextStyle(
               fontSize: 19
             ),)),
         body: getListViewBody(context)
@@ -28,7 +31,7 @@ class LandProp extends StatelessWidget{
 
 //Generates an instance of a card for a house
 makeListCard(BuildContext context, int index){
-  house = getHouseFromLatLng(landlordList[landLordID].houses[index]);
+  house = getHouseFromLatLng(landlord.houses[index]);
   return Card(
     elevation: 8.0,
     margin: new EdgeInsets.symmetric(
@@ -81,7 +84,7 @@ Widget getListViewBody(BuildContext context){
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
         //Might also be here?
-        itemCount: landlordList[landLordID].houses.length,
+        itemCount: landlord.houses.length,
         itemBuilder: (BuildContext context, int index){
           return makeListCard(context,index);
         },
