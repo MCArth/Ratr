@@ -65,6 +65,7 @@ class HomePage extends StatelessWidget {
                         heroTag: "landlordlst",
                         onPressed: () {
                           Navigator.pushNamed(context,'/rentierList');
+                         //addNewLandlordReview(1,"burnt down",5.0);
                         }
                         ),
                         

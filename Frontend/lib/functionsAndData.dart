@@ -263,6 +263,7 @@ Landlord getRentierFromID(int id){
       return rentier;
     }
   }
+  print("you tried to get a landlord from an invalid id!!");
   return null;
 }
 
