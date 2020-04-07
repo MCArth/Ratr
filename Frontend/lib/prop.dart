@@ -7,6 +7,7 @@ import 'review.dart';
 import 'package:nexus_app/functionsAndData.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'propImage.dart';
+import 'dart:math';
 
 //Global variables to be passed in from list of houses
 int rating;
@@ -331,6 +332,8 @@ Color getColour(double num) {
 }
 
 Widget getRow(String review, double rating) {
+  //random number avoids herotag cockups because dart is retarded
+  var random = new Random().nextInt(1000);
   return RichText(
     text: TextSpan(children: [
       WidgetSpan(
@@ -338,7 +341,7 @@ Widget getRow(String review, double rating) {
             height: 50,
             width: 50,
             child: FloatingActionButton(
-              heroTag: 'littlerating' + review.toString(),
+              heroTag: review.toString() + random.toString(),
               backgroundColor: Colors.white,
               splashColor: Colors.blueAccent,
               onPressed: null,

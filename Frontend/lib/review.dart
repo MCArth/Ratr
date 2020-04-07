@@ -227,18 +227,12 @@ class _ReviewPage extends State<ReviewPage> {
   }
 
   void _submitPropertyReview() {
+    int count = 0;
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
       log(propertyReview);
-      double total = 0;
-
-
-      print("New rev: " + propertyReview);
-      print("New rating: " + value.toString());
-
-
+      //Update backend
       addNewHouseReview(cord, propertyReview, value);
-
       showDialog(
           context: context,
           builder: (BuildContext context){
@@ -249,7 +243,9 @@ class _ReviewPage extends State<ReviewPage> {
                 new FlatButton(
                   child: Text("Okay"),
                   onPressed: () {
-                    Navigator.of(context)..popUntil((route) => route.isFirst);
+                    Navigator.popUntil(context, (route) {
+                      return count++ == 2;
+                    });
                   },
                 ),
               ],
