@@ -197,7 +197,7 @@ class _LandlordProfile extends StatelessWidget {
                       Navigator.push(
                         context,
                         //goes to review; passes lat and long into the class
-                        MaterialPageRoute(builder: (context) => LandlordReview()),
+                        MaterialPageRoute(builder: (context) => LandlordReview(id)),
                       );
                     },
                   )))
