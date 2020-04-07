@@ -9,7 +9,6 @@ import 'login.dart';
 import 'home.dart';
 import 'map.dart';
 import 'registration.dart';
-import 'prop.dart';
 import 'list.dart';
 import 'rentierList.dart';
 import 'mapStuff.dart';

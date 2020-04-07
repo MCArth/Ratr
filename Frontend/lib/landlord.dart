@@ -5,11 +5,10 @@ import 'package:nexus_app/revland.dart';
 import 'package:string_validator/string_validator.dart';
 import 'app.dart';
 
-double widthScreen;
 Landlord landlord;
 int id;
 
-class LandlordProfile extends StatelessWidget {
+class LandlordProfile extends StatefulWidget {
 
   LandlordProfile(int index) {
     id = index;
@@ -17,19 +16,14 @@ class LandlordProfile extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
-    widthScreen = MediaQuery.of(context).size.width;
-    return _LandlordProfile();
-  }
+  _LandlordProfile createState() => _LandlordProfile();
 }
 
-class _LandlordProfile extends StatelessWidget {
-  //final String name = landlordList[landID].name.toString();
+class _LandlordProfile extends State<LandlordProfile> {
   final String name = landlord.name;
-  //final String rating = landlordList[landID].avgRating.toStringAsFixed(1);
   final String rating = landlord.avgRating.toStringAsFixed(1);
-  //final int number = landlordList[landID].houses.length;
   final int number = landlord.houses.length;
+  final List<bool> selected = [true,false];
 
   @override
   Widget build(BuildContext context) {
@@ -153,34 +147,102 @@ class _LandlordProfile extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                      child: TabBarView(
-                        children: <Widget>[
-                          Container(
-                            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
-                            child: ListView(
-                              children: <Widget>[
-                                Row(
+                      //height: 300,
+//                        padding: EdgeInsets.symmetric(
+//                            vertical: 10, horizontal: 2),
+                        child: ListView(
+                          shrinkWrap: true,
+                          children: <Widget>[
+                            SizedBox(height: 10,),
+                            Align(
+                              alignment: Alignment.center,
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: ToggleButtons(
                                   children: <Widget>[
-                                    Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        for (var i in landlord.reviews)
-                                          Container(
-                                            width: widthScreen*0.7,
-                                            padding: EdgeInsets.symmetric(vertical: 10),
-                                            child: getRowLand(i.review, i.rating),
-                                            //child: Text(i.review),
-                                          ),
-                                      ],
-                                    ),
+                                    Text("  All  "),
+                                    Text("  Landlord  "),
                                   ],
+                                  selectedColor: Colors.white,
+                                  color: Colors.white,
+                                  borderColor: Color(0xF9AA33).withOpacity(1),
+                                  selectedBorderColor: Colors.white,
+                                  renderBorder: true,
+                                  fillColor: Color(0xF9AA33).withOpacity(1),
+                                  borderWidth: 2,
+                                  borderRadius:
+                                  BorderRadius.circular(20),
+                                  onPressed: (int index) {
+                                    setState(() {
+                                      for (int buttonIndex = 0;
+                                      buttonIndex < selected.length;
+                                      buttonIndex++) {
+                                        if (buttonIndex == index) {
+                                          selected[buttonIndex] = true;
+                                        } else {
+                                          selected[buttonIndex] = false;
+                                        }
+                                      }
+                                    });
+                                  },
+                                  isSelected: selected,
                                 ),
-                              ],
+                              ),
                             ),
-                          )
-                        ],
-                      ),
-                    )
+                            Column(
+                              children: <Widget>[
+                                //Row(
+                                //children: <Widget>[
+                                Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      SizedBox(height: 7),
+                                      for (var i in landlord.reviews)
+                                        Container(
+                                          //width:MediaQuery.of(context).size.width *0.8,
+                                          padding:
+                                          EdgeInsets.symmetric(vertical: 10),
+                                          child: getRowLand(i.review, i.rating),
+                                          //child: Text(i.review),
+                                        )])
+                                //],
+                                //)
+                                //],
+                                //)
+                              ],
+                            )
+                          ],
+                        )
+                    ),
+//                    Expanded(
+//                      child: TabBarView(
+//                        children: <Widget>[
+//                          Container(
+//                            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
+//                            child: ListView(
+//                              children: <Widget>[
+//                                Row(
+//                                  children: <Widget>[
+//                                    Column(
+//                                      crossAxisAlignment: CrossAxisAlignment.start,
+//                                      children: <Widget>[
+//                                        for (var i in landlord.reviews)
+//                                          Container(
+//                                            width: widthScreen*0.7,
+//                                            padding: EdgeInsets.symmetric(vertical: 10),
+//                                            child: getRowLand(i.review, i.rating),
+//                                            //child: Text(i.review),
+//                                          ),
+//                                      ],
+//                                    ),
+//                                  ],
+//                                ),
+//                              ],
+//                            ),
+//                          )
+//                        ],
+//                      ),
+//                    )
                   ],
                 ))),
           ),
