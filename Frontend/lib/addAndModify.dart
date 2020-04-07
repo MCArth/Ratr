@@ -22,7 +22,7 @@ void addNewLandlordReview(int id, String reviewText, double rating){
   landlord.addReview = review;
   String json = jsonEncode(landlord);
   print(json);
-  //http.get("https://us-central1-ridr-cc2ec.cloudfunctions.net/updateLandlord?text=" + json);
+  http.get("https://us-central1-ridr-cc2ec.cloudfunctions.net/updateLandlord?text=" + json);
 }
 
 void propertyToDatabase(House house){

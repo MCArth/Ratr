@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:nexus_app/addAndModify.dart';
 import 'package:string_validator/string_validator.dart';
 import 'dart:developer';
 import 'app.dart';
@@ -9,11 +10,15 @@ import 'app.dart';
 //No need for main here, can be accessed from app
 
 //Global variables to do db stuff
-int landLat;
-int landLong;
 var themeYellow;
+int landID;
 
 class LandlordReview extends StatefulWidget {
+
+  LandlordReview(int id) {
+    landID = id;
+  }
+
   @override
   _LandlordReview createState() => _LandlordReview();
 }
@@ -180,10 +185,11 @@ class _LandlordReview extends State<LandlordReview> {
 
 
   void _submitLandlordReview() {
+    int count = 0;
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
       log(landlordReview);
-
+      addNewLandlordReview(landID, landlordReview, value);
       showDialog(
           context: context,
           builder: (BuildContext context){
@@ -194,7 +200,9 @@ class _LandlordReview extends State<LandlordReview> {
                 new FlatButton(
                   child: Text("Okay"),
                   onPressed: () {
-                    Navigator.of(context)..popUntil((route) => route.isFirst);
+                    Navigator.popUntil(context, (route) {
+                      return count++ == 2;
+                    });
                   },
                 ),
               ],
