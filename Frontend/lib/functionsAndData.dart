@@ -108,6 +108,7 @@ Future fetchHouses() async {
         house.reviews[j] = Review.fromJson(house.reviews[j]);
       }
     }
+    sortByPriceHL();
   } else {
     throw Exception('Failed to load houses! (Probably the server is down)');
   }
@@ -197,15 +198,38 @@ void printAllHouses(){
 
 // Specifically, house sorting
 
-sortByPrice(){
+//
+sortByPriceLH(){
   houseList.sort((a,b) => a.price.compareTo(b.price));
 }
 
-sortByRating(List<House> houselist){
+sortByPriceHL(){
+  houseList.sort((b,a) => a.price.compareTo(b.price));
+}
+
+
+sortByRatingLH(){
   houseList.sort((a,b) => a.avgRating.compareTo(b.avgRating));
 }
-sortByBedrooms(List<House> houselist){
+
+sortByRatingHL(){
+  houseList.sort((b,a) => a.avgRating.compareTo(b.avgRating));
+}
+sortByBedrooms(){
   houseList.sort((a,b) => a.bedrooms.compareTo(b.bedrooms));
+}
+
+// Sorts housing list based on index, corresponding to a button within ToggleButtons in  list.dart
+toggleSort(int index){
+  if(index == 0){
+    sortByPriceHL();
+  }else if(index == 1){
+    sortByPriceLH();
+  }else if(index == 2){
+    sortByRatingHL();
+  }else if(index == 3){
+    sortByRatingLH();
+  }
 }
 
 void filter(){
