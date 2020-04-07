@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:string_validator/string_validator.dart';
 import 'package:numberpicker/numberpicker.dart';
-
+import 'addAndModify.dart';
+import 'functionsAndData.dart';
 class addProperty extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _addProperty();
@@ -170,14 +172,20 @@ class _addProperty extends State<addProperty> {
                             onPressed: () {
                               if (formKey.currentState.validate()) {
                                 formKey.currentState.save();
+                                LatLng latlong;
+                                getFromAddress(address).then((latlng) => latlong = latlng);
 
                                 print(address);
                                 print(description);
+                                if(landlord == null){landlord = "unknown";
+                                }
                                 print(landlord);
                                 print(phoneNumber);
                                 print(price);
                                 print(nBathrooms);
                                 print(nBedrooms);
+                                //Create house object here
+                                //feed into houseToDatabase
                                 //TODO: Link with RL DBS], if everything goes well show the bellow code (STARTS HERE to ENDS HERE) else dont
 
                                 //STARTS HERE
@@ -193,7 +201,7 @@ class _addProperty extends State<addProperty> {
                                             child: ListBody(
                                               children: <Widget>[
                                                 Text(
-                                                    "You successfully created an property profile 🎉🎉")
+                                                    "You successfully created a property profile 🎉🎉")
                                               ],
                                             ),
                                           ),
