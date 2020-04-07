@@ -5,13 +5,15 @@ import 'package:nexus_app/revland.dart';
 import 'package:string_validator/string_validator.dart';
 import 'app.dart';
 
-int landID;
 double widthScreen;
+Landlord landlord;
+int id;
 
 class LandlordProfile extends StatelessWidget {
 
   LandlordProfile(int index) {
-    landID = index;
+    id = index;
+    landlord = getRentierFromID(index);
   }
 
   @override
@@ -22,9 +24,12 @@ class LandlordProfile extends StatelessWidget {
 }
 
 class _LandlordProfile extends StatelessWidget {
-  final String name = landlordList[landID].name.toString();
-  final String rating = landlordList[landID].avgRating.toStringAsFixed(1);
-  final int number = landlordList[landID].houses.length;
+  //final String name = landlordList[landID].name.toString();
+  final String name = landlord.name;
+  //final String rating = landlordList[landID].avgRating.toStringAsFixed(1);
+  final String rating = landlord.avgRating.toStringAsFixed(1);
+  //final int number = landlordList[landID].houses.length;
+  final int number = landlord.houses.length;
 
   @override
   Widget build(BuildContext context) {
@@ -122,7 +127,7 @@ class _LandlordProfile extends StatelessWidget {
                           Navigator.push(
                             context,
                             //goes to review; passes lat and long into the class
-                            MaterialPageRoute(builder: (context) => LandProp(landID)),
+                            MaterialPageRoute(builder: (context) => LandProp(id)),
                           );
                            }
                       ),
@@ -159,7 +164,7 @@ class _LandlordProfile extends StatelessWidget {
                                     Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: <Widget>[
-                                        for (var i in landlordList[landID].reviews)
+                                        for (var i in landlord.reviews)
                                           Container(
                                             width: widthScreen*0.7,
                                             padding: EdgeInsets.symmetric(vertical: 10),
@@ -192,7 +197,7 @@ class _LandlordProfile extends StatelessWidget {
                       Navigator.push(
                         context,
                         //goes to review; passes lat and long into the class
-                        MaterialPageRoute(builder: (context) => LandlordReview()),
+                        MaterialPageRoute(builder: (context) => LandlordReview(id)),
                       );
                     },
                   )))

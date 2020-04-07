@@ -13,48 +13,50 @@ class ListPage extends StatefulWidget {
   _PropListState createState() => _PropListState();
 }
 
-final List<bool> isSelected = [true, false,false,false];
+final List<bool> isSelected = [true, false, false, false, false];
 
 class _PropListState extends State<ListPage> {
+  List<String> list = [
+    'Price Highest',
+    'Price Lowest',
+    'Rating Highest',
+    'Rating Lowest',
+    'Bedrooms'
+  ];
+  String _sort;
   @override
   build(BuildContext context) {
     return Scaffold(
         appBar: new AppBar(title: Text("Property List")),
         body: Column(
           children: <Widget>[
-            SizedBox(height:5),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: ToggleButtons(
-                children: <Widget>[
-                  Text(" Price Highest First "),
-                  Text(" Price Lowest First "),
-                  Text(" Rating Highest First "),
-                  Text(" Rating Lowest First ")
-                ],
-                selectedColor: Colors.white,
-                color: Colors.white,
-                borderColor: themeYellow,
-                selectedBorderColor: Colors.white,
-                renderBorder: true,
-                fillColor: themeYellow,
-                borderWidth: 2,
-                borderRadius: BorderRadius.circular(30),
-                onPressed: (int index) {
-                  toggleSort(index);
-                  setState(() {
-                    for (int buttonIndex = 0;
-                        buttonIndex < isSelected.length;
-                        buttonIndex++) {
-                      if (buttonIndex == index) {
-                        isSelected[buttonIndex] = true;
-                      } else {
-                        isSelected[buttonIndex] = false;
-                      }
-                    }
-                  });
-                },
-                isSelected: isSelected,
+            SizedBox(height: 5),
+            Container(
+              width: MediaQuery.of(context).size.width * 0.92,
+              child: ButtonTheme(
+                alignedDropdown: true,
+                child: DropdownButton(
+                  isExpanded: true,
+                  hint: Text(
+                    'Sort houses by....',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: themeYellow),
+                  ),
+                  value: _sort,
+                  items: list.map((sortBy) {
+                    return DropdownMenuItem(
+                      child: new Text(sortBy),
+                      value: sortBy,
+                    );
+                  }).toList(),
+                  onChanged: (newValue) {
+                    int index = list.indexOf(newValue);
+                    toggleSort(index, 0);
+                    setState(() {
+                      _sort = newValue;
+                    });
+                  },
+                ),
               ),
             ),
             SizedBox(height: 5),
@@ -108,9 +110,11 @@ makeHouseCard(BuildContext context, int index) {
                 houseList[index].street),
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
-          subtitle: Row(
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(houseList[index].bedrooms.toString() + " Bedroom House")
+              Text(houseList[index].bedrooms.toString() + " Bedroom House"),
+              Text("£"+ (houseList[index].price / 12).toString() + " pcm")
             ],
           ),
           trailing:

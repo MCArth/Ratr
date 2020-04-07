@@ -17,6 +17,7 @@ import 'help.dart';
 
 var themeYellow = Color(0xF9AA33).withOpacity(1);
 var themeGrey = Colors.blueGrey[700];
+
 class NexusApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
@@ -43,7 +44,6 @@ class NexusApp extends StatelessWidget {
           '/map': (BuildContext context) { return MapPage();},
           '/registration': (BuildContext context) {return RegistrationPage();},
           '/list': (BuildContext context) {return ListPage();},
-          '/landrev': (BuildContext context) {return LandlordReview();},
           '/addProp': (BuildContext context) {return addProperty();},
           '/addLand': (BuildContext context) {return addLandlord();},
           '/rentierList': (BuildContext context) {return RentierListPage();},

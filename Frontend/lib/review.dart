@@ -8,7 +8,7 @@ import 'package:nexus_app/functionsAndData.dart';
 import 'package:nexus_app/prop.dart';
 import 'package:string_validator/string_validator.dart';
 import 'dart:developer';
-
+import 'addAndModify.dart';
 //Global variables to do db stuff
 House house;
 var cord;
@@ -227,25 +227,17 @@ class _ReviewPage extends State<ReviewPage> {
   }
 
   void _submitPropertyReview() {
+    int count = 0;
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
       log(propertyReview);
-      double total = 0;
-      //todo backend stuff goes here
-      var revs = house.reviews;
-      for (var a in revs) {
-        print(a.review);
-        total += a.rating;
-      }
-      total += value;
-      double newAvg = total/(revs.length+1);
+
+      //Update backend
 
       print("New rev: " + propertyReview);
       print("New rating: " + value.toString());
-      print("New avg: "+newAvg.toString());
 
-      addNewReview(cord, propertyReview, value, newAvg);
-
+      addNewHouseReview(cord, propertyReview, value);
       showDialog(
           context: context,
           builder: (BuildContext context){
@@ -256,7 +248,9 @@ class _ReviewPage extends State<ReviewPage> {
                 new FlatButton(
                   child: Text("Okay"),
                   onPressed: () {
-                    Navigator.of(context)..popUntil((route) => route.isFirst);
+                    Navigator.popUntil(context, (route) {
+                      return count++ == 2;
+                    });
                   },
                 ),
               ],

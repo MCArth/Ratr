@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'functionsAndData.dart';
 import 'app.dart';
+import 'addAndModify.dart';
 
 class HomePage extends StatelessWidget {
   
@@ -9,6 +10,8 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     fetchHouses();
     fetchLandlords();
+
+
     return new Scaffold(
       appBar: new AppBar(
         centerTitle: true,
@@ -62,6 +65,7 @@ class HomePage extends StatelessWidget {
                         heroTag: "landlordlst",
                         onPressed: () {
                           Navigator.pushNamed(context,'/rentierList');
+                         //addNewLandlordReview(1,"burnt down",5.0);
                         }
                         ),
                         
