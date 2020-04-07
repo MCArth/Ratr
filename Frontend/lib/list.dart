@@ -4,48 +4,90 @@ import 'package:nexus_app/prop.dart';
 import 'functionsAndData.dart';
 
 String filter = "default";
+double widthScreen;
 
 //page displaying all available properties in a relational database
 //required to display only a small amount of information that nevertheless expresses the general sense for a property at a glance
 //Maybe use tiles to display an image + price per month + an address
 class ListPage extends StatefulWidget {
+
+  ListPage(double widthSc) {
+    widthScreen = widthSc;
+  }
+
   @override
   _PropListState createState() => _PropListState();
 }
 
-final List<bool> isSelected = [true, false,false,false];
+final List<bool> isSelected = [true, false, false, false];
 
 class _PropListState extends State<ListPage> {
+  List<String> list = ['Price Highest', 'Price Lowest', 'Rating Highest', 'Rating Lowest'];
+  String _sort;
   @override
   build(BuildContext context) {
     return Scaffold(
         appBar: new AppBar(title: Text("Property List")),
         body: Column(
           children: <Widget>[
-            SizedBox(height:5),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: ToggleButtons(
-                children: <Widget>[
-                  Text(" Price Highest First "),
-                  Text(" Price Lowest First "),
-                  Text(" Rating Highest First "),
-                  Text(" Rating Lowest First ")
-                ],
-                selectedColor: Colors.white,
-                color: Colors.white,
-                borderColor: themeYellow,
-                selectedBorderColor: Colors.white,
-                renderBorder: true,
-                fillColor: themeYellow,
-                borderWidth: 2,
-                borderRadius: BorderRadius.circular(30),
-                onPressed: (int index) {
+            SizedBox(height: 5),
+//            SingleChildScrollView(
+//              scrollDirection: Axis.horizontal,
+//              child: ToggleButtons(
+//                children: <Widget>[
+//                  Text(" Price Highest First "),
+//                  Text(" Price Lowest First "),
+//                  Text(" Rating Highest First "),
+//                  Text(" Rating Lowest First ")
+//                ],
+//                selectedColor: Colors.white,
+//                color: Colors.white,
+//                borderColor: themeYellow,
+//                selectedBorderColor: Colors.white,
+//                renderBorder: true,
+//                fillColor: themeYellow,
+//                borderWidth: 2,
+//                borderRadius: BorderRadius.circular(30),
+//                onPressed: (int index) {
+//                  toggleSort(index);
+//                  setState(() {
+//                    for (int buttonIndex = 0;
+//                        buttonIndex < isSelected.length;
+//                        buttonIndex++) {
+//                      if (buttonIndex == index) {
+//                        isSelected[buttonIndex] = true;
+//                      } else {
+//                        isSelected[buttonIndex] = false;
+//                      }
+//                    }
+//                  });
+//                },
+//                isSelected: isSelected,
+//              ),
+//            ),
+          Container(
+            width: widthScreen*0.9,
+            child: ButtonTheme(
+              alignedDropdown: true,
+              child: DropdownButton(
+                isExpanded: true,
+                hint: Text('Sort houses by....', textAlign: TextAlign.center,
+                style: TextStyle(color: themeYellow),),
+                value: _sort,
+                items: list.map((location) {
+                  return DropdownMenuItem(
+                    child: new Text(location),
+                    value: location,
+                  );
+                }).toList(),
+                onChanged: (newValue) {
+                  int index = list.indexOf(newValue);
                   toggleSort(index);
                   setState(() {
+                    _sort = newValue;
                     for (int buttonIndex = 0;
-                        buttonIndex < isSelected.length;
-                        buttonIndex++) {
+                    buttonIndex < isSelected.length;
+                    buttonIndex++) {
                       if (buttonIndex == index) {
                         isSelected[buttonIndex] = true;
                       } else {
@@ -54,9 +96,9 @@ class _PropListState extends State<ListPage> {
                     }
                   });
                 },
-                isSelected: isSelected,
               ),
             ),
+          ),
             SizedBox(height: 5),
             Expanded(child: listBuildChild(context))
           ],
