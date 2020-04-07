@@ -91,6 +91,14 @@ void addNewReview(LatLng latlng, String review, double rating, double newAvgRati
   //todo Some stuff goes here
 }
 
+void addAccountData() {
+
+}
+
+Future fetchAccountData() async {
+
+}
+
 // Retreives a list of houses from database
 Future fetchHouses() async {
   //clears previous version of houseList
