@@ -4,25 +4,20 @@ import 'package:nexus_app/prop.dart';
 import 'functionsAndData.dart';
 
 String filter = "default";
-double widthScreen;
 
 //page displaying all available properties in a relational database
 //required to display only a small amount of information that nevertheless expresses the general sense for a property at a glance
 //Maybe use tiles to display an image + price per month + an address
 class ListPage extends StatefulWidget {
 
-  ListPage(double widthSc) {
-    widthScreen = widthSc;
-  }
-
   @override
   _PropListState createState() => _PropListState();
 }
 
-final List<bool> isSelected = [true, false, false, false];
+final List<bool> isSelected = [true, false, false, false, false];
 
 class _PropListState extends State<ListPage> {
-  List<String> list = ['Price Highest', 'Price Lowest', 'Rating Highest', 'Rating Lowest'];
+  List<String> list = ['Price Highest', 'Price Lowest', 'Rating Highest', 'Rating Lowest', 'Bedrooms'];
   String _sort;
   @override
   build(BuildContext context) {
@@ -66,7 +61,7 @@ class _PropListState extends State<ListPage> {
 //              ),
 //            ),
           Container(
-            width: widthScreen*0.9,
+            width: MediaQuery.of(context).size.width*0.92,
             child: ButtonTheme(
               alignedDropdown: true,
               child: DropdownButton(
@@ -74,26 +69,17 @@ class _PropListState extends State<ListPage> {
                 hint: Text('Sort houses by....', textAlign: TextAlign.center,
                 style: TextStyle(color: themeYellow),),
                 value: _sort,
-                items: list.map((location) {
+                items: list.map((sortBy) {
                   return DropdownMenuItem(
-                    child: new Text(location),
-                    value: location,
+                    child: new Text(sortBy),
+                    value: sortBy,
                   );
                 }).toList(),
                 onChanged: (newValue) {
                   int index = list.indexOf(newValue);
-                  toggleSort(index);
+                  toggleSort(index,0);
                   setState(() {
                     _sort = newValue;
-                    for (int buttonIndex = 0;
-                    buttonIndex < isSelected.length;
-                    buttonIndex++) {
-                      if (buttonIndex == index) {
-                        isSelected[buttonIndex] = true;
-                      } else {
-                        isSelected[buttonIndex] = false;
-                      }
-                    }
                   });
                 },
               ),

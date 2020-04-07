@@ -43,7 +43,7 @@ class NexusApp extends StatelessWidget {
         routes: <String, WidgetBuilder>{
           '/map': (BuildContext context) { return MapPage();},
           '/registration': (BuildContext context) {return RegistrationPage();},
-          '/list': (BuildContext context) {return ListPage(MediaQuery.of(context).size.width);},
+          '/list': (BuildContext context) {return ListPage();},
           '/landrev': (BuildContext context) {return LandlordReview();},
           '/addProp': (BuildContext context) {return addProperty();},
           '/addLand': (BuildContext context) {return addLandlord();},
