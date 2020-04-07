@@ -65,7 +65,7 @@ class HomePage extends StatelessWidget {
                         heroTag: "landlordlst",
                         onPressed: () {
                           Navigator.pushNamed(context,'/rentierList');
-                          // addNewReview(houseList[0].latlng,"asbestos killed my dog",5.0);
+                          //addNewHouseReview(houseList[0].latlng,"asbestos killed my dog",5.0);
                         }
                         ),
                         

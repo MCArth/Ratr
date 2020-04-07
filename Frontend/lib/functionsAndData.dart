@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:geocoder/geocoder.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:nexus_app/mapStuff.dart';
 
 // Classes, getters, builders, etc. for accessing json go here for the time being //
 // CLASSES //
@@ -43,7 +44,13 @@ class Landlord {
     }
     this.avgRating = total/(this.reviews.length);
   }
-
+  Map<String,dynamic> toJson() => {
+    "name": this.name,
+    "reviews": this.reviews,
+    "houses": this.houses,
+    "avgRating": this.avgRating,
+    //TODO figure out how to handle list of 
+  };
 }
 
 
@@ -56,7 +63,7 @@ class House {
   String postCode, street;
   String landlord;
   List<dynamic> reviews;
-
+  RoomInfo roominfo;
   House(
       {this.lat,
       this.long,
@@ -95,6 +102,7 @@ class House {
     this.avgRating = total/(this.reviews.length);
   }
 
+  //Get for lat and long as LatLng datatype for map compatability and key purposes
   LatLng get latlng {
     return LatLng(this.lat,this.long);
   }
@@ -103,10 +111,33 @@ class House {
     String address = (this.houseNum.toString() + " " + this.street);
     return address;
   }
+  
+  Map<String,dynamic> toJson() => {
+    "lat": this.lat,
+    "long": this.long,
+    "avgRating": this.avgRating,
+    "postCode": this.postCode,
+    "pricePerAnnum": this.price,
+    "houseNumber": this.houseNum,
+    "houseStreet": this.street,
+    "landlord": this.landlord,
+    "reviews": this.reviews,
+    "roomInfo": RoomInfo(this.bathrooms,this.bedrooms),
+  };
 
-  //Map<String, dynamic> toJson() => _$HouseToJson(this);
 }
 
+class RoomInfo{
+  int numBathrooms;
+  int numBedrooms;
+  RoomInfo(this.numBathrooms,this.numBedrooms);
+
+  Map<String,dynamic> toJson() => {
+    "numBathrooms": this.numBathrooms,
+    "numBedrooms": this.numBedrooms,
+  };
+}
+@JsonSerializable()
 class Review {
   double rating;
   String review;
@@ -116,6 +147,11 @@ class Review {
   factory Review.fromJson(Map<String, dynamic> json) {
     return Review(rating: json["rating"].toDouble(), review: json["review"]);
   }
+
+  Map<String,dynamic> toJson() => {
+    "rating": this.rating,
+    "review": this.review
+  };
 }
 
 
@@ -237,17 +273,13 @@ void printAllHouses() {
 
 // Sorting //
 
-// Specifically, house sorting
-
-//
+// Sorting functions for built in list display purposes
 sortByPriceLH() {
   houseList.sort((a, b) => a.price.compareTo(b.price));
 }
-
 sortByPriceHL() {
   houseList.sort((b, a) => a.price.compareTo(b.price));
 }
-
 sortByRatingLH(int whichList) {
   if (whichList == 0) {
     houseList.sort((a, b) => a.avgRating.compareTo(b.avgRating));
@@ -256,7 +288,6 @@ sortByRatingLH(int whichList) {
     landlordList.sort((a, b) => a.avgRating.compareTo(b.avgRating));
   }
 }
-
 sortByRatingHL(int whichList) {
   if (whichList == 0) {
     houseList.sort((b, a) => a.avgRating.compareTo(b.avgRating));
@@ -266,15 +297,12 @@ sortByRatingHL(int whichList) {
     landlordList.sort((b, a) => a.avgRating.compareTo(b.avgRating));
   }
 }
-
 sortByBedrooms() {
   houseList.sort((a, b) => a.bedrooms.compareTo(b.bedrooms));
 }
-
 sortAlpha() {
   landlordList.sort((a,b) => a.name.compareTo(b.name));
 }
-
 sortNumHouse() {
   landlordList.sort((a,b) => a.houses.length.compareTo(b.houses.length));
 }

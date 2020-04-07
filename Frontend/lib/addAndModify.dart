@@ -7,15 +7,23 @@ import 'functionsAndData.dart';
 // This file contains things for adding and modifying the database //
 
 //add a new review to a house, should always be used in a context where house is guaranteed to exist or will break things 
-void addNewReview(LatLng latlng, String reviewText, double rating) {
+void addNewHouseReview(LatLng latlng, String reviewText, double rating) {
   Review review = new Review(rating: rating, review: reviewText);
   House house = getHouseFromLatLng(latlng);
-  print(house.avgRating);
   house.addReview = review;
-  print(house.avgRating);
   String json = jsonEncode(house);
   print(json);
+  http.get("https://us-central1-ridr-cc2ec.cloudfunctions.net/updateHouse?text=" + json);
 }
+
+// void addNewLandlordReview(int id, String reviewText, double rating){
+//   Review review = new Review(rating: rating, review: reviewText);
+//   Landlord landlord = getRentierFromID(id);
+//   landlord.addReview = review;
+//   String json = jsonEncode(landlord);
+//   print(json);
+//   http.get("https://us-central1-ridr-cc2ec.cloudfunctions.net/updateLandlord?text=" + json);
+// }
 
 void propertyToDatabase(House house){
   //If house already exists, either abort or direct them towards review creation page
@@ -24,6 +32,9 @@ void propertyToDatabase(House house){
   }
   else{
     houseList.add(house);
-    //json stuff goes here (dependant on getting houses to serialise)
+    String json = jsonEncode(house);
+    print(json);
+    http.get("https://us-central1-ridr-cc2ec.cloudfunctions.net/addHouse?text=" + json);
   }
 }
+

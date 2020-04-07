@@ -237,7 +237,7 @@ class _ReviewPage extends State<ReviewPage> {
       print("New rating: " + value.toString());
 
 
-      addNewReview(cord, propertyReview, value);
+      addNewHouseReview(cord, propertyReview, value);
 
       showDialog(
           context: context,
