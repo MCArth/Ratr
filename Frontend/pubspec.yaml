@@ -48,7 +48,8 @@ dev_dependencies:
 # The following section is specific to Flutter.
 
 flutter:
-  ## Gets asets
+  #uses-material-design: true
+  ## Gets assets
   assets:
     - assets/House 1/
     - assets/House 2/
