@@ -110,9 +110,11 @@ makeHouseCard(BuildContext context, int index) {
                 houseList[index].street),
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
-          subtitle: Row(
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(houseList[index].bedrooms.toString() + " Bedroom House")
+              Text(houseList[index].bedrooms.toString() + " Bedroom House"),
+              Text("£"+ (houseList[index].price / 12).toString() + " pcm")
             ],
           ),
           trailing:

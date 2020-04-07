@@ -48,26 +48,38 @@ class _addProperty extends State<addProperty> {
                         },
                       ),
                     ),
-                    SizedBox(height: 14,),
-                    Container(child: Text("Address:", style:
-                    TextStyle(fontSize: 18, fontWeight: FontWeight.bold),)),
+                    SizedBox(
+                      height: 14,
+                    ),
+                    Container(
+                        child: Text(
+                      "Address:",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    )),
                     Container(
                         child: TextFormField(
-                          keyboardType: TextInputType.multiline,
-                          minLines: 2,
-                          maxLines: 4,
-                          decoration: InputDecoration(
-                              hintText: "2 Beckhampton road, Bath \nSomerset, England, BA2 3LL"
-                          ),
-                          validator: (input) =>
+                      keyboardType: TextInputType.multiline,
+                      minLines: 2,
+                      maxLines: 4,
+                      decoration: InputDecoration(
+                          hintText:
+                              "2 Beckhampton road, Bath \nSomerset, England, BA2 3LL"),
+                      validator: (input) =>
                           !matches(input, r'^[#.0-9a-zA-Z\s,-]+$')
                               ? 'Not a valid Address'
                               : null,
-                          onSaved: (input) => address = input,
-                        )),
-                    SizedBox(height: 20,),
-                    Container(child: Text("Description:", style:
-                    TextStyle(fontSize: 18, fontWeight: FontWeight.bold),)),
+                      onSaved: (input) => address = input,
+                    )),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                        child: Text(
+                      "Description:",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    )),
                     Container(
                       child: TextFormField(
                         keyboardType: TextInputType.multiline,
@@ -77,55 +89,80 @@ class _addProperty extends State<addProperty> {
 //                            hintText: "Insert description of property"
 //                        ),
                         validator: (input) =>
-                        !matches(input, r'^[#.0-9a-zA-Z\s,-]+$')
-                            ? 'Not a valid Description'
-                            : null,
+                            !matches(input, r'^[#.0-9a-zA-Z\s,-]+$')
+                                ? 'Not a valid Description'
+                                : null,
                         onSaved: (input) => description = input,
                       ),
                     ),
-                    SizedBox(height: 20,),
+                    SizedBox(
+                      height: 20,
+                    ),
                     Row(
                       children: <Widget>[
                         Column(
                           children: <Widget>[
-                            Text('Number of Bedrooms:',
-                            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),),
+                            Text(
+                              'Number of Bedrooms:',
+                              style: TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.bold),
+                            ),
                             //Header("Number of Bedrooms:"),
                             SizedBox(
                               height: 90,
-                              child: NumberPicker.integer(infiniteLoop: true, initialValue: nBedrooms, minValue: 1, maxValue: 15, onChanged: (newValue) =>
-                                  setState(() => nBedrooms = newValue)),
+                              child: NumberPicker.integer(
+                                  infiniteLoop: true,
+                                  initialValue: nBedrooms,
+                                  minValue: 1,
+                                  maxValue: 15,
+                                  onChanged: (newValue) =>
+                                      setState(() => nBedrooms = newValue)),
                             )
                           ],
                         ),
                         Spacer(),
                         Column(
                           children: <Widget>[
-                            Text('Number of Bathrooms:',
-                              style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold),),
+                            Text(
+                              'Number of Bathrooms:',
+                              style: TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.bold),
+                            ),
                             SizedBox(
                               height: 90,
-                              child: NumberPicker.integer(infiniteLoop: true, initialValue: nBathrooms, minValue: 1, maxValue: 15, onChanged: (newValue) =>
-                                  setState(() => nBathrooms = newValue)),
+                              child: NumberPicker.integer(
+                                  infiniteLoop: true,
+                                  initialValue: nBathrooms,
+                                  minValue: 1,
+                                  maxValue: 15,
+                                  onChanged: (newValue) =>
+                                      setState(() => nBathrooms = newValue)),
                             )
                           ],
                         ),
                       ],
                     ),
-                    SizedBox(height: 25,),
-                    Container(child: Text("Landlord:", style:
-                      TextStyle(fontSize: 18, fontWeight: FontWeight.bold),)),
+                    SizedBox(
+                      height: 25,
+                    ),
+                    Container(
+                        child: Text(
+                      "Landlord:",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    )),
                     Container(
                         child: TextFormField(
-                          decoration: InputDecoration(
-                              hintText: "Yassin Ouzzane"
-                          ),
-                          validator: (input) => !matches(input, r'^[A-Z][a-z]+\s[A-Z][a-z]+$') ? 'Not a valid Full Name' : null,
-                          onSaved: (input) => landlord = input,
-                        )),
+                      decoration: InputDecoration(hintText: "Yassin Ouzzane"),
+                      validator: (input) =>
+                          !matches(input, r'^[A-Z][a-z]+\s[A-Z][a-z]+$')
+                              ? 'Not a valid Full Name'
+                              : null,
+                      onSaved: (input) => landlord = input,
+                    )),
                     Container(
                       padding:
-                      EdgeInsets.symmetric(horizontal: 2.0, vertical: 10.0),
+                          EdgeInsets.symmetric(horizontal: 2.0, vertical: 10.0),
                       child: SizedBox(
                         width: 350,
                         height: 50,
@@ -163,7 +200,11 @@ class _addProperty extends State<addProperty> {
                                           actions: <Widget>[
                                             FlatButton(
                                               onPressed: () {
-                                                Navigator.of(context).popUntil(ModalRoute.withName(Navigator.defaultRouteName));},
+                                                Navigator.of(context).popUntil(
+                                                    ModalRoute.withName(
+                                                        Navigator
+                                                            .defaultRouteName));
+                                              },
                                               child: Text("Ok"),
                                             )
                                           ],

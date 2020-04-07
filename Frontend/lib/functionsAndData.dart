@@ -2,6 +2,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:geocoder/geocoder.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 // Classes, getters, builders, etc. for accessing json go here for the time being //
 // CLASSES //
@@ -33,16 +34,27 @@ class Landlord {
       uniqueID: landlordList.length,
     );
   }
+
+  set addReview(Review newRev){
+    reviews.add(newRev);
+    double total = 0;
+    for (var a in reviews) {
+      total += a.rating;
+    }
+    this.avgRating = total/(this.reviews.length);
+  }
+
 }
 
+
 // Class for storing property information locally from JSON
+@JsonSerializable()
 class House {
   double avgRating;
   int bedrooms, bathrooms, houseNum, price;
   double lat, long;
   String postCode, street;
   String landlord;
-  LatLng latlng;
   List<dynamic> reviews;
 
   House(
@@ -54,7 +66,6 @@ class House {
       this.street,
       this.postCode,
       this.price,
-      this.latlng,
       this.bathrooms,
       this.landlord,
       this.reviews});
@@ -72,14 +83,28 @@ class House {
       landlord: json["landlord"],
       price: json["pricePerAnnum"],
       reviews: json["reviews"],
-      latlng: LatLng(json["lat"], json["long"]),
     );
+  }
+  // adds a new review and recalculates review average
+  set addReview(Review newRev){
+    reviews.add(newRev);
+    double total = 0;
+    for (var a in reviews) {
+      total += a.rating;
+    }
+    this.avgRating = total/(this.reviews.length);
+  }
+
+  LatLng get latlng {
+    return LatLng(this.lat,this.long);
   }
 
   String get fullAddress {
     String address = (this.houseNum.toString() + " " + this.street);
     return address;
   }
+
+  //Map<String, dynamic> toJson() => _$HouseToJson(this);
 }
 
 class Review {
@@ -93,10 +118,7 @@ class Review {
   }
 }
 
-void addNewReview(
-    LatLng latlng, String review, double rating, double newAvgRating) {
-  //todo Some stuff goes here
-}
+
 
 // Retreives a list of houses from database
 Future fetchHouses() async {
@@ -122,6 +144,7 @@ Future fetchHouses() async {
   }
 }
 
+// Retreives a list of rentiers from database
 Future fetchLandlords() async {
   //Clears previously stored version of landlord list
   landlordList = [];
@@ -167,7 +190,6 @@ Future<LatLng> getFromAddress(String address) async {
 }
 
 //Checks if a house with a given latLng is in database, returns true if already exists, else false
-
 bool houseExists(LatLng latlng) {
   for (House house in houseList) {
     if (house.latlng == latlng) {
@@ -178,6 +200,7 @@ bool houseExists(LatLng latlng) {
 }
 
 // Gets a landlord from list of landlords from name
+// Will get first landlord if multiple names found
 Landlord getRentierFromName(String name) {
   for (Landlord rentier in landlordList) {
     if (rentier.name == name) {
