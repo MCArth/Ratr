@@ -64,8 +64,8 @@ class HomePage extends StatelessWidget {
                         label: Text('Landlords',style: TextStyle(color: Colors.white,fontSize: 18.0)),
                         heroTag: "landlordlst",
                         onPressed: () {
-                          //Navigator.pushNamed(context,'/rentierList');
-                              addNewReview(houseList[0].latlng,"asbestos killed my dog",5.0);
+                          Navigator.pushNamed(context,'/rentierList');
+                          // addNewReview(houseList[0].latlng,"asbestos killed my dog",5.0);
                         }
                         ),
                         
