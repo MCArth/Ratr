@@ -27,7 +27,6 @@ class Property extends StatefulWidget {
 class _PropertyProfile extends State<Property> {
   final String propertyName = thisHouse.fullAddress;
   final String rating = thisHouse.avgRating.toStringAsFixed(1);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -236,7 +235,7 @@ class _PropertyProfile extends State<Property> {
                                         children: <Widget>[
                                           Text("  All  "),
                                           Text("  Kitchen  "),
-                                          Text("  Bedrooms  "),
+                                          Text("  Rooms  "),
                                           Text("  Bills  ")
                                         ],
                                         selectedColor: Colors.white,
@@ -484,5 +483,7 @@ List<Container> reviewContainer() {
         //child: Text(i.review),
       ));
   }
+  //Back to start
+  selected = [true,false,false,false];
   return out;
 }
