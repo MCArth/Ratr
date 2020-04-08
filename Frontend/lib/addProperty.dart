@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:string_validator/string_validator.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'addAndModify.dart';
 import 'functionsAndData.dart';
 import 'app.dart';
-class addProperty extends StatefulWidget {
+
+
+//Page allowing user creation of new property entries
+class AddPropertyPage extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _addProperty();
+  State<StatefulWidget> createState() => AddProperty();
 }
 
-class _addProperty extends State<addProperty> {
+class AddProperty extends State<AddPropertyPage> {
   final formKey = GlobalKey<FormState>();
   double price = 500.0;
   String address, postcode, description, landlord, phoneNumber;
@@ -214,9 +216,8 @@ class _addProperty extends State<addProperty> {
                                 houseNum = (double.parse(splitStreet[0])).toInt();
                                 if(landlord == null){landlord = "unknown";
                                 }
-                                //Create house object here
-                                //feed into houseToDatabase
-                                //TODO: Link with RL DBS], if everything goes well show the bellow code (STARTS HERE to ENDS HERE) else dont
+                                //Create house object here based on user inputs
+                                //feed into houseToDatabase which pushes to database
                                 House newHouse = new House(
                                   lat: lat,
                                   long:long,

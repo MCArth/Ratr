@@ -285,13 +285,12 @@ class _PropertyProfile extends State<Property> {
                             )
                           ),
                           Container(
-                            //todo ALEX YOUR STUFF GOES HERE
                             //This container corresponds to the 3rd tab!
                             child: GridView.count(
                               crossAxisCount: 3,
                               children: <Widget>[
                                 // the following lines are hard coded shit for presentation purposes
-                                //TODO replace these because they're not good
+ 
                                 if (thisHouse.latlng ==
                                     LatLng(51.374515, -2.377066))
                                   for (var i = 0; i < 15; i++)
@@ -393,7 +392,7 @@ List<Container> reviewContainer(){
   List<Container> out = [];
   if(thisHouse.reviews == null){
       out.add(Container(
-        child: Text("No Reviews found for this property!"),
+        child: Text("No Reviews found for this property./n Be the first to add a review!"),
         ));
   }
   else{
