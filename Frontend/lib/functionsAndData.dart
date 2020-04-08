@@ -368,6 +368,6 @@ class Weirdlatlng{
 
   Map<String,dynamic> toJson() => {
     "lat": num.parse(this.lat.toStringAsFixed(8)),
-    "long": num.parse(this.lat.toStringAsFixed(8)),
+    "long": num.parse(this.long.toStringAsFixed(8)),
   };
 }
