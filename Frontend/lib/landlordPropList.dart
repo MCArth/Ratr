@@ -63,7 +63,6 @@ makeListCard(BuildContext context, int index){
               Text(house.bedrooms.toString()+" Bedroom House")
             ],
           ),
-          //todo address potential issue with passing in index
           trailing:
           Icon(Icons.keyboard_arrow_right, color: themeYellow, size: 50.0),
           onTap: () {

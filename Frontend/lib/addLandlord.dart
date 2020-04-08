@@ -69,42 +69,6 @@ class AddLandlord extends State<AddLandlordPage> {
                             textAlign: TextAlign.left,
                           )),
                     ),
-//                          Container(
-//                            padding: EdgeInsets.symmetric(vertical: 10),
-//                            child: TextFormField(
-//                              keyboardType: TextInputType.multiline,
-//                              minLines: 7,
-//                              maxLines: 7,
-//                              decoration: InputDecoration(
-//                                  border: OutlineInputBorder(
-//                                      borderRadius: BorderRadius.circular(3.0),
-//                                      borderSide: BorderSide(
-//                                          width: 10.0,
-//                                          style: BorderStyle.solid)),
-//                                  filled: true,
-//                                  hintText: 'Write your review here...'),
-//                              validator: (input) => !matches(
-//                                  input, r'^[A-Za-z\n]+$')
-//                                  ? 'Invalid description, needs to consist of letters'
-//                                  : null,
-//                              onSaved: (input) => propertyReview = input,
-//                              //labelText: 'House Review')
-//                            ),
-//                          ),
-//                          Align(
-//                            alignment: Alignment.centerRight,
-//                            child: RaisedButton(
-//                                color: Colors.blue,
-//                                //disabledColor: Colors.pink,
-//                                disabledTextColor: Colors.black,
-//                                splashColor: Colors.lightGreen,
-//                                child: Text(
-//                                  'POST',
-//                                  style: TextStyle(color: Colors.white),
-//                                ),
-//                                //todo stuff goes here
-//                                onPressed: _submitPropertyReview),
-//                          ),
                     Container(
                       padding: EdgeInsets.symmetric(vertical: 10),
                       child: TextFormField(
@@ -128,21 +92,6 @@ class AddLandlord extends State<AddLandlordPage> {
                     SizedBox(
                       height: 12,
                     ),
-//                          Align(
-//                            alignment: Alignment.centerRight,
-//                            child: RaisedButton(
-//                                //color: Colors.orange,
-//                                color: Colors.blue,
-//                                disabledColor: Colors.pink,
-//                                disabledTextColor: Colors.black,
-//                                splashColor: Colors.lightGreen,
-//                                child: Text(
-//                                  'POST',
-//                                  style: TextStyle(color: Colors.white),
-//                                ),
-//                                //todo stuff goes here
-//                                onPressed: _submitLandlordReview),
-//                          ),
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 2.0, vertical: 5),
                       child: Align(
@@ -212,7 +161,6 @@ class AddLandlord extends State<AddLandlordPage> {
                             'POST',
                             style: TextStyle(color: Colors.white),
                           ),
-                          //todo stuff goes here
                           onPressed: () {
                             showDialog(
                                     context: context,

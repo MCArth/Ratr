@@ -171,7 +171,6 @@ class _LandlordReview extends State<LandlordReview> {
                                   'POST',
                                   style: TextStyle(color: Colors.white),
                                 ),
-                                //todo Update backend here!!
                                 onPressed: () {
                                   _submitLandlordReview();
                                 }),

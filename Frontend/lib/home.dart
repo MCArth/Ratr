@@ -33,7 +33,6 @@ class HomePage extends StatelessWidget {
                   child: ListView(
                     padding: EdgeInsets.symmetric(horizontal: 16),
                     children: <Widget>[
-                      //TODO implement search bar here 
                       SizedBox(height: 24.0),
                       FloatingActionButton.extended(
                         icon: Icon(Icons.map,color: themeYellow,),
