@@ -13,8 +13,11 @@ class ImageDisplay extends StatelessWidget {
       child: Scaffold(
         body: Padding(
             padding: EdgeInsets.all(8.0),
-            child: Image.asset(imageDir)),
-        ),
+            child: Image.asset(imageDir,
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                fit: BoxFit.fitWidth)),
+      ),
     );
   }
 }
