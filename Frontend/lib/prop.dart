@@ -12,6 +12,7 @@ import 'dart:math';
 //Global variables to be passed in from list of houses
 int rating;
 House thisHouse;
+List<bool> selected = [true, false, false, false];
 
 class Property extends StatefulWidget {
   Property(LatLng latlng) {
@@ -26,7 +27,6 @@ class Property extends StatefulWidget {
 class _PropertyProfile extends State<Property> {
   final String propertyName = thisHouse.fullAddress;
   final String rating = thisHouse.avgRating.toStringAsFixed(1);
-  final List<bool> selected = [true, false, false, false];
 
   @override
   Widget build(BuildContext context) {
@@ -224,66 +224,64 @@ class _PropertyProfile extends State<Property> {
                             ),
                           ),
                           Container(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 2),
-                            child: ListView(
-                              children: <Widget>[
-                                Align(
-                                  alignment: Alignment.center,
-                                  child: SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: ToggleButtons(
-                                      children: <Widget>[
-                                        Text("  All  "),
-                                        Text("  Bedrooms  "),
-                                        Text("  Kitchen  "),
-                                        Text("  Bills  ")
-                                      ],
-                                      selectedColor: Colors.white,
-                                      color: Colors.white,
-                                      borderColor: themeYellow,
-                                      selectedBorderColor: Colors.white,
-                                      renderBorder: true,
-                                      fillColor: themeYellow,
-                                      borderWidth: 2,
-                                      borderRadius:
-                                      BorderRadius.circular(20),
-                                      onPressed: (int index) {
-                                        setState(() {
-                                          for (int buttonIndex = 0;
-                                          buttonIndex < selected.length;
-                                          buttonIndex++) {
-                                            if (buttonIndex == index) {
-                                              selected[buttonIndex] = true;
-                                            } else {
-                                              selected[buttonIndex] = false;
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 2),
+                              child: ListView(
+                                children: <Widget>[
+                                  Align(
+                                    alignment: Alignment.center,
+                                    child: SingleChildScrollView(
+                                      scrollDirection: Axis.horizontal,
+                                      child: ToggleButtons(
+                                        children: <Widget>[
+                                          Text("  All  "),
+                                          Text("  Kitchen  "),
+                                          Text("  Bedrooms  "),
+                                          Text("  Bills  ")
+                                        ],
+                                        selectedColor: Colors.white,
+                                        color: Colors.white,
+                                        borderColor: themeYellow,
+                                        selectedBorderColor: Colors.white,
+                                        renderBorder: true,
+                                        fillColor: themeYellow,
+                                        borderWidth: 2,
+                                        borderRadius: BorderRadius.circular(20),
+                                        onPressed: (int index) {
+                                          setState(() {
+                                            for (int buttonIndex = 0;
+                                                buttonIndex < selected.length;
+                                                buttonIndex++) {
+                                              if (buttonIndex == index) {
+                                                selected[buttonIndex] = true;
+                                              } else {
+                                                selected[buttonIndex] = false;
+                                              }
                                             }
-                                          }
-                                        });
-                                      },
-                                      isSelected: selected,
+                                          });
+                                        },
+                                        isSelected: selected,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Column(
-                                  children: <Widget>[
-                                    //Row(
-                                    //children: <Widget>[
-                                    SizedBox(height: 7),
-                                    Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: 
-                                        reviewContainer(),                               
-                                        )
+                                  Column(
+                                    children: <Widget>[
+                                      //Row(
+                                      //children: <Widget>[
+                                      SizedBox(height: 7),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: reviewContainer(),
+                                      )
                                       //],
-                                    //)
-                                  //],
-                                  //)
-                                  ],
-                                )
-                              ],
-                            )
-                          ),
+                                      //)
+                                      //],
+                                      //)
+                                    ],
+                                  )
+                                ],
+                              )),
                           Container(
                             //todo ALEX YOUR STUFF GOES HERE
                             //This container corresponds to the 3rd tab!
@@ -366,46 +364,124 @@ Color getColour(double num) {
 
 Widget getRow(String review, double rating) {
   var random = new Random().nextInt(1000);
-  return RichText(
-    text: TextSpan(children: [
-      WidgetSpan(
-        child: Container(
-            height: 50,
-            width: 50,
-            child: FloatingActionButton(
-              heroTag: review.toString() + random.toString(),
-              backgroundColor: Colors.white,
-              splashColor: Colors.blueAccent,
-              onPressed: null,
-              child: Text(
-                rating.toString(),
-                style: TextStyle(fontSize: 11.0, color: getColour(rating)),
-                textAlign: TextAlign.start,
-              ),
-            )),
-      ),
-      TextSpan(text: "      " + review)
-    ]),
-  );
+  if (selected[0]) {
+    return RichText(
+      text: TextSpan(children: [
+        WidgetSpan(
+          child: Container(
+              height: 50,
+              width: 50,
+              child: FloatingActionButton(
+                heroTag: review.toString() + random.toString(),
+                backgroundColor: Colors.white,
+                splashColor: Colors.blueAccent,
+                onPressed: null,
+                child: Text(
+                  rating.toString(),
+                  style: TextStyle(fontSize: 11.0, color: getColour(rating)),
+                  textAlign: TextAlign.start,
+                ),
+              )),
+        ),
+        TextSpan(text: "      " + review)
+      ]),
+    );
+  } else if (selected[1]) {
+    if (review.contains("kitchen") || review.contains("Kitchen")) {
+      return RichText(
+        text: TextSpan(children: [
+          WidgetSpan(
+            child: Container(
+                height: 50,
+                width: 50,
+                child: FloatingActionButton(
+                  heroTag: review.toString() + random.toString(),
+                  backgroundColor: Colors.white,
+                  splashColor: Colors.blueAccent,
+                  onPressed: null,
+                  child: Text(
+                    rating.toString(),
+                    style: TextStyle(fontSize: 11.0, color: getColour(rating)),
+                    textAlign: TextAlign.start,
+                  ),
+                )),
+          ),
+          TextSpan(text: "      " + review)
+        ]),
+      );
+    } else {
+      return SizedBox.shrink();
+    }
+  } else if (selected[2]) {
+    if (review.contains("bedroom") || review.contains("room")) {
+      return RichText(
+        text: TextSpan(children: [
+          WidgetSpan(
+            child: Container(
+                height: 50,
+                width: 50,
+                child: FloatingActionButton(
+                  heroTag: review.toString() + random.toString(),
+                  backgroundColor: Colors.white,
+                  splashColor: Colors.blueAccent,
+                  onPressed: null,
+                  child: Text(
+                    rating.toString(),
+                    style: TextStyle(fontSize: 11.0, color: getColour(rating)),
+                    textAlign: TextAlign.start,
+                  ),
+                )),
+          ),
+          TextSpan(text: "      " + review)
+        ]),
+      );
+    } else {
+      return SizedBox.shrink();
+    }
+  } else if (selected[3]) {
+    if (review.contains("bills") || review.contains("Bills")) {
+      return RichText(
+        text: TextSpan(children: [
+          WidgetSpan(
+            child: Container(
+                height: 50,
+                width: 50,
+                child: FloatingActionButton(
+                  heroTag: review.toString() + random.toString(),
+                  backgroundColor: Colors.white,
+                  splashColor: Colors.blueAccent,
+                  onPressed: null,
+                  child: Text(
+                    rating.toString(),
+                    style: TextStyle(fontSize: 11.0, color: getColour(rating)),
+                    textAlign: TextAlign.start,
+                  ),
+                )),
+          ),
+          TextSpan(text: "      " + review)
+        ]),
+      );
+    }
+    else {
+      return SizedBox.shrink();
+    }
+  }
 }
 
-List<Container> reviewContainer(){
+List<Container> reviewContainer() {
   List<Container> out = [];
-  if(thisHouse.reviews == null){
-      out.add(Container(
-        child: Text("No Reviews found for this property!"),
-        ));
-  }
-  else{
+  if (thisHouse.reviews == null) {
+    out.add(Container(
+      child: Text("No Reviews found for this property!"),
+    ));
+  } else {
     for (var i in thisHouse.reviews)
       out.add(Container(
         //width:MediaQuery.of(context).size.width *0.8,
-        padding:
-        EdgeInsets.symmetric(vertical: 10),
+        padding: EdgeInsets.symmetric(vertical: 10),
         child: getRow(i.review, i.rating),
         //child: Text(i.review),
-      )
-      );
+      ));
   }
   return out;
 }
