@@ -190,6 +190,7 @@ class _ReviewPage extends State<ReviewPage> {
                                         child: FloatingActionButton(
                                           child: Icon(Icons.add, size: 40, color: Colors.white,),
                                           backgroundColor: themeYellow,
+                                          //todo IMAGE SELECTION GOES HERE
                                           onPressed: () {chooseImage();},
                                           materialTapTargetSize:
                                           MaterialTapTargetSize.shrinkWrap,
@@ -237,7 +238,6 @@ class _ReviewPage extends State<ReviewPage> {
       print("New rating: " + value.toString());
 
       addNewHouseReview(cord, propertyReview, value);
-
       showDialog(
           context: context,
           builder: (BuildContext context){
@@ -284,8 +284,7 @@ class _ImageUpload extends State<Image> {
       _image = cropped ?? _image;
     });
   }
-  //TODO Catch PlatformException(photo_access_denied, The user did not allow photo access.,)
-  //TODO catch error on going back from image picker
+
   Future chooseFile() async {
     await ImagePicker.pickImage(source: ImageSource.gallery).then((image) {
       setState(() {

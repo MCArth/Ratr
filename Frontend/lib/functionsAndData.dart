@@ -58,7 +58,6 @@ class Landlord {
     "reviews": this.reviews,
     "houses": this.latlngAsList,
     "avgRating": this.avgRating,
-    //TODO figure out how to handle list of latlngs
   };
 }
 
