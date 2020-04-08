@@ -472,6 +472,7 @@ List<Container> reviewContainer() {
   List<Container> out = [];
   if (thisHouse.reviews == null) {
     out.add(Container(
+      padding: EdgeInsets.symmetric(vertical: 5),
       child: Text("No Reviews found for this property!"),
     ));
   } else {

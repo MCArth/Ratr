@@ -5,10 +5,11 @@ import 'package:nexus_app/revland.dart';
 import 'package:string_validator/string_validator.dart';
 import 'app.dart';
 
+double widthScreen;
 Landlord landlord;
 int id;
 
-class LandlordProfile extends StatefulWidget {
+class LandlordProfile extends StatelessWidget {
 
   LandlordProfile(int index) {
     id = index;
@@ -16,14 +17,19 @@ class LandlordProfile extends StatefulWidget {
   }
 
   @override
-  _LandlordProfile createState() => _LandlordProfile();
+  Widget build(BuildContext context) {
+    widthScreen = MediaQuery.of(context).size.width;
+    return _LandlordProfile();
+  }
 }
 
-class _LandlordProfile extends State<LandlordProfile> {
+class _LandlordProfile extends StatelessWidget {
+  //final String name = landlordList[landID].name.toString();
   final String name = landlord.name;
+  //final String rating = landlordList[landID].avgRating.toStringAsFixed(1);
   final String rating = landlord.avgRating.toStringAsFixed(1);
+  //final int number = landlordList[landID].houses.length;
   final int number = landlord.houses.length;
-  final List<bool> selected = [true,false];
 
   @override
   Widget build(BuildContext context) {
@@ -39,232 +45,156 @@ class _LandlordProfile extends State<LandlordProfile> {
       ),
       body: SafeArea(
           child: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 12.0),
-        children: <Widget>[
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 12.0),
             children: <Widget>[
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 23.0),
-                decoration: BoxDecoration(border: Border.all(width: 2),borderRadius: BorderRadius.all(
-                  Radius.circular(7.0)
-                ), color: themeGrey),
-                //color: Colors.grey,
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        child: Text(
-                          name,
-                          style: TextStyle(
-                              fontSize: 24, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 12,
-                      ),
-                      Container(
-                          height: 55,
-                          width: 55,
-                          child: FloatingActionButton(
-                            backgroundColor: Colors.white,
-                            splashColor: Colors.blueAccent,
-                            onPressed: () {},
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 23.0),
+                    decoration: BoxDecoration(border: Border.all(width: 2),borderRadius: BorderRadius.all(
+                        Radius.circular(7.0)
+                    ), color: themeGrey),
+                    //color: Colors.grey,
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Container(
                             child: Text(
-                              rating,
+                              name,
                               style: TextStyle(
-                                  fontSize: 20.0, color: getColour(toDouble(rating))),
+                                  fontSize: 24, fontWeight: FontWeight.bold),
                             ),
-                          )),
-                      SizedBox(
-                        height: 18,
-                      ),
-                      //]),
-                      Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            SizedBox(
-                              width: 80,
-                            ),
-                            Container(
+                          ),
+                          SizedBox(
+                            height: 12,
+                          ),
+                          Container(
+                              height: 55,
+                              width: 55,
+                              child: FloatingActionButton(
+                                backgroundColor: Colors.white,
+                                splashColor: Colors.blueAccent,
+                                onPressed: () {},
+                                child: Text(
+                                  rating,
+                                  style: TextStyle(
+                                      fontSize: 20.0, color: getColour(toDouble(rating))),
+                                ),
+                              )),
+                          SizedBox(
+                            height: 18,
+                          ),
+                          //]),
+                          Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                SizedBox(
+                                  width: 80,
+                                ),
+                                Container(
+                                  child: Text(
+                                    'Number of Properties: ',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                        fontStyle: FontStyle.normal),
+                                  ),
+                                ),
+                                Container(
+                                  child: Text(
+                                    //var number
+                                    number.toString(),
+                                    style: TextStyle(
+                                        color: Colors.blue,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                )
+                              ]),
+                          SizedBox(
+                            height: 12,
+                          ),
+                          InkWell(
                               child: Text(
-                                'Number of Properties: ',
+                                'List of Properties',
                                 style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                    fontStyle: FontStyle.normal),
+                                    color: Color(0xF9AA33).withOpacity(1),
+                                    fontSize: 18,
+                                    decoration: TextDecoration.underline),
                               ),
-                            ),
-                            Container(
-                              child: Text(
-                                //var number
-                                number.toString(),
-                                style: TextStyle(
-                                    color: Colors.blue,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            )
-                          ]),
-                      SizedBox(
-                        height: 12,
-                      ),
-                      InkWell(
-                        child: Text(
-                          'List of Properties',
-                          style: TextStyle(
-                              color: Color(0xF9AA33).withOpacity(1),
-                              fontSize: 18,
-                              decoration: TextDecoration.underline),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  //goes to review; passes lat and long into the class
+                                  MaterialPageRoute(builder: (context) => LandProp(id)),
+                                );
+                              }
+                          ),
+                        ]),
+                  ),
+                ],
+              ),
+              SizedBox(height: 10),
+              DefaultTabController(
+                length: 1,
+                child: (SizedBox(
+                    height: 250,
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          child: TabBar(
+                            tabs: <Widget>[
+                              Tab(
+                                icon: Icon(Icons.format_list_bulleted),
+                                text: 'Reviews',
+                              )
+                            ],
+                          ),
                         ),
-                        onTap: () {
+                        Expanded(
+                          child: TabBarView(
+                            children: <Widget>[
+                              Container(
+                                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
+                                child: ListView(
+                                  children: <Widget>[
+                                    Row(
+                                      children: <Widget>[
+                                        Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: reviewContainer(),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ))),
+              ),
+              SizedBox(height: 35),
+              Container(
+                  child: Align(
+                      alignment: Alignment.bottomRight,
+                      child: FloatingActionButton(
+                        heroTag: "dog",
+                        elevation: 0.0,
+                        child: Icon(Icons.add),
+                        //backgroundColor: Colors.orange,
+                        onPressed: () {
                           Navigator.push(
                             context,
                             //goes to review; passes lat and long into the class
-                            MaterialPageRoute(builder: (context) => LandProp(id)),
+                            MaterialPageRoute(builder: (context) => LandlordReview(id)),
                           );
-                           }
-                      ),
-                    ]),
-              ),
+                        },
+                      )))
             ],
-          ),
-          SizedBox(height: 10),
-          DefaultTabController(
-            length: 1,
-            child: (SizedBox(
-                height: 250,
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      child: TabBar(
-                        tabs: <Widget>[
-                          Tab(
-                            icon: Icon(Icons.format_list_bulleted),
-                            text: 'Reviews',
-                          )
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      //height: 300,
-//                        padding: EdgeInsets.symmetric(
-//                            vertical: 10, horizontal: 2),
-                        child: ListView(
-                          shrinkWrap: true,
-                          children: <Widget>[
-                            SizedBox(height: 10,),
-                            Align(
-                              alignment: Alignment.center,
-                              child: SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: ToggleButtons(
-                                  children: <Widget>[
-                                    Text("  All  "),
-                                    Text("  Landlord  "),
-                                  ],
-                                  selectedColor: Colors.white,
-                                  color: Colors.white,
-                                  borderColor: Color(0xF9AA33).withOpacity(1),
-                                  selectedBorderColor: Colors.white,
-                                  renderBorder: true,
-                                  fillColor: Color(0xF9AA33).withOpacity(1),
-                                  borderWidth: 2,
-                                  borderRadius:
-                                  BorderRadius.circular(20),
-                                  onPressed: (int index) {
-                                    setState(() {
-                                      for (int buttonIndex = 0;
-                                      buttonIndex < selected.length;
-                                      buttonIndex++) {
-                                        if (buttonIndex == index) {
-                                          selected[buttonIndex] = true;
-                                        } else {
-                                          selected[buttonIndex] = false;
-                                        }
-                                      }
-                                    });
-                                  },
-                                  isSelected: selected,
-                                ),
-                              ),
-                            ),
-                            Column(
-                              children: <Widget>[
-                                //Row(
-                                //children: <Widget>[
-                                Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      SizedBox(height: 7),
-                                      for (var i in landlord.reviews)
-                                        Container(
-                                          //width:MediaQuery.of(context).size.width *0.8,
-                                          padding:
-                                          EdgeInsets.symmetric(vertical: 10),
-                                          child: getRowLand(i.review, i.rating),
-                                          //child: Text(i.review),
-                                        )])
-                                //],
-                                //)
-                                //],
-                                //)
-                              ],
-                            )
-                          ],
-                        )
-                    ),
-//                    Expanded(
-//                      child: TabBarView(
-//                        children: <Widget>[
-//                          Container(
-//                            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
-//                            child: ListView(
-//                              children: <Widget>[
-//                                Row(
-//                                  children: <Widget>[
-//                                    Column(
-//                                      crossAxisAlignment: CrossAxisAlignment.start,
-//                                      children: <Widget>[
-//                                        for (var i in landlord.reviews)
-//                                          Container(
-//                                            width: widthScreen*0.7,
-//                                            padding: EdgeInsets.symmetric(vertical: 10),
-//                                            child: getRowLand(i.review, i.rating),
-//                                            //child: Text(i.review),
-//                                          ),
-//                                      ],
-//                                    ),
-//                                  ],
-//                                ),
-//                              ],
-//                            ),
-//                          )
-//                        ],
-//                      ),
-//                    )
-                  ],
-                ))),
-          ),
-          SizedBox(height: 35),
-          Container(
-              child: Align(
-                  alignment: Alignment.bottomRight,
-                  child: FloatingActionButton(
-                    heroTag: "dog",
-                    elevation: 0.0,
-                    child: Icon(Icons.add),
-                    //backgroundColor: Colors.orange,
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        //goes to review; passes lat and long into the class
-                        MaterialPageRoute(builder: (context) => LandlordReview(id)),
-                      );
-                    },
-                  )))
-        ],
-      )),
+          )),
     );
   }
 }
@@ -301,4 +231,23 @@ Widget getRowLand(String review, double rating) {
         ]
     ),
   );
+}
+
+List<Container> reviewContainer() {
+  List<Container> out = [];
+  if (landlord.reviews == null) {
+    out.add(Container(
+      padding: EdgeInsets.symmetric(vertical: 5),
+      child: Text("No Reviews found for this landlord!"),
+    ));
+  } else {
+    for (var i in landlord.reviews)
+      out.add(Container(
+        //width:MediaQuery.of(context).size.width *0.8,
+        padding: EdgeInsets.symmetric(vertical: 10),
+        child: getRowLand(i.review, i.rating),
+        //child: Text(i.review),
+      ));
+  }
+  return out;
 }
