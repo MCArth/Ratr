@@ -166,9 +166,12 @@ class Review {
     "review": this.review
   };
 }
+Future fetchAccounts() async {
 
+}
+Future addAccount() async {
 
-
+}
 // Retreives a list of houses from database
 Future fetchHouses() async {
   //clears previous version of houseList

@@ -481,8 +481,8 @@ List<Container> reviewContainer() {
         child: getRow(i.review, i.rating),
         //child: Text(i.review),
       ));
-  }
   //Back to start
   selected = [true,false,false,false];
+  }
   return out;
 }
