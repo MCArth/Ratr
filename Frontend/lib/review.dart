@@ -190,7 +190,6 @@ class _ReviewPage extends State<ReviewPage> {
                                         child: FloatingActionButton(
                                           child: Icon(Icons.add, size: 40, color: Colors.white,),
                                           backgroundColor: themeYellow,
-                                          //todo IMAGE SELECTION GOES HERE
                                           onPressed: () {chooseImage();},
                                           materialTapTargetSize:
                                           MaterialTapTargetSize.shrinkWrap,

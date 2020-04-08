@@ -114,7 +114,7 @@ makeHouseCard(BuildContext context, int index) {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(houseList[index].bedrooms.toString() + " Bedroom House"),
-              Text("£"+ (houseList[index].price / 12).toString() + " pcm")
+              Text("£"+ (houseList[index].price / 12).toStringAsFixed(2) + " pcm")
             ],
           ),
           trailing:

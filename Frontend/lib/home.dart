@@ -10,8 +10,6 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     fetchHouses();
     fetchLandlords();
-
-
     return new Scaffold(
       appBar: new AppBar(
         centerTitle: true,
