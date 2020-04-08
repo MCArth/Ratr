@@ -468,21 +468,12 @@ Widget getRow(String review, double rating) {
 
 List<Container> reviewContainer() {
   List<Container> out = [];
-<<<<<<< HEAD
-  if(thisHouse.reviews == null){
-      out.add(Container(
-        child: Text("No Reviews found for this property./n Be the first to add a review!"),
-        ));
-  }
-  else{
-=======
   if (thisHouse.reviews == null) {
     out.add(Container(
       padding: EdgeInsets.symmetric(vertical: 5),
       child: Text("No Reviews found for this property!"),
     ));
   } else {
->>>>>>> 8ec7484c51629ede7f62591a74f80d12182b8299
     for (var i in thisHouse.reviews)
       out.add(Container(
         //width:MediaQuery.of(context).size.width *0.8,
