@@ -282,13 +282,12 @@ class _PropertyProfile extends State<Property> {
                                 ],
                               )),
                           Container(
-                            //todo ALEX YOUR STUFF GOES HERE
                             //This container corresponds to the 3rd tab!
                             child: GridView.count(
                               crossAxisCount: 3,
                               children: <Widget>[
                                 // the following lines are hard coded shit for presentation purposes
-                                //TODO replace these because they're not good
+ 
                                 if (thisHouse.latlng ==
                                     LatLng(51.374515, -2.377066))
                                   for (var i = 0; i < 15; i++)
@@ -469,12 +468,21 @@ Widget getRow(String review, double rating) {
 
 List<Container> reviewContainer() {
   List<Container> out = [];
+<<<<<<< HEAD
+  if(thisHouse.reviews == null){
+      out.add(Container(
+        child: Text("No Reviews found for this property./n Be the first to add a review!"),
+        ));
+  }
+  else{
+=======
   if (thisHouse.reviews == null) {
     out.add(Container(
       padding: EdgeInsets.symmetric(vertical: 5),
       child: Text("No Reviews found for this property!"),
     ));
   } else {
+>>>>>>> 8ec7484c51629ede7f62591a74f80d12182b8299
     for (var i in thisHouse.reviews)
       out.add(Container(
         //width:MediaQuery.of(context).size.width *0.8,
