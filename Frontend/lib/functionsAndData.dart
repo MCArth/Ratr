@@ -279,7 +279,9 @@ House getHouseFromLatLng(LatLng latlng) {
       return house;
     }
   }
+  print("house wasn't found with that latlng!!");
   return null;
+
 }
 
 void printAllHouses() {

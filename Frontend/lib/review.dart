@@ -93,10 +93,10 @@ class _ReviewPage extends State<ReviewPage> {
                                           style: BorderStyle.solid)),
                                   filled: true,
                                   hintText: 'Write your review here...'),
-                              validator: (input) => !matches(
-                                  input, r'^[A-Za-z\n]+$')
-                                  ? 'Invalid description, needs to consist of letters'
-                                  : null,
+                              // validator: (input) => !matches(
+                              //     input, r'^[A-Za-z\n]+$')
+                              //     ? 'Invalid description, needs to consist of letters'
+                              //     : null,
                               onSaved: (input) => propertyReview = input,
                               //labelText: 'House Review')
                             ),
