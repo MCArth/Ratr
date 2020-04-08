@@ -3,13 +3,13 @@ import 'app.dart';
 import 'package:flutter/material.dart';
 import 'package:string_validator/string_validator.dart';
 
-class addLandlord extends StatefulWidget {
+// Page allowing user creation of new landlord entries
+class AddLandlordPage extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _addLandlord();
+  State<StatefulWidget> createState() => AddLandlord();
 }
 
-class _addLandlord extends State<addLandlord> {
-  //todo change this to do backend stuff
+class AddLandlord extends State<AddLandlordPage> {
   String name = "Landlord Review";
   String landlordReview = "";
   final formKey = GlobalKey<FormState>();
