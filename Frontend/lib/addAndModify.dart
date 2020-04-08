@@ -34,7 +34,7 @@ void propertyToDatabase(House house){
     houseList.add(house);
     String json = jsonEncode(house);
     print(json);
-    //http.get("https://us-central1-ridr-cc2ec.cloudfunctions.net/addHouse?text=" + json);
+    http.get("https://us-central1-ridr-cc2ec.cloudfunctions.net/addHouse?text=" + json);
   }
 }
 
