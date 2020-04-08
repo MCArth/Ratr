@@ -183,7 +183,8 @@ Future fetchHouses() async {
       houseList.add(House.fromJson(i));
     }
     for (House house in houseList) {
-      for (var j = 0; j < house.reviews.length; j++) {
+      if(house.reviews != null)
+        for (var j = 0; j < house.reviews.length; j++) {
         house.reviews[j] = Review.fromJson(house.reviews[j]);
       }
     }
