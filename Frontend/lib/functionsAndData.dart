@@ -67,12 +67,12 @@ class Landlord {
 // Class for storing property information locally from JSON
 @JsonSerializable()
 class House {
-  double avgRating;
+  double avgRating = 0.0;
   int bedrooms, bathrooms, houseNum, price;
   double lat, long;
   String postCode, street;
-  String landlord;
-  List<dynamic> reviews;
+  String landlord = "unknown";
+  List<dynamic> reviews = [];
   RoomInfo roominfo;
   House(
       {this.lat,
@@ -137,6 +137,7 @@ class House {
 
 }
 
+// Class defintion for room info, primarily for ease of json parsin
 class RoomInfo{
   int numBathrooms;
   int numBedrooms;
@@ -148,6 +149,7 @@ class RoomInfo{
   };
 }
 
+// Class definition for a Review, applicable to both landlords and properties
 @JsonSerializable()
 class Review {
   double rating;

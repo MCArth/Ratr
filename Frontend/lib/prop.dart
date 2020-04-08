@@ -269,18 +269,12 @@ class _PropertyProfile extends State<Property> {
                                   children: <Widget>[
                                     //Row(
                                     //children: <Widget>[
+                                    SizedBox(height: 7),
                                     Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        SizedBox(height: 7),
-                                        for (var i in thisHouse.reviews)
-                                          Container(
-                                            //width:MediaQuery.of(context).size.width *0.8,
-                                            padding:
-                                            EdgeInsets.symmetric(vertical: 10),
-                                            child: getRow(i.review, i.rating),
-                                            //child: Text(i.review),
-                                          )])
+                                      children: 
+                                        reviewContainer(),                               
+                                        )
                                       //],
                                     //)
                                   //],
@@ -333,7 +327,8 @@ class _PropertyProfile extends State<Property> {
         ],
       )),
       floatingActionButton: FloatingActionButton(
-        heroTag: thisHouse.reviews[1].toString() + 55.toString(),
+        //heroTag commented out, was breaking code
+        //heroTag: thisHouse.reviews[1].toString() + 55.toString(),
         elevation: 0.0,
         child: Icon(Icons.add),
         //backgroundColor: Colors.orange,
@@ -392,4 +387,25 @@ Widget getRow(String review, double rating) {
       TextSpan(text: "      " + review)
     ]),
   );
+}
+
+List<Container> reviewContainer(){
+  List<Container> out = [];
+  if(thisHouse.reviews == null){
+      out.add(Container(
+        child: Text("No Reviews found for this property!"),
+        ));
+  }
+  else{
+    for (var i in thisHouse.reviews)
+      out.add(Container(
+        //width:MediaQuery.of(context).size.width *0.8,
+        padding:
+        EdgeInsets.symmetric(vertical: 10),
+        child: getRow(i.review, i.rating),
+        //child: Text(i.review),
+      )
+      );
+  }
+  return out;
 }
