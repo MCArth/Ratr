@@ -243,7 +243,7 @@ List<Container> reviewContainer() {
   } else {
     for (var i in landlord.reviews)
       out.add(Container(
-        //width:MediaQuery.of(context).size.width *0.8,
+        width: widthScreen*0.9,
         padding: EdgeInsets.symmetric(vertical: 10),
         child: getRowLand(i.review, i.rating),
         //child: Text(i.review),
