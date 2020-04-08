@@ -237,6 +237,7 @@ class _ReviewPage extends State<ReviewPage> {
       print("New rating: " + value.toString());
 
       addNewHouseReview(cord, propertyReview, value);
+
       showDialog(
           context: context,
           builder: (BuildContext context){
@@ -247,6 +248,7 @@ class _ReviewPage extends State<ReviewPage> {
                 new FlatButton(
                   child: Text("Okay"),
                   onPressed: () {
+                    fetchHouses();
                     Navigator.popUntil(context, (route) {
                       return count++ == 2;
                     });
