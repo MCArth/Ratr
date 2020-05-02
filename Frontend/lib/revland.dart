@@ -1,17 +1,24 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:nexus_app/addAndModify.dart';
 import 'package:string_validator/string_validator.dart';
 import 'dart:developer';
+import 'app.dart';
 
 //void main() => runApp(ReviewPage());
 //No need for main here, can be accessed from app
 
 //Global variables to do db stuff
-int landLat;
-int landLong;
+var themeYellow;
+int landID;
 
 class LandlordReview extends StatefulWidget {
+
+  LandlordReview(int id) {
+    landID = id;
+  }
+
   @override
   _LandlordReview createState() => _LandlordReview();
 }
@@ -23,6 +30,7 @@ class _LandlordReview extends State<LandlordReview> {
   double value = 2.5;
   var ratingIcon = Icons.account_circle;
   var iconColour = Colors.white;
+  final themeYellow = Color(0xF9AA33).withOpacity(1);
 
   //RangeValues values = RangeValues(0, 10);
 
@@ -51,11 +59,10 @@ class _LandlordReview extends State<LandlordReview> {
                           Container(
                             padding: EdgeInsets.symmetric(vertical: 15.0),
                             child: Text(
-                              'Please write your review below for '
-                              'the landlord chosen:',
+                              'Let us know about your experience with this landlord',
                               textDirection: TextDirection.ltr,
                               style:
-                                  TextStyle(fontSize: 18, color: Colors.black),
+                                  TextStyle(fontSize: 18, color: themeYellow),
                             ),
                           ),
                           Container(
@@ -85,10 +92,10 @@ class _LandlordReview extends State<LandlordReview> {
                                           style: BorderStyle.solid)),
                                   filled: true,
                                   hintText: 'Write your review here...'),
-                              validator: (input) => !matches(
-                                      input, r'^[A-Za-z\n]+$')
-                                  ? 'Invalid description, needs to consist of letters'
-                                  : null,
+                              // validator: (input) => !matches(
+                              //         input, r'^[A-Za-z\n]+$')
+                              //     ? 'Invalid description, needs to consist of letters'
+                              //     : null,
                               onSaved: (input) => landlordReview = input,
                               //labelText: 'House Review')
                             ),
@@ -128,7 +135,7 @@ class _LandlordReview extends State<LandlordReview> {
                                     ),
                                     child: Slider(
 //                                      inactiveColor: Colors.white,
-                                      activeColor: Colors.black,
+                                      activeColor: themeGrey,
                                       label: '$value',
                                       value: value,
                                       min: 0.0,
@@ -137,20 +144,17 @@ class _LandlordReview extends State<LandlordReview> {
                                       onChanged: (newValue) {
                                         setState(() {
                                           value = newValue;
-                                          if (value >= 7.0) {
+                                          if (value >= 3.8) {
                                             iconColour = Colors.green;
                                             return;
                                           }
-                                          if (value >= 4.0) {
+                                          if (value > 2.5) {
                                             iconColour = Colors.yellow;
                                           } else
                                             iconColour = Colors.red;
                                         });
                                       },
                                     ))),
-//                            Expanded(
-//                              child: Text('10'),
-//                            ),
                           ]),
                           SizedBox(
                             height: 22,
@@ -159,7 +163,7 @@ class _LandlordReview extends State<LandlordReview> {
                             alignment: Alignment.centerRight,
                             child: RaisedButton(
                                 //color: Colors.orange,
-                                color: Colors.blue,
+                                color: themeYellow,
                                 disabledColor: Colors.pink,
                                 disabledTextColor: Colors.black,
                                 splashColor: Colors.lightGreen,
@@ -167,20 +171,10 @@ class _LandlordReview extends State<LandlordReview> {
                                   'POST',
                                   style: TextStyle(color: Colors.white),
                                 ),
-                                //todo Update backend here!!
-                                onPressed: () {}),
+                                onPressed: () {
+                                  _submitLandlordReview();
+                                }),
                           )
-                          //text to show slider value + colour
-//                          Container(
-//                            //child: Icon(ratingIcon, size: 50, color: iconColour,),
-//                            child: Text(
-//                              value.toString(),
-//                              style: TextStyle(
-//                                color: iconColour,
-//                                fontSize: 28,
-//                              ),
-//                            ),
-//                          )
                         ])
                       ],
                     )))),
@@ -188,15 +182,32 @@ class _LandlordReview extends State<LandlordReview> {
     );
   }
 
+
   void _submitLandlordReview() {
+    int count = 0;
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
       log(landlordReview);
-      //Popup saying that account was created successfully
-      //Link with RL DBS
-      //Go back to home bage
+      addNewLandlordReview(landID, landlordReview, value);
+      showDialog(
+          context: context,
+          builder: (BuildContext context){
+            return AlertDialog(
+              title:Text("Thanks!"),
+              content: Text("We've received your review!"),
+              actions: <Widget>[
+                new FlatButton(
+                  child: Text("Okay"),
+                  onPressed: () {
+                    Navigator.popUntil(context, (route) {
+                      return count++ == 2;
+                    });
+                  },
+                ),
+              ],
+            );
+          }
+      );
     }
   }
-
-  void _submitImage() {}
 }

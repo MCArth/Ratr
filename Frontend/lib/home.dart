@@ -2,20 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'functionsAndData.dart';
 import 'app.dart';
+import 'addAndModify.dart';
 
-//TODO implement map and list as states of home page, with bottom navigation bar, do more encapsulation
-class HomePage extends StatelessWidget{
-
+class HomePage extends StatelessWidget {
   
   @override
-  Widget build(BuildContext context){
-
+  Widget build(BuildContext context) {
     fetchHouses();
     fetchLandlords();
     return new Scaffold(
       appBar: new AppBar(
         centerTitle: true,
         title: new Text("Rental Nexus"),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.help_outline),
+            color: themeYellow,
+            onPressed: () {
+              Navigator.pushNamed(context,'/help');}
+            )
+
+        ]
       ),
       body: SafeArea(
         child: Center(
@@ -26,7 +33,6 @@ class HomePage extends StatelessWidget{
                   child: ListView(
                     padding: EdgeInsets.symmetric(horizontal: 16),
                     children: <Widget>[
-                      //TODO implement search bar here 
                       SizedBox(height: 24.0),
                       FloatingActionButton.extended(
                         icon: Icon(Icons.map,color: themeYellow,),
@@ -56,11 +62,11 @@ class HomePage extends StatelessWidget{
                         heroTag: "landlordlst",
                         onPressed: () {
                           Navigator.pushNamed(context,'/rentierList');
+                         //addNewLandlordReview(1,"burnt down",5.0);
                         }
                         ),
                         
               ],),
-  
             ),
               ),
           ]

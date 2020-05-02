@@ -1,35 +1,53 @@
 import 'package:flutter/material.dart';
 import 'package:nexus_app/prop.dart';
 import 'functionsAndData.dart';
+import 'app.dart';
 
 int landLordID;
 House house;
-var themeYellow;
+Landlord landlord;
 
 /*
 Page displaying each property a landlord owns
  */
-class LandProp extends StatelessWidget{
-
+class LandProp extends StatelessWidget {
   LandProp(int index) {
     landLordID = index;
-    themeYellow = Color(0xF9AA33).withOpacity(1);
+    landlord = getRentierFromID(landLordID);
   }
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
         appBar: new AppBar(
-            title: Text("Properties")),
-        body: getListViewBody(context)
-    );
+            title: Text(
+          landlord.name + "'s Properties",
+          style: TextStyle(fontSize: 19),
+        )),
+        body: getListViewBody(context));
   }
 }
 
+//Function that gets all houses from database, creates card for each one
+Widget getListViewBody(BuildContext context) {
+  return Container(
+      child: ListView.builder(
+    scrollDirection: Axis.vertical,
+    shrinkWrap: true,
+    //Might also be here?
+    itemCount: landlord.houses.length,
+
+    itemBuilder: (BuildContext context, int index) {
+      return makeListCard(context, index);
+    },
+  ));
+}
+
+
 //Generates an instance of a card for a house
-makeListCard(BuildContext context, int index){
-  //ERROR IS HERE @SAM
-  house = getHouseFromLatLng(landlordList[landLordID].houses[index]);
+makeListCard(BuildContext context, int index) {
+  print(landlord.houses[index]);
+  house = getHouseFromLatLng(landlord.houses[index]);
   return Card(
     elevation: 8.0,
     margin: new EdgeInsets.symmetric(
@@ -38,51 +56,41 @@ makeListCard(BuildContext context, int index){
     ),
     child: Container(
       decoration: BoxDecoration(
+        color: themeGrey,
+        borderRadius: BorderRadius.all(Radius.circular(10.0)),
       ),
       child: ListTile(
-          contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+          contentPadding:
+              EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
           leading: Container(
             padding: EdgeInsets.only(right: 12.0),
             decoration: new BoxDecoration(
                 border: new Border(
-                    right: new BorderSide(width: 1.0, color: Colors.white24))),
-            child: Icon(Icons.home, color: Colors.white, size: 40,),
+                    right: new BorderSide(width: 1.0, color: themeYellow))),
+            child: Icon(
+              Icons.home,
+              color: Colors.white,
+              size: 40,
+            ),
           ),
           title: Text(
-            house.fullAddress.toString(),
+            house.fullAddress,
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
-
           subtitle: Row(
             children: <Widget>[
-              Text(house.bedrooms.toString()+" Bedroom House")
+              Text(house.bedrooms.toString() + " Bedroom House")
             ],
           ),
-          //todo address potential issue with passing in index
           trailing:
-          Icon(Icons.keyboard_arrow_right, color: themeYellow, size: 50.0),
+              Icon(Icons.keyboard_arrow_right, color: themeYellow, size: 50.0),
           onTap: () {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => Property(house.latlng)),
             );
-          }
-      ),
+          }),
     ),
   );
 }
 
-//Function that gets all houses from database, creates card for each one
-Widget getListViewBody(BuildContext context){
-  return Container(
-      child: ListView.builder(
-        scrollDirection: Axis.vertical,
-        shrinkWrap: true,
-        //Might also be here?
-        itemCount: landlordList[landLordID].houses.length,
-        itemBuilder: (BuildContext context, int index){
-          return makeListCard(context,index);
-        },
-      )
-  );
-}

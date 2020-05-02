@@ -6,19 +6,61 @@ import 'package:nexus_app/app.dart';
 //page displaying all available properties in a relational database
 //required to display only a small amount of information that nevertheless expresses the general sense for a property at a glance
 //Maybe use tiles to display an image + price per month + an address
-class RentierListPage extends StatelessWidget{
+
+class RentierListPage extends StatefulWidget {
+  @override
+  _RentierListState createState() => _RentierListState();
+}
+
+class _RentierListState extends State<RentierListPage>{
+
+  List<String> landList = ['Alphabetical','Number of Houses','Rating Highest','Rating Lowest'];
+  String _land;
+
   @override 
   Widget build(BuildContext context){
     return Scaffold(
       appBar: new AppBar(
         title: Text("Landlord List")),
-        body: getRentierListViewBody(context)
+        body: Column(
+          children: <Widget>[
+            SizedBox(height: 5,),
+            Container(
+              width: MediaQuery.of(context).size.width*0.92,
+              child: ButtonTheme(
+                alignedDropdown: true,
+                child: DropdownButton(
+                  isExpanded: true,
+                  hint: Text('Sort landlords by....', textAlign: TextAlign.center,
+                    style: TextStyle(color: themeYellow),),
+                  value: _land,
+                  items: landList.map((sortBy) {
+                    return DropdownMenuItem(
+                      child: new Text(sortBy),
+                      value: sortBy,
+                    );
+                  }).toList(),
+                  onChanged: (newValue) {
+                    int index = landList.indexOf(newValue);
+                    toggleSort(index,1);
+                    setState(() {
+                      _land = newValue;
+                    });
+                  },
+                ),
+              ),
+            ),
+            SizedBox(height: 5),
+            Expanded(child: getRentierListViewBody(context))
+          ],
+        )
         );
   }
 }
 
 //Generates an instance of a card for a house
 makeLandlordCard(BuildContext context, int index){
+  int num = landlordList[index].houses.length;
   print(index);
   return Card(
     elevation: 8.0,
@@ -47,7 +89,7 @@ makeLandlordCard(BuildContext context, int index){
 
                 subtitle: Row(
                   children: <Widget>[
-                    Text("Has " + landlordList[index].houses.length.toString() + " known property")
+                    getText(num)
                   ],
                 ),
                 trailing:
@@ -67,7 +109,7 @@ makeLandlordCard(BuildContext context, int index){
 Widget getRentierListViewBody(BuildContext context){
   return Column(children: <Widget>[
     SizedBox(height: 10),
-    Container(
+    Expanded(
       child: ListView.builder(
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
@@ -79,4 +121,13 @@ Widget getRentierListViewBody(BuildContext context){
   ),
   ]
   );
+}
+
+Text getText(int num) {
+  if (num == 1) {
+    return Text("Has " + num.toString() + " known property");
+  }
+  else {
+    return Text("Has " + num.toString() + " known properties");
+  }
 }

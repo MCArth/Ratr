@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:string_validator/string_validator.dart';
 
+
+// User registration page, routes from login
 class RegistrationPage extends StatefulWidget {
   @override
   _RegistrationPage createState() => _RegistrationPage();
@@ -112,14 +114,6 @@ class _RegistrationPage extends State<RegistrationPage> {
                                           onPressed: () {
                                             if (formKey.currentState.validate()) {
                                               formKey.currentState.save();
-
-                                              print(email);
-                                              print(password);
-                                              print(firstName);
-                                              //TODO: Link with RL DBS], if everything
-                                              // goes well show the bellow code (STARTS HERE to ENDS HERE) else dont
-
-                                              //STARTS HERE
                                               showDialog(
                                                   context: context,
                                                   barrierDismissible: false,
@@ -151,7 +145,6 @@ class _RegistrationPage extends State<RegistrationPage> {
                                                       ),
                                                     );
                                                   });
-                                              //ENDS HERE
                                             }
                                           },
                                           child: Text('Create Account'),

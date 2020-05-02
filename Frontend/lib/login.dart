@@ -41,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
                 controller: _usernameController,
                 decoration: InputDecoration(
                   filled: true,
-                  labelText: 'Username',  
+                  hintText: 'Username',  
                 ),
               ),
             ),
@@ -55,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
                 controller: _passwordController,
                 decoration: InputDecoration(
                   filled: true,
-                  labelText: 'Password',
+                  hintText: 'Password',
                 ),
                 obscureText: true,
               ),
@@ -83,9 +83,6 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
             SizedBox(height: 12.0),
-            // TODO: Wrap Username with AccentColorOverride (103)
-            // TODO: Remove filled: true values (103)
-            // TODO: Wrap Password with AccentColorOverride (103)
             Center(
               child: new InkWell( 
                 child: Text("Not registered yet? Click here!"),
@@ -100,5 +97,3 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
-
-// TODO: Add AccentColorOverride (103)
